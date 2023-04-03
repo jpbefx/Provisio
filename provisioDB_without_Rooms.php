@@ -79,14 +79,14 @@ if (mysqli_query($conn, $sql)) {
     echo "Error creating table: " . mysqli_error($conn);
 }
 
-// Create users and sysAdmin users
-$sql = "DROP USER IF EXISTS 'reserv_mgmt'@'localhost';
+/* Create users and sysAdmin users
+$sql = "DROP USER IF EXISTS 'root'@'localhost';
         DROP USER IF EXISTS 'sysAdmin'@'localhost';
-        CREATE USER 'reserv_mgmt'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin';
-        CREATE USER 'sysAdmin'@'localhost' IDENTIFIED WITH mysql_native_password BY 'admin';
-        GRANT ALL PRIVILEGES ON provisio.* TO 'reserv_mgmt'@'localhost';
+        CREATE USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
+        CREATE USER 'sysAdmin'@'localhost' IDENTIFIED WITH mysql_native_password BY '';
+        GRANT ALL PRIVILEGES ON provisio.* TO 'root'@'localhost';
         GRANT ALL PRIVILEGES ON provisio.* TO 'sysAdmin'@'localhost'";
-
+*/
 if (mysqli_multi_query($conn, $sql)) {
     echo "Users created successfully\n";
 } else {
