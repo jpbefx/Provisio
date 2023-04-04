@@ -18,7 +18,7 @@ GRANT ALL PRIVILEGES ON `provisio`.* TO `reserv_mgmt`@`localhost`;
 CREATE USER `sysAdmin`@`localhost` IDENTIFIED WITH mysql_native_password BY 'admin';
 GRANT ALL PRIVILEGES ON `provisio`.* TO `sysAdmin`@`localhost`;
 */
-/*
+
 CREATE TABLE `provisio`.`users` (
     `userID` int NOT NULL AUTO_INCREMENT,
     `username` varchar(30) NOT NULL,
@@ -43,7 +43,6 @@ CREATE TABLE `provisio`.`reservations` (
     `hasPaidBreakfast` boolean NOT NULL,
     PRIMARY KEY (`reservationID`)
 );
-*/
 
 CREATE TABLE `provisio`.`hotel` (
 `hotelID` int NOT NULL AUTO_INCREMENT,
