@@ -1,0 +1,218 @@
+@charset "utf-8";
+/* CSS Document */
+body{font-family: 'Tiro Bangla', serif !important; margin:0; padding:0;}
+header .custom-nav li a{
+	font-family: 'Tiro Bangla';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 27px;	
+	color:#000;
+	padding:10px 30px !important;
+}
+header .navbar-nav-custom{
+    flex-grow:0 !important;
+}
+header .login-btn{
+	margin-top:10px;	
+}
+header .login-btn a{
+	background:#143A2F;
+    color:#fff;
+    border-radius:50px;
+    padding:8px 56px;
+	text-decoration:none;	
+}
+.first-section{
+	background:#D1E1D6;
+	/*margin-right: 100px;*/
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+	height:360px;
+	margin:60px 0;
+	position:absolute;
+	width:94%;
+    z-index:-999;
+}
+section .book-stay-img{
+	margin-top:90px;
+	text-align:center;	
+}
+section .book-stay-img a{
+	font-size:36px;
+	font-weight:400;
+	color:#143A2F;
+	line-height:48px;
+	text-decoration:none;	
+}
+section .book-stay-text{
+    margin-top: 130px;	
+}
+section .book-stay-text p{
+	font-size:24px;
+	font-weight:400;
+	line-height:32px;
+	text-align:left;
+	margin-bottom: 0;
+	padding: 40px;
+}
+section .manage-reservation-bg{	
+	background:#D1E1D6;
+    border-top-left-radius:20px;
+    border-bottom-left-radius:20px;
+	margin-top:70px;
+    height:282px;
+    position:absolute;
+    width:41%;
+    z-index:-999;
+}
+section .manage-reservation{
+	margin-top: 90px;	
+}
+section .manage-reservation p{
+	font-size:24px;
+	font-weight:400;
+	line-height:32px;
+	text-align:left;
+	margin-bottom: 0;
+	padding: 40px;	
+}
+section .manage-reservation-img{
+	/*margin-top:90px;*/
+	text-align:center;	
+}
+section .manage-reservation-img a{
+	font-size:36px;
+	font-weight:400;
+	color:#143A2F;
+	line-height:48px;
+	text-decoration:none;	
+}
+section .propoints-bg{	
+	background:#D1E1D6;
+    border-top-left-radius:20px;
+    border-bottom-left-radius:20px;
+	margin-top:70px;
+    height:335px;
+    position:absolute;
+    width:77%;
+    z-index:-999;
+	right:0;
+}
+footer{
+	background:#143A2F;
+	padding:28px 0;
+	margin-top:70px;
+}
+footer .copyright-text{
+	font-size:16px;
+	font-weight:400;
+	line-height:22px;
+	text-align: center;
+	color:#fff;
+	
+}
+@media (max-width: 540px){
+section .book-stay-text {
+    margin-top:40px;
+}
+section .book-stay-text p{
+    padding:15px;
+}
+section .manage-reservation-bg{
+    width:97% !important;
+}
+section .manage-reservation{
+    margin-top:70px;
+}
+section .manage-reservation p {
+    padding:34px;
+}
+section .manage-reservation-img a{
+    font-size:32px;
+}
+section .manage-reservation-img{
+    margin-top:40px;
+}
+}
+@media (min-width: 540px) and (max-width: 767px){
+	section .book-stay-text {
+    margin-top: 40px;
+}
+section .book-stay-text p{
+     padding:0px; 
+}
+section .manage-reservation-bg{
+    width: 84% !important;
+}
+}
+@media (min-width: 768px) and (max-width: 990px){
+section .book-stay-text {
+    margin-top: 30px;
+}
+section .manage-reservation-bg{
+    width: 85% !important;
+	margin-top:30px !important;
+}
+section .manage-reservation{
+    margin-top: 50px;
+}
+section .manage-reservation-img{
+    margin-top:90px
+}
+}
+@media (min-width: 991px) and (max-width: 1199px){
+section .book-stay-text {
+    margin-top: 100px;
+}
+section .manage-reservation-img{
+    margin-top:36px;
+}
+section .manage-reservation-bg{
+    width:60% !important;
+	margin-top:85px !important;
+    height:250px !important;
+}
+section .manage-reservation-img a{
+    font-size:32px;
+}
+section .propoints-bg {
+    margin-top: 86px;
+    height: 290px;
+    width: 84%;
+}
+}
+@media (max-width: 1900px){
+section .manage-reservation-bg{
+    margin-top:60px;
+    width:60%;
+}
+section .propoints-bg {
+    width:88%;
+}
+}
+@media (max-width: 991px){
+header .custom-nav{
+	background:#143a2f;
+	padding-bottom: 20px;
+}
+header .custom-nav li a{	
+	color:#fff;
+}
+header .custom-nav li a:hover{	
+	color:#000;
+}
+header .login-btn a{
+    background: #fff;
+    color: #143a2f;
+}
+header .login-btn {
+    margin-left:28px;
+}
+.nav-bar{
+	width:75%;
+}
+}
+.bg-white {
+	background-color:white;
+}
