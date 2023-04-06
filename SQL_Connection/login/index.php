@@ -24,7 +24,7 @@
     <h1>This is the index page for the Sample Login/Logout tutorial</h1>
 
     <br>
-    Hello, <?php echo $user_data['user_name']; ?>
+    <h2>Hello, <?php echo $user_data['user_name']; ?></h2>
 
 </body>
 </html>
