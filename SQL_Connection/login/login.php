@@ -4,6 +4,8 @@ session_start();
 include("connection.php");
 include("functions.php");
 
+$notice = "";
+
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     //something was posted
     $user_name = $_POST['user_name'];
@@ -29,7 +31,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             }
         }
     }else {
-        echo "Wrong Username or Password!";
+        $notice = "<h3>"."Wrong Username or Password!"."</h3>";
     }
 }
 
@@ -73,13 +75,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         <form method="post">
             <div style="font-size:large;font-weight: 900; margin: 10px;color:rgb(20, 58, 47)">Login</div>
 
-            <input id="text" type="text" name="user_name"><br><br>
-            <input id="text" type="password" name="password"><br><br>
+            <input id="text" type="text" name="user_name">User name<br><br>
+            <input id="text" type="password" name="password">Password<br><br>
 
             <input id="button" type="submit" value="Login"><br><br>
 
             <a href="signup.php">Click To Signup</a><br><br>
         </form>
+        <?php
+            echo($notice);
+        ?>
     </div>
 </body>
 </html>
