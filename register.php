@@ -134,52 +134,54 @@
                   <input type="password" name="password" class="form-control" id="InputPassword1">
                 </div>
                 <div class="response-text">
-                  <?php
-                  // Create account functions
-                  if (array_key_exists('createAccount', $_POST)) {
-                    createAccount();
-                  }
-                  function createAccount()
-                  {
-                    $hasError = false;
-                    if ($_POST["username"] == "") {
-                      $hasError = true;
-                      echo "<br>Username is blank";
+                  <ul>
+                    <?php
+                    // Create account functions
+                    if (array_key_exists('createAccount', $_POST)) {
+                      createAccount();
                     }
-                    if ($_POST["password"] == "") {
-                      $hasError = true;
-                      echo "<br>Password is blank";
-                    }
-                    if (strlen($_POST["password"]) < 8) {
-                      $hasError = true;
-                      echo "<br>Password must be at least 8 characters";
-                    }
-                    if (!preg_match('/[A-Z]/', $_POST["password"]) || !preg_match('/[a-z]/', $_POST["password"])) {
-                      $hasError = true;
-                      echo "<br>Password must contain at least one uppercase and one lowercase letter";
-                    }
-                    if ($_POST["firstName"] == "") {
-                      $hasError = true;
-                      echo "<br>First Name is blank";
-                    }
-                    if ($_POST["lastName"] == "") {
-                      $hasError = true;
-                      echo "<br>Last Name is blank";
-                    }
-                    if ($_POST["email"] == "") {
-                      $hasError = true;
-                      echo "<br>Email is blank";
-                    }
-                    if ($hasError == false) {
-                      $ret = createUser($_POST["username"], password_hash($_POST["password"], PASSWORD_DEFAULT), $_POST["firstName"], $_POST["lastName"], $_POST["email"]);
-                      if ($ret == true) {
-                        echo "Account Created Successfully... Sign In <a href='login.php'> Here </a>";
-                      } else {
-                        echo $ret;
+                    function createAccount()
+                    {
+                      $hasError = false;
+                      if ($_POST["username"] == "") {
+                        $hasError = true;
+                        echo "<li>Username is blank</li>";
+                      }
+                      if ($_POST["password"] == "") {
+                        $hasError = true;
+                        echo "<li>Password is blank</li>";
+                      }
+                      if (strlen($_POST["password"]) < 8) {
+                        $hasError = true;
+                        echo "<li>Password must be at least 8 characters</li>";
+                      }
+                      if (!preg_match('/[A-Z]/', $_POST["password"]) || !preg_match('/[a-z]/', $_POST["password"])) {
+                        $hasError = true;
+                        echo "<li>Password must contain at least one uppercase and one lowercase letter</li>";
+                      }
+                      if ($_POST["firstName"] == "") {
+                        $hasError = true;
+                        echo "<li>First Name is blank</li>";
+                      }
+                      if ($_POST["lastName"] == "") {
+                        $hasError = true;
+                        echo "<li>Last Name is blank</li>";
+                      }
+                      if ($_POST["email"] == "") {
+                        $hasError = true;
+                        echo "<li>Email is blank</li>";
+                      }
+                      if ($hasError == false) {
+                        $ret = createUser($_POST["username"], password_hash($_POST["password"], PASSWORD_DEFAULT), $_POST["firstName"], $_POST["lastName"], $_POST["email"]);
+                        if ($ret == true) {
+                          echo "<li>Account Created Successfully... Sign In <a href='login.php'> Here </a></li>";
+                        } else {
+                          echo $ret;
+                        }
                       }
                     }
-                  }
-                  ?>
+                    ?>
+                  </ul>
                 </div>
             </div>
             <div class="mb-3 mt-3 form-check custom-form-check">
