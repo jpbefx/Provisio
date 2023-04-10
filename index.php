@@ -66,7 +66,7 @@
                         ?>
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Start a Reservation</a></li>
+                        <li><a class="dropdown-item" href="hotel-reservation.php">Start a Reservation</a></li>
                         <li><a class="dropdown-item" href="#">Manage Reservations</a></li>
                         <li>
                           <hr class="dropdown-divider">
