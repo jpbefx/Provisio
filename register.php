@@ -186,7 +186,7 @@
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
               <label class="form-check-label" for="exampleCheck1">Sign me up for marketing emails (Promise we won’t sell
                 your info)</label>
-              <div class="response-text">Password must contain uppercase letters;</div>
+              <div class="response-text">Password must contain at least one uppercase and lowercase letter</div>
               <div class="response-text">Password length must be greater than 8 characters.</div>
             </div>
             <div class="create-account-btn text-center">
