@@ -125,6 +125,19 @@
                 <label for="InputPassword1" class="form-label">Password</label>
                 <input type="password" class="form-control" name="password" id="InputPassword1">
               </div>
+              <div class="custom-form">
+                <input type="checkbox" onclick="passControl()">Show Password</input>
+                <script>
+                  function passControl() {
+                    var x = document.getElementById("InputPassword1");
+                    if (x.type === "password") {
+                      x.type = "text";
+                    } else {
+                      x.type = "password";
+                    }
+                  }
+                </script>
+              </div>
               <div class="create-account-btn mt-5 mb-61 text-center">
                 <?php
                 // Log In Functions
