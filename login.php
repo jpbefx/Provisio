@@ -1,3 +1,7 @@
+<!-- 
+Nicholas Werner, James Bailey, Larissa Passamani Lima
+CSD 460 - Red Team
+ -->
 <?php session_start(); ?>
 <!doctype html>
 <html lang="en">
