@@ -128,90 +128,70 @@ if (isset($_SESSION['username'])) {
                                         <div class="col-lg-4 col-md-3 col-sm-12 col-12">
                                             <div class="reservation-id"> Reservation ID: 3675 </div>
                                         </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <form action="#" class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group check-text">
-                                                        <label for="input_from">Check In</label>
-                                                        <input type="text" class="form-control" id="input_from"
-                                                            placeholder="">
-                                                    </div>
+                                        <div class="reservation-content">
+                                            <ul>
+                                                <li><span>Booking Dates:</span></li>
+                                                <li>Check in Date : 09/01/2023</li>
+                                                <li>Check out Date : 09/06/2023</li>
+                                            </ul>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                                                <div class="reservation-content">
+                                                    <ul>
+                                                        <li><span>Number of guests:</span></li>
+                                                        <li>2</li>
+                                                    </ul>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group check-text">
-                                                        <label for="input_from">Check Out</label>
-                                                        <input type="text" class="form-control" id="input_to"
-                                                            placeholder="">
-                                                    </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-6 col-sm-12 col-12">
+                                                <div class="reservation-content">
+                                                    <ul>
+                                                        <li><span>Room Type:</span></li>
+                                                        <li>Double Queen Beds</li>
+                                                    </ul>
                                                 </div>
-                                            </form>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                                                <div class="reservation-content">
+                                                    <ul>
+                                                        <li><span>Number of Nights:</span></li>
+                                                        <li>5</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="reservation-content">
+                                                    <ul>
+                                                        <li><span>Chosen Amenities:</span></li>
+                                                        <li> WiFi </li>
+                                                        <li> Breakfast </li>
+                                                        <li> Parking </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="reservation-content text-center mt-4">
+                                                    <ul>
+                                                        <li><span>Total Price:</span></li>
+                                                        <li>$784.85</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="submit-btns text-center">
+                                            <button type="button">Cancel</button>
+                                            <button type="button">Submit</button>
+                                        </div>
+                                        <div class="earn-points-text">
+                                            <p>Earn 150 Provisio points per night </p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="reservation-content">
-                                    <ul>
-                                        <li><span>Booking Dates:</span></li>
-                                        <li>Check in Date : 09/01/2023</li>
-                                        <li>Check out Date : 09/06/2023</li>
-                                    </ul>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div class="reservation-content">
-                                            <ul>
-                                                <li><span>Number of guests:</span></li>
-                                                <li>2</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-6 col-sm-12 col-12">
-                                        <div class="reservation-content">
-                                            <ul>
-                                                <li><span>Room Type:</span></li>
-                                                <li>Double Queen Beds</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div class="reservation-content">
-                                            <ul>
-                                                <li><span>Number of Nights:</span></li>
-                                                <li>5</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <div class="reservation-content">
-                                            <ul>
-                                                <li><span>Chosen Amenities:</span></li>
-                                                <li> WiFi </li>
-                                                <li> Breakfast </li>
-                                                <li> Parking </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                                        <div class="reservation-content text-center mt-4">
-                                            <ul>
-                                                <li><span>Total Price:</span></li>
-                                                <li>$784.85</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="submit-btns text-center">
-                                    <button type="button">Cancel</button>
-                                    <button type="button">Submit</button>
-                                </div>
-                                <div class="earn-points-text">
-                                    <p>Earn 150 Provisio points per night </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
     </section>
 
     <footer>
