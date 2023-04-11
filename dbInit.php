@@ -1,3 +1,7 @@
+<!-- 
+Nicholas Werner, James Bailey, Larissa Passamani Lima
+CSD 460 - Red Team
+ -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -84,26 +88,7 @@
         echo "Error creating user account: " . mysqli_error($conn);
     }
 
-
-    // Create reservations table
-    $sql = "CREATE TABLE `provisio`.`reservations` (
-            `reservationID` int NOT NULL AUTO_INCREMENT,
-            `userID` int NOT NULL,
-            `hotelID` int NOT NULL,
-            `roomID` int NOT NULL,
-            `numGuests` int NOT NULL,
-            `hasPaidWifi` boolean NOT NULL,
-            `hasPaidParking` boolean NOT NULL,
-            `hasPaidBreakfast` boolean NOT NULL,
-            PRIMARY KEY (`reservationID`)
-        )";
-
-    if (mysqli_query($conn, $sql)) {
-        echo "Reservations table created successfully<br>";
-    } else {
-        echo "Error creating table: " . mysqli_error($conn);
-    }
-
+    //Create hotel table
     $sql = "CREATE TABLE `provisio`.`hotel` (
     `hotelID` int NOT NULL AUTO_INCREMENT,
     `hotelName`	 VARCHAR(30) NOT NULL,
@@ -115,6 +100,44 @@
 
     if (mysqli_query($conn, $sql)) {
         echo "Hotel table created successfully<br>";
+    } else {
+        echo "Error creating table: " . mysqli_error($conn);
+    }
+
+    // Create room table
+    $sql = "CREATE TABLE `provisio`.`room` (
+    `roomID` int NOT NULL AUTO_INCREMENT,
+    `hotelID` int NOT NULL,
+    `roomType`	 VARCHAR(30) NOT NULL,
+    `roomCost` int NOT NULL,
+    PRIMARY KEY (`roomID`),
+    FOREIGN KEY (hotelID) REFERENCES `provisio`.`hotel`(hotelID)
+    );";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Room table created successfully<br>";
+    } else {
+        echo "Error creating table: " . mysqli_error($conn);
+    }
+
+    // Create reservations table
+    $sql = "CREATE TABLE `provisio`.`reservations` (
+            `reservationID` int NOT NULL AUTO_INCREMENT,
+            `userID` int NOT NULL,
+            `hotelID` int NOT NULL,
+            `roomID` int NOT NULL,
+            `numGuests` int NOT NULL,
+            `hasPaidWifi` boolean NOT NULL,
+            `hasPaidParking` boolean NOT NULL,
+            `hasPaidBreakfast` boolean NOT NULL,
+            PRIMARY KEY (`reservationID`),
+            FOREIGN KEY (userID) REFERENCES `provisio`.`users`(userID),
+            FOREIGN KEY (hotelID) REFERENCES `provisio`.`hotel`(hotelID),
+            FOREIGN KEY (roomID) REFERENCES `provisio`.`room`(roomID)
+        )";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Reservations table created successfully<br>";
     } else {
         echo "Error creating table: " . mysqli_error($conn);
     }
