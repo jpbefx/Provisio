@@ -173,6 +173,14 @@ section .custom-form label{
 	line-height:32px;
 	text-align:left;
 	margin-bottom:0;
+	margin: 15px;
+
+}
+section .custom-form1{
+	text-align: start;
+    padding: 10px;
+    size: 40px;
+    font-size: larger;
 }
 section .custom-form input{
 	background:#FFFFFF;
