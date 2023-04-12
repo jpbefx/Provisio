@@ -1,3 +1,7 @@
+<!-- 
+Nicholas Werner, James Bailey, Larissa Passamani Lima
+CSD 460 - Red Team
+ -->
 <?php session_start();
 ?>
 <!doctype html>
@@ -117,135 +121,213 @@
                     <div class="mtop-20rem">
                         <div class="location-btn"> Start your Booking </div>
                         <div class="location-wrapper">
+                            <ul>
+                                <?php
+                                //Reservation Logic
+                                if (array_key_exists('bookButton', $_POST)) {
+                                    checkReservationFields();
+                                }
+
+                                function checkReservationFields()
+                                {
+                                    global $redirectReady;
+                                    $hasError = false;
+
+                                    //check in blank
+                                    if ($_POST["checkIn"] == "") {
+                                        $hasError = true;
+                                        echo "<li>Check In is blank!</li>";
+                                    } else {
+                                        //check in date is in the past
+                                        if ($_POST["checkIn"] < date("Y-m-d")) {
+                                            $hasError = true;
+                                            echo "<li>Check In is earlier then today!</li>";
+                                        }
+                                    }
+
+                                    //check out blank
+                                    if ($_POST["checkOut"] == "") {
+                                        $hasError = true;
+                                        echo "<li>Check Out is blank!</li>";
+                                    } else {
+                                        //check out date is in the past
+                                        if ($_POST["checkOut"] < date("Y-m-d")) {
+                                            $hasError = true;
+                                            echo "<li>Check Out is earlier then today!</li>";
+                                        }
+                                    }
+
+                                    //check in is before check out
+                                    if ($_POST["checkIn"] > $_POST["checkOut"]) {
+                                        $hasError = true;
+                                        echo "<li>Check In is after Check Out!</li>";
+                                    }
+
+                                    //check if hotel is selected
+                                    if(isset($_POST['hotelGroup']) == false){
+                                        $hasError = true;
+                                        echo "<li>Select one of the hotels</li>";
+                                    }
+
+                                    //check if room is selected
+                                    if(isset($_POST['roomGroup']) == false){
+                                        $hasError = true;
+                                        echo "<li>Select one of the hotels</li>";
+                                    }
+                                    
+                                    //check if num guests has a value
+                                    if(isset($_POST['numGuests']) == false){
+                                        $hasError = true;
+                                        echo "<li>Number of Guests is blank!</li>";
+                                    } else {
+                                        if($_POST['numGuests'] < 0 || $_POST['numGuests'] > 4){
+                                            $hasError = true;
+                                            echo "<li>Number of guests is negative or exceeds 4 people</li>";
+                                        }
+                                    }
+                                    
+                                    if($hasError == false){
+                                        $_SESSION['checkIn'] = $_POST["checkIn"];
+                                        $_SESSION['checkOut'] = $_POST["checkOut"];
+                                        $_SESSION['numGuests'] = $_POST['numGuests'];
+                                        $_SESSION['hotelGroup'] = $_POST['hotelGroup'];
+                                        $_SESSION['roomGroup'] = $_POST['roomGroup'];
+                                        $_SESSION['hasWifi'] = isset($_POST['wifi']);
+                                        $_SESSION['hasParking'] = isset($_POST['parking']);
+                                        $_SESSION['hasBreakfest'] = isset($_POST['breakfest']);
+                                
+                                        echo "<script> location.replace('reservation-summary.php'); </script>";
+                                    }
+                                }
+
+                                ?>
+                            </ul>
                             <div class="hotels-directly">
                                 <h3>Choose your Dates</h3>
                             </div>
-                            <div class="mt-5">
-                                <form action="#" class="row">
+                            <form class="row" method="post">
+                                <div class="mt-5">
                                     <div class="col-md-6">
                                         <div class="form-group check-text">
                                             <label for="input_from">Check In</label>
-                                            <input type="text" class="form-control" id="input_from" placeholder="">
+                                            <?php
+                                            echo "<input type='date' class='form-control' name='checkIn' id='input_from' min=" . date("Y-m-d") . ">";
+                                            ?>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group check-text">
                                             <label for="input_from">Check Out</label>
-                                            <input type="text" class="form-control" id="input_to" placeholder="">
+                                            <?php
+                                            echo "<input type='date' class='form-control' name='checkOut' id='input_from' min=" . date('Y-m-d', strtotime("+1 day")) . ">";
+                                            ?>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                            <div class="mt-5">
-                                <div class="hotels-directly">
-                                    <h3>Number of guests:</h3> <input class="form-control" type="text"
-                                        aria-label="input">
                                 </div>
-                            </div>
-                            <div class="hotels-directly mt-5">
-                                <h3>Locations</h3>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                    <div class="nyc-location">
-                                        <div class="hotel-location-text custom-form-check">New York <input
-                                                type="checkbox" class="form-check-input" id="exampleCheck1"></div>
-                                        <img class="img-fluid" src="images/location-newyork-img.png" />
+                                <div class="mt-5">
+                                    <div class="hotels-directly">
+                                        <h3>Number of guests:</h3>
+                                        <input class="form-control" type="text" name="numGuests" aria-label="input">
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                    <div class="nyc-location">
-                                        <div class="hotel-location-text custom-form-check">Las Vegas <input
-                                                type="checkbox" class="form-check-input" id="exampleCheck1"></div>
-                                        <img class="img-fluid" src="images/location-lasvegas-img.png" />
-                                    </div>
+                                <div class="hotels-directly mt-5">
+                                    <h3>Locations</h3>
                                 </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                    <div class="nyc-location">
-                                        <div class="hotel-location-text custom-form-check">Honolulu <input
-                                                type="checkbox" class="form-check-input" id="exampleCheck1"></div>
-                                        <img class="img-fluid" src="images/location-honolulu-img.png" />
-                                    </div>
+                                <div class="row">
+                                <fieldset id="hotelGroup">
+                                    <?php
+                                        $hotelList = getAllHotels();
+                                        if($hotelList == false){
+                                            echo "Error accessing hotel list try again later";
+                                        } else {
+                                        while ($hotel = mysqli_fetch_assoc($hotelList)) {
+                                            echo "<div class='col-lg-4 col-md-6 col-sm-12 col-12'>";
+                                            echo "  <div class='nyc-location'>";
+                                            echo "      <div class='hotel-location-text custom-form-check'>" . $hotel['hotelName'];
+                                            echo "          <input type='radio' name='hotelGroup' class='form-check-input' value=" . $hotel['hotelName'] . ">";
+                                            echo "      </div>";
+                                            echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
+                                            echo "  </div>";
+                                            echo "</div>";
+                                        }
+                                    }
+                                    ?>
+                                    </fieldset>
                                 </div>
-                            </div>
-                            <div class="hotels-directly mt-5">
-                                <h3>Room Type</h3>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4 offset-lg-1 col-md-6 col-sm-12 col-12">
-                                    <div class="nyc-location">
-                                        <div class="hotel-location-text custom-form-check">Double Full Beds $110.00
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        </div>
-                                        <img class="img-fluid" src="images/double-full-bed.png" />
-                                    </div>
+                                <div class="hotels-directly mt-5">
+                                    <h3>Room Type</h3>
                                 </div>
-                                <div class="col-lg-4 offset-lg-1 col-md-6 col-sm-12 col-12">
-                                    <div class="nyc-location">
-                                        <div class="hotel-location-text custom-form-check">Double Queen Beds $125.00
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        </div>
-                                        <img class="img-fluid" src="images/double-queen-bed.png" />
-                                    </div>
+                                <div class="row">
+                                <fieldset id="roomGroup">
+                                    <?php
+                                        $roomList = getAllRooms();
+                                        if($roomList == false){
+                                            echo "Error accessing room list try again later";
+                                        } else {
+                                            while($room = mysqli_fetch_assoc($roomList)){
+                                                echo "<div class='col-lg-4 offset-lg-1 col-md-6 col-sm-12 col-12'>";
+                                                echo "  <div class='nyc-location'>";
+                                                echo "      <div class='hotel-location-text custom-form-check'>" . $room['roomType'] . " $" . $room['roomCost'];
+                                                echo "          <input type='radio' name='roomGroup'class='form-check-input' value=" . $room['roomType'] . ">";
+                                                echo "      </div>";
+                                                echo "      <img class='img-fluid' src=" . $room['pictureAddress'] . " />";
+                                                echo "  </div>";
+                                                echo "</div>";
+                                            }
+                                        }
+
+                                    ?>
+                                    </fieldset>
                                 </div>
-                                <div class="col-lg-4 offset-lg-1 col-md-6 col-sm-12 col-12">
-                                    <div class="nyc-location">
-                                        <div class="hotel-location-text custom-form-check">Queen Bed $150.00 <input
-                                                type="checkbox" class="form-check-input" id="exampleCheck1"></div>
-                                        <img class="img-fluid" src="images/queen-bed.png" />
-                                    </div>
+                                <div class="hotels-directly mt-5">
+                                    <h3>Amenities</h3>
                                 </div>
-                                <div class="col-lg-4 offset-lg-1 col-md-6 col-sm-12 col-12">
-                                    <div class="nyc-location">
-                                        <div class="hotel-location-text custom-form-check">King Bed $165.00 <input
-                                                type="checkbox" class="form-check-input" id="exampleCheck1"></div>
-                                        <img class="img-fluid" src="images/king-bed.png" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hotels-directly mt-5">
-                                <h3>Amenities</h3>
-                            </div>
-                            <div class="col-12">
-                                <div class="amenities-box">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-                                            <div class="hotel-location-text text-start custom-form-check">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1"> WiFi
-                                                +$12.99 flat fee
+                                <div class="col-12">
+                                    <div class="amenities-box">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                                <div class="hotel-location-text text-start custom-form-check">
+                                                    <input type="checkbox" class="form-check-input" name="wifi" id="exampleCheck1">
+                                                    WiFi
+                                                    +$12.99 flat fee
+                                                </div>
+                                                <div class="hotel-location-text text-start custom-form-check mt-50">
+                                                    <input type="checkbox" class="form-check-input" name="Parking" id="exampleCheck1">
+                                                    Parking + $19.99 per night
+                                                </div>
+                                                <div class="hotel-location-text text-start custom-form-check mt-50">
+                                                    <input type="checkbox" class="form-check-input" name="Breakfest" id="exampleCheck1">
+                                                    Breakfast + $8.99 per night
+                                                </div>
                                             </div>
-                                            <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                Parking + $19.99 per night
-                                            </div>
-                                            <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                Breakfast + $8.99 per night
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-                                            <div class="hotel-location-text text-start custom-form-check"> Included with
-                                                every stay: </div>
-                                            <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1"
-                                                    checked> Earn 150 Provisio points per night
-                                            </div>
-                                            <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                <input type="checkbox" class="form-check-input" id="exampleCheck1"
-                                                    checked> Gym/ Pool Access
+                                            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                                <div class="hotel-location-text text-start custom-form-check"> Included
+                                                    with
+                                                    every stay: </div>
+                                                <div class="hotel-location-text text-start custom-form-check mt-50">
+                                                    <input type="checkbox" class="form-check-input"
+                                                        onclick="return false;" id="exampleCheck1" checked> Earn 150
+                                                    Provisio points per night
+                                                </div>
+                                                <div class="hotel-location-text text-start custom-form-check mt-50">
+                                                    <input type="checkbox" class="form-check-input"
+                                                        onclick="return false;" id="exampleCheck1" checked> Gym/ Pool
+                                                    Access
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="booknow-btn text-center mt-5"> <button type="button"> Book Now </button></div>
+                                <div class="booknow-btn text-center mt-5">
+                                    <button type="submit" name="bookButton"> Book Now </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <footer>
         <div class="container">
             <div class="row">
@@ -260,7 +342,6 @@
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/rome.js" type="text/javascript"></script>
     <script src="js/main.js" type="text/javascript"></script>
-
 </body>
 
 </html>
