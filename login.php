@@ -131,8 +131,17 @@ CSD 460 - Red Team
                 <label for="InputPassword1" class="form-label">Password</label>
                 <input type="password" class="form-control" name="password" id="InputPassword1">
               </div>
-              <div class="custom-form">
-                <input type="checkbox" onclick="passControl()">Show Password</input>
+              <div class="custom-form1">
+                <style>
+                  section .custom-form1 {
+                    text-align: start;
+                    padding: 10px;
+                    size: 40px;
+                    font-size: larger;
+                  }
+                </style>
+                <input type="checkbox" onclick="passControl()"> Show Password
+                </input>
                 <script>
                   function passControl() {
                     var x = document.getElementById("InputPassword1");
@@ -145,6 +154,7 @@ CSD 460 - Red Team
                 </script>
               </div>
               <div class="create-account-btn mt-5 mb-61 text-center">
+
                 <?php
                 // Log In Functions
                 if (array_key_exists('loginButton', $_POST)) {
