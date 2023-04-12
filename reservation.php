@@ -29,6 +29,8 @@ CSD 460 - Red Team
         if (validateUser($_SESSION['username']) == false) {
             signOutUser();
         }
+    } else {
+        header("Location: index.php");
     }
     ?>
 </head>
@@ -40,7 +42,7 @@ CSD 460 - Red Team
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg">
                         <div class="container-fluid">
-                            <a class="navbar-brand nav-bar" href="index.html"><img class="img-fluid"
+                            <a class="navbar-brand nav-bar" href="index.php"><img class="img-fluid"
                                     src="images/white-logo.svg" /></a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -53,7 +55,7 @@ CSD 460 - Red Team
                                         <a class="nav-link" aria-current="page" href="index.php">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" aria-current="page" href="about-us.php">About Us</a>
+                                        <a class="nav-link" href="aboutus.php">About Us</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="location.php">Location</a>
@@ -71,13 +73,14 @@ CSD 460 - Red Team
                                                 ?>
                                             </a>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="hotel-reservation.php">Start a
-                                                        Reservation</a></li>
-                                                <li><a class="dropdown-item" href="#">Manage Reservations</a></li>
+                                                <li><a class="dropdown-item" href="reservation.php">Start a Reservation</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="manageReservation.php">Manage
+                                                        Reservations</a></li>
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" href="#">ProPoints</a></li>
+                                                <li><a class="dropdown-item" href="propoints.php">ProPoints</a></li>
                                             </ul>
                                         </li>
                                         <?php
@@ -121,86 +124,103 @@ CSD 460 - Red Team
                     <div class="mtop-20rem">
                         <div class="location-btn"> Start your Booking </div>
                         <div class="location-wrapper">
-                            <ul>
-                                <?php
-                                //Reservation Logic
-                                if (array_key_exists('bookButton', $_POST)) {
-                                    checkReservationFields();
-                                }
+                            <?php
+                            //Reservation Logic
+                            if (array_key_exists('bookButton', $_POST)) {
+                                checkReservationFields();
+                            }
 
-                                function checkReservationFields()
-                                {
-                                    global $redirectReady;
-                                    $hasError = false;
+                            function checkReservationFields()
+                            {
+                                global $redirectReady;
+                                $hasError = false;
+                                $errorStr = "";
 
-                                    //check in blank
-                                    if ($_POST["checkIn"] == "") {
+                                //check in blank
+                                if ($_POST["checkIn"] == "") {
+                                    $hasError = true;
+                                    $errorStr .= "<li>Check In is blank!</li>";
+                                } else {
+                                    //check in date is in the past
+                                    if ($_POST["checkIn"] < date("Y-m-d")) {
                                         $hasError = true;
-                                        echo "<li>Check In is blank!</li>";
-                                    } else {
-                                        //check in date is in the past
-                                        if ($_POST["checkIn"] < date("Y-m-d")) {
-                                            $hasError = true;
-                                            echo "<li>Check In is earlier then today!</li>";
-                                        }
-                                    }
-
-                                    //check out blank
-                                    if ($_POST["checkOut"] == "") {
-                                        $hasError = true;
-                                        echo "<li>Check Out is blank!</li>";
-                                    } else {
-                                        //check out date is in the past
-                                        if ($_POST["checkOut"] < date("Y-m-d")) {
-                                            $hasError = true;
-                                            echo "<li>Check Out is earlier then today!</li>";
-                                        }
-                                    }
-
-                                    //check in is before check out
-                                    if ($_POST["checkIn"] > $_POST["checkOut"]) {
-                                        $hasError = true;
-                                        echo "<li>Check In is after Check Out!</li>";
-                                    }
-
-                                    //check if hotel is selected
-                                    if(isset($_POST['hotelGroup']) == false){
-                                        $hasError = true;
-                                        echo "<li>Select one of the hotels</li>";
-                                    }
-
-                                    //check if room is selected
-                                    if(isset($_POST['roomGroup']) == false){
-                                        $hasError = true;
-                                        echo "<li>Select one of the hotels</li>";
-                                    }
-                                    
-                                    //check if num guests has a value
-                                    if(isset($_POST['numGuests']) == false){
-                                        $hasError = true;
-                                        echo "<li>Number of Guests is blank!</li>";
-                                    } else {
-                                        if($_POST['numGuests'] < 0 || $_POST['numGuests'] > 4){
-                                            $hasError = true;
-                                            echo "<li>Number of guests is negative or exceeds 4 people</li>";
-                                        }
-                                    }
-                                    
-                                    if($hasError == false){
-                                        $_SESSION['checkIn'] = $_POST["checkIn"];
-                                        $_SESSION['checkOut'] = $_POST["checkOut"];
-                                        $_SESSION['numGuests'] = $_POST['numGuests'];
-                                        $_SESSION['hotelGroup'] = $_POST['hotelGroup'];
-                                        $_SESSION['roomGroup'] = $_POST['roomGroup'];
-                                        $_SESSION['hasWifi'] = isset($_POST['wifi']);
-                                        $_SESSION['hasParking'] = isset($_POST['parking']);
-                                        $_SESSION['hasBreakfest'] = isset($_POST['breakfest']);
-                                
-                                        echo "<script> location.replace('reservation-summary.php'); </script>";
+                                        $errorStr .= "<li>Check In is earlier then today!</li>";
                                     }
                                 }
 
-                                ?>
+                                //check out blank
+                                if ($_POST["checkOut"] == "") {
+                                    $hasError = true;
+                                    $errorStr .= "<li>Check Out is blank!</li>";
+                                } else {
+                                    //check out date is in the past
+                                    if ($_POST["checkOut"] < date("Y-m-d")) {
+                                        $hasError = true;
+                                        $errorStr .= "<li>Check Out is earlier then today!</li>";
+                                    }
+                                }
+
+                                //check in is before check out
+                                if ($_POST["checkIn"] > $_POST["checkOut"]) {
+                                    $hasError = true;
+                                    $errorStr .= "<li>Check In is after Check Out!</li>";
+                                }
+
+                                //check if hotel is selected
+                                if (isset($_POST['hotelGroup']) == false) {
+                                    $hasError = true;
+                                    $errorStr .= "<li>Select one of the hotels</li>";
+                                }
+
+                                //check if room is selected
+                                if (isset($_POST['roomGroup']) == false) {
+                                    $hasError = true;
+                                    $errorStr .= "<li>Select one of the hotels</li>";
+                                }
+
+                                //check if num guests has a value
+                                if ($_POST['numGuests'] < 0) {
+                                    $hasError = true;
+                                    $errorStr .= "<li>Number of guests is negative or blank</li>";
+                                }
+                                if ($_POST['numGuests'] > 4) {
+                                    $hasError = true;
+                                    $errorStr .= "<li>Number of guests exceeds 4. For parties requiring more then 4 people, please create a seperate reservation.</li>";
+                                }
+
+
+                                if ($hasError == false) {
+                                    $_SESSION['checkIn'] = $_POST["checkIn"];
+                                    $_SESSION['checkOut'] = $_POST["checkOut"];
+                                    $_SESSION['numGuests'] = $_POST['numGuests'];
+                                    $_SESSION['hotel'] = $_POST['hotelGroup'];
+                                    $_SESSION['room'] = $_POST['roomGroup'];
+
+                                    $hasWifi = "No";
+                                    if(isset($_POST['wifi'])){
+                                        $hasWifi = "Yes";
+                                    }
+                                    $_SESSION['hasWifi'] = $hasWifi;
+
+                                    $hasParking = "No";
+                                    if(isset($_POST['parking'])){
+                                        $hasParking = "Yes";
+                                    }
+                                    $_SESSION['hasParking'] = $hasParking;
+
+                                    $hasBreakfest = "No";
+                                    if(isset($_POST['breakfest'])){
+                                        $hasBreakfest = "Yes";
+                                    }
+                                    $_SESSION['hasBreakfest'] = $hasBreakfest;
+
+                                    echo "<script> location.replace('reservationSummary.php'); </script>";
+                                } else {
+                                    echo "<div class='response-text'>One or more errors:<br><ul>" . $errorStr . "</div>";
+                                }
+                            }
+
+                            ?>
                             </ul>
                             <div class="hotels-directly">
                                 <h3>Choose your Dates</h3>
@@ -234,37 +254,37 @@ CSD 460 - Red Team
                                     <h3>Locations</h3>
                                 </div>
                                 <div class="row">
-                                <fieldset id="hotelGroup">
-                                    <?php
+                                    <fieldset id="hotelGroup">
+                                        <?php
                                         $hotelList = getAllHotels();
-                                        if($hotelList == false){
+                                        if ($hotelList == false) {
                                             echo "Error accessing hotel list try again later";
                                         } else {
-                                        while ($hotel = mysqli_fetch_assoc($hotelList)) {
-                                            echo "<div class='col-lg-4 col-md-6 col-sm-12 col-12'>";
-                                            echo "  <div class='nyc-location'>";
-                                            echo "      <div class='hotel-location-text custom-form-check'>" . $hotel['hotelName'];
-                                            echo "          <input type='radio' name='hotelGroup' class='form-check-input' value=" . $hotel['hotelName'] . ">";
-                                            echo "      </div>";
-                                            echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
-                                            echo "  </div>";
-                                            echo "</div>";
+                                            while ($hotel = mysqli_fetch_assoc($hotelList)) {
+                                                echo "<div class='col-lg-4 col-md-6 col-sm-12 col-12'>";
+                                                echo "  <div class='nyc-location'>";
+                                                echo "      <div class='hotel-location-text custom-form-check'>" . $hotel['hotelName'];
+                                                echo "          <input type='radio' name='hotelGroup' class='form-check-input' value=" . $hotel['hotelName'] . ">";
+                                                echo "      </div>";
+                                                echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
+                                                echo "  </div>";
+                                                echo "</div>";
+                                            }
                                         }
-                                    }
-                                    ?>
+                                        ?>
                                     </fieldset>
                                 </div>
                                 <div class="hotels-directly mt-5">
                                     <h3>Room Type</h3>
                                 </div>
                                 <div class="row">
-                                <fieldset id="roomGroup">
-                                    <?php
+                                    <fieldset id="roomGroup">
+                                        <?php
                                         $roomList = getAllRooms();
-                                        if($roomList == false){
+                                        if ($roomList == false) {
                                             echo "Error accessing room list try again later";
                                         } else {
-                                            while($room = mysqli_fetch_assoc($roomList)){
+                                            while ($room = mysqli_fetch_assoc($roomList)) {
                                                 echo "<div class='col-lg-4 offset-lg-1 col-md-6 col-sm-12 col-12'>";
                                                 echo "  <div class='nyc-location'>";
                                                 echo "      <div class='hotel-location-text custom-form-check'>" . $room['roomType'] . " $" . $room['roomCost'];
@@ -276,7 +296,7 @@ CSD 460 - Red Team
                                             }
                                         }
 
-                                    ?>
+                                        ?>
                                     </fieldset>
                                 </div>
                                 <div class="hotels-directly mt-5">
@@ -287,16 +307,19 @@ CSD 460 - Red Team
                                         <div class="row">
                                             <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                                                 <div class="hotel-location-text text-start custom-form-check">
-                                                    <input type="checkbox" class="form-check-input" name="wifi" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" name="wifi"
+                                                        id="exampleCheck1">
                                                     WiFi
                                                     +$12.99 flat fee
                                                 </div>
                                                 <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                    <input type="checkbox" class="form-check-input" name="Parking" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" name="Parking"
+                                                        id="exampleCheck1">
                                                     Parking + $19.99 per night
                                                 </div>
                                                 <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                    <input type="checkbox" class="form-check-input" name="Breakfest" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" name="Breakfest"
+                                                        id="exampleCheck1">
                                                     Breakfast + $8.99 per night
                                                 </div>
                                             </div>

@@ -86,6 +86,23 @@ function getAllHotels(): bool|mysqli_result{
     return false;
 }
 
+function getHotelInfo(string $name): bool|array{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from hotel where hotelName = '$name' limit 1;";
+    $result = mysqli_query($dbConnection,$query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_assoc($result);
+        }
+    }
+    return false;
+}
+
 /*
 Returns all rooms in the room table
 @return false if an error occurs
