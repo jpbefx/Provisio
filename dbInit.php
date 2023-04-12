@@ -47,6 +47,8 @@ CSD 460 - Red Team
 
     mysqli_select_db($conn, $database);
 
+    echo "<br>";
+
     // Create users table
     $sql = "CREATE TABLE `provisio`.`users` (
             `userID` int NOT NULL AUTO_INCREMENT,
@@ -88,6 +90,8 @@ CSD 460 - Red Team
         echo "Error creating user account: " . mysqli_error($conn);
     }
 
+    echo "<br>";
+
     //Create hotel table
     $sql = "CREATE TABLE `provisio`.`hotel` (
     `hotelID` int NOT NULL AUTO_INCREMENT,
@@ -104,14 +108,46 @@ CSD 460 - Red Team
         echo "Error creating table: " . mysqli_error($conn);
     }
 
+    //Create all hotel locations
+    $sql = "INSERT INTO `provisio`.`hotel`
+        (hotelName,hotelAddress,hotelEmail,pictureAddress)
+        VALUES ('New York','1234 Test Street, City State Zip','test@email.com','images/location-newyork-img.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Hotel New York added successfully<br>";
+    } else {
+        echo "Error adding record: " . mysqli_error($conn);
+    }
+
+    $sql = "INSERT INTO `provisio`.`hotel`
+        (hotelName,hotelAddress,hotelEmail,pictureAddress)
+        VALUES ('Las Vegas','1234 Test Street, City State Zip','test@email.com','images/location-lasvegas-img.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Hotel Las Vegas added successfully<br>";
+    } else {
+        echo "Error adding record: " . mysqli_error($conn);
+    }
+
+    $sql = "INSERT INTO `provisio`.`hotel`
+        (hotelName,hotelAddress,hotelEmail,pictureAddress)
+        VALUES ('Honolulu','1234 Test Street, City State Zip','test@email.com','images/location-honolulu-img.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Hotel Honolulu added successfully<br>";
+    } else {
+        echo "Error adding record: " . mysqli_error($conn);
+    }
+
+    echo "<br>";
+
     // Create room table
     $sql = "CREATE TABLE `provisio`.`room` (
     `roomID` int NOT NULL AUTO_INCREMENT,
-    `hotelID` int NOT NULL,
-    `roomType`	 VARCHAR(30) NOT NULL,
+    `roomType` VARCHAR(30) NOT NULL,
     `roomCost` int NOT NULL,
-    PRIMARY KEY (`roomID`),
-    FOREIGN KEY (hotelID) REFERENCES `provisio`.`hotel`(hotelID)
+    `pictureAddress` VARCHAR(100) NOT NULL,
+    PRIMARY KEY (`roomID`)
     );";
 
     if (mysqli_query($conn, $sql)) {
@@ -119,6 +155,49 @@ CSD 460 - Red Team
     } else {
         echo "Error creating table: " . mysqli_error($conn);
     }
+
+    // Creating all rooms
+    $sql = "INSERT INTO `provisio`.`room`
+        (roomType,roomCost,pictureAddress)
+        VALUES ('Double Full Beds',110,'images/double-full-bed.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Double Full Beds added successfully<br>";
+    } else {
+        echo "Error creating record: " . mysqli_error($conn);
+    }
+
+    $sql = "INSERT INTO `provisio`.`room`
+    (roomType,roomCost,pictureAddress)
+    VALUES ('Double Queen Beds',125,'images/double-queen-bed.png')"; 
+ 
+    if (mysqli_query($conn, $sql)) {
+        echo "Double Queen Beds added successfully<br>";
+    } else {
+        echo "Error creating record: " . mysqli_error($conn);
+    }
+
+    $sql = "INSERT INTO `provisio`.`room`
+        (roomType,roomCost,pictureAddress)
+        VALUES ('Queen Bed',150,'images/queen-bed.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Queen Bed added successfully<br>";
+    } else {
+        echo "Error creating record: " . mysqli_error($conn);
+    }
+
+    $sql = "INSERT INTO `provisio`.`room`
+        (roomType,roomCost,pictureAddress)
+        VALUES ('King Bed',165,'images/king-bed.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "King Bed added successfully<br>";
+    } else {
+        echo "Error creating record: " . mysqli_error($conn);
+    }
+
+    echo "<br>";
 
     // Create reservations table
     $sql = "CREATE TABLE `provisio`.`reservations` (
@@ -141,6 +220,8 @@ CSD 460 - Red Team
     } else {
         echo "Error creating table: " . mysqli_error($conn);
     }
+
+    echo "<br>";
 
     // Create sysAdmin user
     $sql = "DROP USER IF EXISTS 'serverUser'@'localhost';";

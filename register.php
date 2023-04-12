@@ -23,6 +23,8 @@ CSD 460 - Red Team
   if (isset($_SESSION['username'])) {
     if (validateUser($_SESSION['username']) == false) {
       signOutUser();
+    } else {
+      header("Location: index.php");
     }
   }
   ?>
@@ -48,10 +50,10 @@ CSD 460 - Red Team
                     <a class="nav-link" aria-current="page" href="index.php">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
+                    <a class="nav-link" href="aboutus.php">About Us</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Location</a>
+                    <a class="nav-link" href="location.php">Location</a>
                   </li>
                   <?php
                   //Show the dropdown if a user is signed in
@@ -65,12 +67,12 @@ CSD 460 - Red Team
                         ?>
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Start a Reservation</a></li>
-                        <li><a class="dropdown-item" href="#">Manage Reservations</a></li>
+                        <li><a class="dropdown-item" href="reservation.php">Start a Reservation</a></li>
+                        <li><a class="dropdown-item" href="manageReservation.php">Manage Reservations</a></li>
                         <li>
                           <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">ProPoints</a></li>
+                        <li><a class="dropdown-item" href="propoints.php">ProPoints</a></li>
                       </ul>
                     </li>
                     <?php
@@ -205,6 +207,7 @@ CSD 460 - Red Team
         </div>
       </div>
     </div>
+    <br><br><br><br>
   </section>
 
   <footer>

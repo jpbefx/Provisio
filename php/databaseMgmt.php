@@ -65,6 +65,67 @@ function validateUser($user): bool
 }
 
 /*
+Returns all hotels in the hotel table
+@return false if an error occurs
+mysqli_result containing all records
+*/
+function getAllHotels(): bool|mysqli_result{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from hotel";
+    $result = mysqli_query($dbConnection,$query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return $result;
+        }
+    }
+    return false;
+}
+
+function getHotelInfo(string $name): bool|array{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from hotel where hotelName = '$name' limit 1;";
+    $result = mysqli_query($dbConnection,$query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_assoc($result);
+        }
+    }
+    return false;
+}
+
+/*
+Returns all rooms in the room table
+@return false if an error occurs
+mysqli_result containing all records
+*/
+function getAllRooms(): bool|mysqli_result {
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from room";
+    $result = mysqli_query($dbConnection,$query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return $result;
+        }
+    }
+    return false;
+}
+
+/*
 Calls the session destroy function to clear all session related data. Can be used if
 another method is required to be ran after signing out the user. Can be removed if 
 nothing else is added to this.

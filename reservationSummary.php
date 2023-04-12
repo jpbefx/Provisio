@@ -17,12 +17,44 @@
 <?php
 //Global user check
 require("php/databaseMgmt.php");
-
-
 if (isset($_SESSION['username'])) {
     if (validateUser($_SESSION['username']) == false) {
         signOutUser();
     }
+    $hasError = false;
+    if(isset($_SESSION['checkIn']) == false){
+        $hasError = true;
+    }
+    if(isset($_SESSION['checkOut']) == false){
+        $hasError = true;
+    }
+    if(isset($_SESSION['numGuests']) == false){
+        $hasError = true;
+    }
+    if(isset($_SESSION['hotel']) == false){
+        $hasError = true;
+    }
+    if(isset($_SESSION['room']) == false){
+        $hasError = true;
+    }
+    if(isset($_SESSION['hasWifi']) == false){
+        $hasError = true;
+    }
+    if(isset($_SESSION['hasParking']) == false){
+        $hasError = true;
+    }
+    if(isset($_SESSION['hasBreakfest']) == false){
+        $hasError = true;
+    }
+    if($hasError == true){
+        header("Location: index.php");
+    }
+
+    $hotelInfo = getHotelInfo($_SESSION['hotel']);
+    $hotelAddress = $hotelInfo['hotelAddress'];
+
+} else {
+    header("Location: index.php");
 }
 ?>
 </head>
@@ -34,7 +66,7 @@ if (isset($_SESSION['username'])) {
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg">
                         <div class="container-fluid">
-                            <a class="navbar-brand nav-bar" href="index.html"><img class="img-fluid"
+                            <a class="navbar-brand nav-bar" href="index.php"><img class="img-fluid"
                                     src="images/white-logo.svg" /></a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -47,12 +79,11 @@ if (isset($_SESSION['username'])) {
                                         <a class="nav-link" aria-current="page" href="index.php">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" aria-current="page" href="about-us.php">About Us</a>
+                                        <a class="nav-link" href="aboutus.php">About Us</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="location.php">Location</a>
                                     </li>
-
                                     <?php
                                     //Show the dropdown if a user is signed in
                                     if (isset($_SESSION['username'])) {
@@ -65,13 +96,14 @@ if (isset($_SESSION['username'])) {
                                                 ?>
                                             </a>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="hotel-reservation.php">Start a
-                                                        Reservation</a></li>
-                                                <li><a class="dropdown-item" href="#">Manage Reservations</a></li>
+                                                <li><a class="dropdown-item" href="reservation.php">Start a Reservation</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="manageReservation.php">Manage
+                                                        Reservations</a></li>
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" href="#">ProPoints</a></li>
+                                                <li><a class="dropdown-item" href="propoints.php">ProPoints</a></li>
                                             </ul>
                                         </li>
                                         <?php
@@ -121,18 +153,33 @@ if (isset($_SESSION['username'])) {
                                     <div class="row">
                                         <div class="col-lg-8 col-md-9 col-sm-12 col-12">
                                             <div class="hotel-heading">
-                                                <h2>Provisio Hotel - New York City </h2>
-                                                <p>123 Imaginary Street, New York, NY 10001</p>
+                                                <h2>
+                                                <?php
+                                                    echo "Provisio Hotel - " . $_SESSION['hotel'];
+                                                ?>
+                                                </h2>
+                                                <p>
+                                                <?php
+                                                    echo $hotelAddress;
+                                                ?>
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-md-3 col-sm-12 col-12">
-                                            <div class="reservation-id"> Reservation ID: 3675 </div>
                                         </div>
                                         <div class="reservation-content">
                                             <ul>
                                                 <li><span>Booking Dates:</span></li>
-                                                <li>Check in Date : 09/01/2023</li>
-                                                <li>Check out Date : 09/06/2023</li>
+                                                <li>
+                                                    <?php
+                                                        echo "Check In Date : " . $_SESSION['checkIn'];
+                                                    ?>
+                                                </li>
+                                                <li>
+                                                <?php
+                                                        echo "Check Out Date : " . $_SESSION['checkOut'];
+                                                ?>
+                                                </li>
                                             </ul>
                                         </div>
                                         <div class="row">
@@ -140,7 +187,11 @@ if (isset($_SESSION['username'])) {
                                                 <div class="reservation-content">
                                                     <ul>
                                                         <li><span>Number of guests:</span></li>
-                                                        <li>2</li>
+                                                        <li>
+                                                            <?php
+                                                                echo $_SESSION['numGuests'];
+                                                            ?>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -148,7 +199,11 @@ if (isset($_SESSION['username'])) {
                                                 <div class="reservation-content">
                                                     <ul>
                                                         <li><span>Room Type:</span></li>
-                                                        <li>Double Queen Beds</li>
+                                                        <li>
+                                                            <?php
+                                                                echo $_SESSION['room'];
+                                                            ?>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -156,7 +211,7 @@ if (isset($_SESSION['username'])) {
                                                 <div class="reservation-content">
                                                     <ul>
                                                         <li><span>Number of Nights:</span></li>
-                                                        <li>5</li>
+                                                        <li>??????</li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -164,9 +219,21 @@ if (isset($_SESSION['username'])) {
                                                 <div class="reservation-content">
                                                     <ul>
                                                         <li><span>Chosen Amenities:</span></li>
-                                                        <li> WiFi </li>
-                                                        <li> Breakfast </li>
-                                                        <li> Parking </li>
+                                                        <li>
+                                                            <?php
+                                                                echo "WiFi : " . $_SESSION['hasWifi'] . "<br>";
+                                                            ?>
+                                                        </li>
+                                                        <li>
+                                                            <?php
+                                                                echo "Breakfast : " . $_SESSION['hasBreakfest'] . "<br>";
+                                                            ?>
+                                                        </li>
+                                                        <li>
+                                                            <?php
+                                                                echo "Parking : " . $_SESSION['hasParking'];
+                                                            ?>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -174,7 +241,7 @@ if (isset($_SESSION['username'])) {
                                                 <div class="reservation-content text-center mt-4">
                                                     <ul>
                                                         <li><span>Total Price:</span></li>
-                                                        <li>$784.85</li>
+                                                        <li>$???.??</li>
                                                     </ul>
                                                 </div>
                                             </div>
