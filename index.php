@@ -129,7 +129,7 @@ CSD 460 - Red Team
       <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-5">
           <div class="book-stay-img">
-            <a href="#">Book your stay
+            <a href="reservation.php">Book your stay
               <img class="img-fluid" src="images/book-stay-img-new.png" />
             </a>
           </div>
