@@ -197,19 +197,19 @@ CSD 460 - Red Team
                                     $_SESSION['room'] = $_POST['roomGroup'];
 
                                     $hasWifi = "No";
-                                    if(isset($_POST['wifi'])){
+                                    if (isset($_POST['wifi'])) {
                                         $hasWifi = "Yes";
                                     }
                                     $_SESSION['hasWifi'] = $hasWifi;
 
                                     $hasParking = "No";
-                                    if(isset($_POST['parking'])){
+                                    if (isset($_POST['parking'])) {
                                         $hasParking = "Yes";
                                     }
                                     $_SESSION['hasParking'] = $hasParking;
 
                                     $hasBreakfest = "No";
-                                    if(isset($_POST['breakfest'])){
+                                    if (isset($_POST['breakfest'])) {
                                         $hasBreakfest = "Yes";
                                     }
                                     $_SESSION['hasBreakfest'] = $hasBreakfest;

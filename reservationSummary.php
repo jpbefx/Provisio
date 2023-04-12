@@ -22,31 +22,31 @@ if (isset($_SESSION['username'])) {
         signOutUser();
     }
     $hasError = false;
-    if(isset($_SESSION['checkIn']) == false){
+    if (isset($_SESSION['checkIn']) == false) {
         $hasError = true;
     }
-    if(isset($_SESSION['checkOut']) == false){
+    if (isset($_SESSION['checkOut']) == false) {
         $hasError = true;
     }
-    if(isset($_SESSION['numGuests']) == false){
+    if (isset($_SESSION['numGuests']) == false) {
         $hasError = true;
     }
-    if(isset($_SESSION['hotel']) == false){
+    if (isset($_SESSION['hotel']) == false) {
         $hasError = true;
     }
-    if(isset($_SESSION['room']) == false){
+    if (isset($_SESSION['room']) == false) {
         $hasError = true;
     }
-    if(isset($_SESSION['hasWifi']) == false){
+    if (isset($_SESSION['hasWifi']) == false) {
         $hasError = true;
     }
-    if(isset($_SESSION['hasParking']) == false){
+    if (isset($_SESSION['hasParking']) == false) {
         $hasError = true;
     }
-    if(isset($_SESSION['hasBreakfest']) == false){
+    if (isset($_SESSION['hasBreakfest']) == false) {
         $hasError = true;
     }
-    if($hasError == true){
+    if ($hasError == true) {
         header("Location: index.php");
     }
 
@@ -154,14 +154,14 @@ if (isset($_SESSION['username'])) {
                                         <div class="col-lg-8 col-md-9 col-sm-12 col-12">
                                             <div class="hotel-heading">
                                                 <h2>
-                                                <?php
+                                                    <?php
                                                     echo "Provisio Hotel - " . $_SESSION['hotel'];
-                                                ?>
+                                                    ?>
                                                 </h2>
                                                 <p>
-                                                <?php
+                                                    <?php
                                                     echo $hotelAddress;
-                                                ?>
+                                                    ?>
                                                 </p>
                                             </div>
                                         </div>
@@ -172,13 +172,13 @@ if (isset($_SESSION['username'])) {
                                                 <li><span>Booking Dates:</span></li>
                                                 <li>
                                                     <?php
-                                                        echo "Check In Date : " . $_SESSION['checkIn'];
+                                                    echo "Check In Date : " . $_SESSION['checkIn'];
                                                     ?>
                                                 </li>
                                                 <li>
-                                                <?php
-                                                        echo "Check Out Date : " . $_SESSION['checkOut'];
-                                                ?>
+                                                    <?php
+                                                    echo "Check Out Date : " . $_SESSION['checkOut'];
+                                                    ?>
                                                 </li>
                                             </ul>
                                         </div>
@@ -189,7 +189,7 @@ if (isset($_SESSION['username'])) {
                                                         <li><span>Number of guests:</span></li>
                                                         <li>
                                                             <?php
-                                                                echo $_SESSION['numGuests'];
+                                                            echo $_SESSION['numGuests'];
                                                             ?>
                                                         </li>
                                                     </ul>
@@ -201,7 +201,7 @@ if (isset($_SESSION['username'])) {
                                                         <li><span>Room Type:</span></li>
                                                         <li>
                                                             <?php
-                                                                echo $_SESSION['room'];
+                                                            echo $_SESSION['room'];
                                                             ?>
                                                         </li>
                                                     </ul>
@@ -221,17 +221,17 @@ if (isset($_SESSION['username'])) {
                                                         <li><span>Chosen Amenities:</span></li>
                                                         <li>
                                                             <?php
-                                                                echo "WiFi : " . $_SESSION['hasWifi'] . "<br>";
+                                                            echo "WiFi : " . $_SESSION['hasWifi'] . "<br>";
                                                             ?>
                                                         </li>
                                                         <li>
                                                             <?php
-                                                                echo "Breakfast : " . $_SESSION['hasBreakfest'] . "<br>";
+                                                            echo "Breakfast : " . $_SESSION['hasBreakfest'] . "<br>";
                                                             ?>
                                                         </li>
                                                         <li>
                                                             <?php
-                                                                echo "Parking : " . $_SESSION['hasParking'];
+                                                            echo "Parking : " . $_SESSION['hasParking'];
                                                             ?>
                                                         </li>
                                                     </ul>

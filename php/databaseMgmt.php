@@ -69,7 +69,8 @@ Returns all hotels in the hotel table
 @return false if an error occurs
 mysqli_result containing all records
 */
-function getAllHotels(): bool|mysqli_result{
+function getAllHotels(): bool|mysqli_result
+{
     global $dbConnection;
     if ($dbConnection == null) {
         if (connectDB() == false) {
@@ -77,7 +78,7 @@ function getAllHotels(): bool|mysqli_result{
         }
     }
     $query = "select * from hotel";
-    $result = mysqli_query($dbConnection,$query);
+    $result = mysqli_query($dbConnection, $query);
     if ($result) {
         if ($result && mysqli_num_rows($result) > 0) {
             return $result;
@@ -86,7 +87,13 @@ function getAllHotels(): bool|mysqli_result{
     return false;
 }
 
-function getHotelInfo(string $name): bool|array{
+/*
+Returns an array of fields for a passed hotel name
+@return false if no hotel with that name was found
+or an indexed array of hotel information following database field set 
+*/
+function getHotelInfo(string $name): bool|array
+{
     global $dbConnection;
     if ($dbConnection == null) {
         if (connectDB() == false) {
@@ -94,7 +101,7 @@ function getHotelInfo(string $name): bool|array{
         }
     }
     $query = "select * from hotel where hotelName = '$name' limit 1;";
-    $result = mysqli_query($dbConnection,$query);
+    $result = mysqli_query($dbConnection, $query);
     if ($result) {
         if ($result && mysqli_num_rows($result) > 0) {
             return mysqli_fetch_assoc($result);
@@ -108,7 +115,8 @@ Returns all rooms in the room table
 @return false if an error occurs
 mysqli_result containing all records
 */
-function getAllRooms(): bool|mysqli_result {
+function getAllRooms(): bool|mysqli_result
+{
     global $dbConnection;
     if ($dbConnection == null) {
         if (connectDB() == false) {
@@ -116,7 +124,7 @@ function getAllRooms(): bool|mysqli_result {
         }
     }
     $query = "select * from room";
-    $result = mysqli_query($dbConnection,$query);
+    $result = mysqli_query($dbConnection, $query);
     if ($result) {
         if ($result && mysqli_num_rows($result) > 0) {
             return $result;
