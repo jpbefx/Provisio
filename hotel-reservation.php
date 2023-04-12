@@ -17,9 +17,7 @@ CSD 460 - Red Team
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap" rel="stylesheet">
     <link href="css/rome.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
-        integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <?php
     //Global user check
     require("php/databaseMgmt.php");
@@ -42,11 +40,8 @@ CSD 460 - Red Team
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg">
                         <div class="container-fluid">
-                            <a class="navbar-brand nav-bar" href="index.php"><img class="img-fluid"
-                                    src="images/white-logo.svg" /></a>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
+                            <a class="navbar-brand nav-bar" href="index.php"><img class="img-fluid" src="images/white-logo.svg" /></a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse navbar-nav-custom" id="navbarSupportedContent">
@@ -55,7 +50,7 @@ CSD 460 - Red Team
                                         <a class="nav-link" aria-current="page" href="index.php">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="aboutus.php">About Us</a>
+                                        <a class="nav-link" href="about-us.php">About Us</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="location.php">Location</a>
@@ -64,16 +59,16 @@ CSD 460 - Red Team
                                     <?php
                                     //Show the dropdown if a user is signed in
                                     if (isset($_SESSION['username'])) {
-                                        ?>
+                                    ?>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <?php
                                                 echo $_SESSION['username'];
                                                 ?>
                                             </a>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="reservation.php">Start a Reservation</a>
+                                                <li><a class="dropdown-item" href="hotel-reservation.php">Start a
+                                                        Reservation</a>
                                                 </li>
                                                 <li><a class="dropdown-item" href="manageReservation.php">Manage
                                                         Reservations</a></li>
@@ -83,29 +78,29 @@ CSD 460 - Red Team
                                                 <li><a class="dropdown-item" href="propoints.php">ProPoints</a></li>
                                             </ul>
                                         </li>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                     <div class="login-btn">
                                         <?php
                                         //Green Button Space; Either logout or login
                                         if (isset($_SESSION['username'])) {
-                                            ?>
+                                        ?>
                                             <a href="php\logout.php">
-                                                <?php
+                                            <?php
                                         } else {
                                             ?>
                                                 <a href="login.php">
-                                                    <?php
-                                        }
+                                                <?php
+                                            }
 
-                                        if (isset($_SESSION['username'])) {
-                                            echo "Log Out";
-                                        } else {
-                                            echo "Login / Sign Up";
-                                        }
-                                        ?>
-                                            </a>
+                                            if (isset($_SESSION['username'])) {
+                                                echo "Log Out";
+                                            } else {
+                                                echo "Login / Sign Up";
+                                            }
+                                                ?>
+                                                </a>
                                     </div>
                                 </ul>
                             </div>
@@ -214,7 +209,7 @@ CSD 460 - Red Team
                                     }
                                     $_SESSION['hasBreakfest'] = $hasBreakfest;
 
-                                    echo "<script> location.replace('reservationSummary.php'); </script>";
+                                    echo "<script> location.replace('reservation-summary.php'); </script>";
                                 } else {
                                     echo "<div class='response-text'>One or more errors:<br><ul>" . $errorStr . "</div>";
                                 }
@@ -225,22 +220,24 @@ CSD 460 - Red Team
                             <div class="hotels-directly">
                                 <h3>Choose your Dates</h3>
                             </div>
-                            <form class="row" method="post">
+                            <form method="post">
                                 <div class="mt-5">
-                                    <div class="col-md-6">
-                                        <div class="form-group check-text">
-                                            <label for="input_from">Check In</label>
-                                            <?php
-                                            echo "<input type='date' class='form-control' name='checkIn' id='input_from' min=" . date("Y-m-d") . ">";
-                                            ?>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group check-text">
+                                                <label for="input_from">Check In</label>
+                                                <?php
+                                                echo "<input type='date' class='form-control' name='checkIn' id='input_from' min=" . date("Y-m-d") . ">";
+                                                ?>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group check-text">
-                                            <label for="input_from">Check Out</label>
-                                            <?php
-                                            echo "<input type='date' class='form-control' name='checkOut' id='input_from' min=" . date('Y-m-d', strtotime("+1 day")) . ">";
-                                            ?>
+                                        <div class="col-md-6">
+                                            <div class="form-group check-text">
+                                                <label for="input_to">Check Out</label>
+                                                <?php
+                                                echo "<input type='date' class='form-control' name='checkOut' id='input_to' min=" . date('Y-m-d', strtotime("+1 day")) . ">";
+                                                ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -255,23 +252,25 @@ CSD 460 - Red Team
                                 </div>
                                 <div class="row">
                                     <fieldset id="hotelGroup">
-                                        <?php
-                                        $hotelList = getAllHotels();
-                                        if ($hotelList == false) {
-                                            echo "Error accessing hotel list try again later";
-                                        } else {
-                                            while ($hotel = mysqli_fetch_assoc($hotelList)) {
-                                                echo "<div class='col-lg-4 col-md-6 col-sm-12 col-12'>";
-                                                echo "  <div class='nyc-location'>";
-                                                echo "      <div class='hotel-location-text custom-form-check'>" . $hotel['hotelName'];
-                                                echo "          <input type='radio' name='hotelGroup' class='form-check-input' value=" . $hotel['hotelName'] . ">";
-                                                echo "      </div>";
-                                                echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
-                                                echo "  </div>";
-                                                echo "</div>";
+                                        <div class="row">
+                                            <?php
+                                            $hotelList = getAllHotels();
+                                            if ($hotelList == false) {
+                                                echo "Error accessing hotel list try again later";
+                                            } else {
+                                                while ($hotel = mysqli_fetch_assoc($hotelList)) {
+                                                    echo "<div class='col-lg-4 col-md-6 col-sm-12 col-12'>";
+                                                    echo "  <div class='nyc-location'>";
+                                                    echo "      <div class='hotel-location-text custom-form-check'>" . $hotel['hotelName'];
+                                                    echo "          <input type='radio' name='hotelGroup' class='form-check-input' value='" . $hotel['hotelName'] . "'>";
+                                                    echo "      </div>";
+                                                    echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
+                                                    echo "  </div>";
+                                                    echo "</div>";
+                                                }
                                             }
-                                        }
-                                        ?>
+                                            ?>
+                                        </div>
                                     </fieldset>
                                 </div>
                                 <div class="hotels-directly mt-5">
@@ -279,24 +278,26 @@ CSD 460 - Red Team
                                 </div>
                                 <div class="row">
                                     <fieldset id="roomGroup">
-                                        <?php
-                                        $roomList = getAllRooms();
-                                        if ($roomList == false) {
-                                            echo "Error accessing room list try again later";
-                                        } else {
-                                            while ($room = mysqli_fetch_assoc($roomList)) {
-                                                echo "<div class='col-lg-4 offset-lg-1 col-md-6 col-sm-12 col-12'>";
-                                                echo "  <div class='nyc-location'>";
-                                                echo "      <div class='hotel-location-text custom-form-check'>" . $room['roomType'] . " $" . $room['roomCost'];
-                                                echo "          <input type='radio' name='roomGroup'class='form-check-input' value=" . $room['roomType'] . ">";
-                                                echo "      </div>";
-                                                echo "      <img class='img-fluid' src=" . $room['pictureAddress'] . " />";
-                                                echo "  </div>";
-                                                echo "</div>";
+                                        <div class="row">
+                                            <?php
+                                            $roomList = getAllRooms();
+                                            if ($roomList == false) {
+                                                echo "Error accessing room list try again later";
+                                            } else {
+                                                while ($room = mysqli_fetch_assoc($roomList)) {
+                                                    echo "<div class='col-lg-4 offset-lg-1 col-md-6 col-sm-12 col-12'>";
+                                                    echo "  <div class='nyc-location'>";
+                                                    echo "      <div class='hotel-location-text custom-form-check'>" . $room['roomType'] . " $" . $room['roomCost'];
+                                                    echo "          <input type='radio' name='roomGroup'class='form-check-input' value='" . $room['roomType'] . "'>";
+                                                    echo "      </div>";
+                                                    echo "      <img class='img-fluid' src=" . $room['pictureAddress'] . " />";
+                                                    echo "  </div>";
+                                                    echo "</div>";
+                                                }
                                             }
-                                        }
 
-                                        ?>
+                                            ?>
+                                        </div>
                                     </fieldset>
                                 </div>
                                 <div class="hotels-directly mt-5">
@@ -307,19 +308,16 @@ CSD 460 - Red Team
                                         <div class="row">
                                             <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                                                 <div class="hotel-location-text text-start custom-form-check">
-                                                    <input type="checkbox" class="form-check-input" name="wifi"
-                                                        id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" name="wifi" id="exampleCheck1">
                                                     WiFi
                                                     +$12.99 flat fee
                                                 </div>
                                                 <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                    <input type="checkbox" class="form-check-input" name="Parking"
-                                                        id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" name="Parking" id="exampleCheck1">
                                                     Parking + $19.99 per night
                                                 </div>
                                                 <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                    <input type="checkbox" class="form-check-input" name="Breakfest"
-                                                        id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" name="Breakfest" id="exampleCheck1">
                                                     Breakfast + $8.99 per night
                                                 </div>
                                             </div>
@@ -328,13 +326,11 @@ CSD 460 - Red Team
                                                     with
                                                     every stay: </div>
                                                 <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                    <input type="checkbox" class="form-check-input"
-                                                        onclick="return false;" id="exampleCheck1" checked> Earn 150
+                                                    <input type="checkbox" class="form-check-input" onclick="return false;" id="exampleCheck1" checked> Earn 150
                                                     Provisio points per night
                                                 </div>
                                                 <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                    <input type="checkbox" class="form-check-input"
-                                                        onclick="return false;" id="exampleCheck1" checked> Gym/ Pool
+                                                    <input type="checkbox" class="form-check-input" onclick="return false;" id="exampleCheck1" checked> Gym/ Pool
                                                     Access
                                                 </div>
                                             </div>
@@ -361,7 +357,7 @@ CSD 460 - Red Team
         </div>
     </footer>
     <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-    <script src="js/popper.min.js" type="text/javascript"></script>
+    <!-- <script src="js/popper.min.js" type="text/javascript"></script> -->
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/rome.js" type="text/javascript"></script>
     <script src="js/main.js" type="text/javascript"></script>

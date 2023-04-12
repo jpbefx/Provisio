@@ -1,62 +1,38 @@
-<?php session_start(); ?>
+<!-- 
+Nicholas Werner, James Bailey, Larissa Passamani Lima
+CSD 460 - Red Team
+ -->
+<?php session_start();
+?>
 <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Provisio - Red Team | Reservation Lookup page</title>
+    <title>Provisio - Red Team | Hotel Reservation page</title>
     <link rel="stylesheet" href="css/custom-style.css" type="text/css" />
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap" rel="stylesheet">
     <link href="css/rome.css" rel="stylesheet" type="text/css" />
-</head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
+        integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <?php
+    //Global user check
+    require("php/databaseMgmt.php");
 
-<?php
-//Global user check
-require("php/databaseMgmt.php");
-if (isset($_SESSION['username'])) {
-    if (validateUser($_SESSION['username']) == false) {
-        signOutUser();
-    }
-    $hasError = false;
-    if (isset($_SESSION['checkIn']) == false) {
-        $hasError = true;
-    }
-    if (isset($_SESSION['checkOut']) == false) {
-        $hasError = true;
-    }
-    if (isset($_SESSION['numGuests']) == false) {
-        $hasError = true;
-    }
-    if (isset($_SESSION['hotel']) == false) {
-        $hasError = true;
-    }
-    if (isset($_SESSION['room']) == false) {
-        $hasError = true;
-    }
-    if (isset($_SESSION['hasWifi']) == false) {
-        $hasError = true;
-    }
-    if (isset($_SESSION['hasParking']) == false) {
-        $hasError = true;
-    }
-    if (isset($_SESSION['hasBreakfest']) == false) {
-        $hasError = true;
-    }
-    if ($hasError == true) {
+
+    if (isset($_SESSION['username'])) {
+        if (validateUser($_SESSION['username']) == false) {
+            signOutUser();
+        }
+    } else {
         header("Location: index.php");
     }
-
-    $hotelInfo = getHotelInfo($_SESSION['hotel']);
-    $hotelAddress = $hotelInfo['hotelAddress'];
-
-} else {
-    header("Location: index.php");
-}
-?>
+    ?>
 </head>
 
 <body>
@@ -79,11 +55,12 @@ if (isset($_SESSION['username'])) {
                                         <a class="nav-link" aria-current="page" href="index.php">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="aboutus.php">About Us</a>
+                                        <a class="nav-link" href="about-us.php">About Us</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="location.php">Location</a>
                                     </li>
+
                                     <?php
                                     //Show the dropdown if a user is signed in
                                     if (isset($_SESSION['username'])) {
@@ -96,7 +73,8 @@ if (isset($_SESSION['username'])) {
                                                 ?>
                                             </a>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="reservation.php">Start a Reservation</a>
+                                                <li><a class="dropdown-item" href="hotel-reservation.php">Start a
+                                                        Reservation</a>
                                                 </li>
                                                 <li><a class="dropdown-item" href="manageReservation.php">Manage
                                                         Reservations</a></li>
@@ -138,7 +116,6 @@ if (isset($_SESSION['username'])) {
             </div>
         </div>
     </header>
-
     <section class="location-bg">
         <div class="container">
             <div class="row">
@@ -160,7 +137,7 @@ if (isset($_SESSION['username'])) {
                                                 </h2>
                                                 <p>
                                                     <?php
-                                                    echo $hotelAddress;
+                                                    echo getHotelInfo($_SESSION['hotel'])['hotelAddress'];
                                                     ?>
                                                 </p>
                                             </div>
@@ -211,7 +188,12 @@ if (isset($_SESSION['username'])) {
                                                 <div class="reservation-content">
                                                     <ul>
                                                         <li><span>Number of Nights:</span></li>
-                                                        <li>??????</li>
+                                                        <li>
+                                                        <?php
+                                                            $numNights = (strtotime($_SESSION["checkOut"]) - strtotime($_SESSION['checkIn'])) / 86400;
+                                                            echo $numNights;
+                                                        ?>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -241,7 +223,25 @@ if (isset($_SESSION['username'])) {
                                                 <div class="reservation-content text-center mt-4">
                                                     <ul>
                                                         <li><span>Total Price:</span></li>
-                                                        <li>$???.??</li>
+                                                        <li>
+                                                            <?php
+                                                                $reservTotal = getRoomInfo($_SESSION['room'])['roomCost'] * $numNights;
+
+                                                                if($_SESSION['hasWifi'] == "Yes"){
+                                                                    $reservTotal += 12.99;
+                                                                }
+
+                                                                if($_SESSION['hasBreakfest'] == "Yes"){
+                                                                    $reservTotal += 9.99 * $numNights;
+                                                                }
+
+                                                                if($_SESSION['hasParking'] == "Yes"){
+                                                                    $reservTotal += 19.99 * $numNights;
+                                                                }
+
+                                                                echo '$' . number_format($reservTotal, 2);
+                                                            ?>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -272,7 +272,7 @@ if (isset($_SESSION['username'])) {
     </footer>
 
     <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-    <script src="js/popper.min.js" type="text/javascript"></script>
+    <!-- <script src="js/popper.min.js" type="text/javascript"></script> -->
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/rome.js" type="text/javascript"></script>
     <script src="js/main.js" type="text/javascript"></script>

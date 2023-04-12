@@ -2,7 +2,10 @@
 Nicholas Werner, James Bailey, Larissa Passamani Lima
 CSD 460 - Red Team
  -->
-<?php session_start(); ?>
+<?php
+  session_start();
+  ob_start();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -18,9 +21,6 @@ CSD 460 - Red Team
   <?php
   //Global user check
   require("php/databaseMgmt.php");
-
-
-
   if (isset($_SESSION['username'])) {
     if (validateUser($_SESSION['username']) == false) {
       signOutUser();
@@ -51,7 +51,7 @@ CSD 460 - Red Team
                     <a class="nav-link" aria-current="page" href="index.php">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="aboutus.php">About Us</a>
+                    <a class="nav-link" href="about-us.php">About Us</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="location.php">Location</a>
@@ -68,7 +68,7 @@ CSD 460 - Red Team
                         ?>
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="reservation.php">Start a Reservation</a></li>
+                        <li><a class="dropdown-item" href="hotel-reservation.php">Start a Reservation</a></li>
                         <li><a class="dropdown-item" href="manageReservation.php">Manage Reservations</a></li>
                         <li>
                           <hr class="dropdown-divider">
@@ -131,7 +131,14 @@ CSD 460 - Red Team
                 <label for="InputPassword1" class="form-label">Password</label>
                 <input type="password" class="form-control" name="password" id="InputPassword1">
               </div>
-              <div class="custom-form">
+              <div class="custom-form1">
+                <style>
+                  section .custom-form1 {
+                    margin: block;
+                    font-display: login-account-box;
+                    height: 10px;
+                  }
+                </style>
                 <input type="checkbox" onclick="passControl()">Show Password</input>
                 <script>
                   function passControl() {

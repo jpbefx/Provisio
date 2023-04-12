@@ -49,11 +49,11 @@ CSD 460 - Red Team
               </button>
               <div class="collapse navbar-collapse navbar-nav-custom" id="navbarSupportedContent">
                 <ul class="navbar-nav custom-nav">
-                <li class="nav-item">
+                  <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="index.php">Home</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="aboutus.php">About Us</a>
+                    <a class="nav-link" href="about-us.php">About Us</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="location.php">Location</a>
@@ -70,7 +70,7 @@ CSD 460 - Red Team
                         ?>
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="reservation.php">Start a Reservation</a></li>
+                        <li><a class="dropdown-item" href="hotel-reservation.php">Start a Reservation</a></li>
                         <li><a class="dropdown-item" href="manageReservation.php">Manage Reservations</a></li>
                         <li>
                           <hr class="dropdown-divider">
