@@ -134,12 +134,14 @@ CSD 460 - Red Team
               <div class="custom-form1">
                 <style>
                   section .custom-form1 {
-                    margin: block;
-                    font-display: login-account-box;
-                    height: 10px;
+                    text-align: start;
+                    padding: 10px;
+                    size: 40px;
+                    font-size: larger;
                   }
                 </style>
-                <input type="checkbox" onclick="passControl()">Show Password</input>
+                <input type="checkbox" onclick="passControl()"> Show Password
+                </input>
                 <script>
                   function passControl() {
                     var x = document.getElementById("InputPassword1");
@@ -152,6 +154,7 @@ CSD 460 - Red Team
                 </script>
               </div>
               <div class="create-account-btn mt-5 mb-61 text-center">
+
                 <?php
                 // Log In Functions
                 if (array_key_exists('loginButton', $_POST)) {
