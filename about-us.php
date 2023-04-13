@@ -39,13 +39,10 @@
                         <div class="container-fluid">
                             <a class="navbar-brand nav-bar" href="index.html"><img class="img-fluid"
                                     src="images/provisiologo.svg" /></a>
-<<<<<<< HEAD
-=======
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
->>>>>>> 71136b86d913c089681046e288404797dff7b5ed
                             </button>
                             <div class="collapse navbar-collapse navbar-nav-custom" id="navbarSupportedContent">
                                 <ul class="navbar-nav custom-nav">
@@ -56,11 +53,7 @@
                                         <a class="nav-link" href="about-us.php">About Us</a>
                                     </li>
                                     <li class="nav-item">
-<<<<<<< HEAD
                                         <a class="nav-link" href="location.php">Location</a>
-=======
-                                        <a class="nav-link" href="#">Location</a>
->>>>>>> 71136b86d913c089681046e288404797dff7b5ed
                                     </li>
                                     <?php
                                     //Show the dropdown if a user is signed in
@@ -74,7 +67,6 @@
                                                 ?>
                                             </a>
                                             <ul class="dropdown-menu">
-<<<<<<< HEAD
                                                 <li><a class="dropdown-item" href="hotel-reservation.php">Start a
                                                         Reservation</a></li>
                                                 <li><a class="dropdown-item" href="manageReservation.php">Manage
@@ -83,14 +75,6 @@
                                                     <hr class="dropdown-divider">
                                                 </li>
                                                 <li><a class="dropdown-item" href="propoints.php">ProPoints</a></li>
-=======
-                                                <li><a class="dropdown-item" href="#">Start a Reservation</a></li>
-                                                <li><a class="dropdown-item" href="#">Manage Reservations</a></li>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item" href="#">ProPoints</a></li>
->>>>>>> 71136b86d913c089681046e288404797dff7b5ed
                                             </ul>
                                         </li>
                                         <?php
