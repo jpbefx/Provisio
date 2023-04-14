@@ -17,7 +17,9 @@ CSD 460 - Red Team
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap" rel="stylesheet">
     <link href="css/rome.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
+        integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <?php
     //Global user check
     require("php/databaseMgmt.php");
@@ -40,8 +42,11 @@ CSD 460 - Red Team
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg">
                         <div class="container-fluid">
-                            <a class="navbar-brand nav-bar" href="index.php"><img class="img-fluid" src="images/white-logo.svg" /></a>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <a class="navbar-brand nav-bar" href="index.php"><img class="img-fluid"
+                                    src="images/white-logo.svg" /></a>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse navbar-nav-custom" id="navbarSupportedContent">
@@ -59,9 +64,10 @@ CSD 460 - Red Team
                                     <?php
                                     //Show the dropdown if a user is signed in
                                     if (isset($_SESSION['username'])) {
-                                    ?>
+                                        ?>
                                         <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
                                                 <?php
                                                 echo $_SESSION['username'];
                                                 ?>
@@ -78,29 +84,29 @@ CSD 460 - Red Team
                                                 <li><a class="dropdown-item" href="propoints.php">ProPoints</a></li>
                                             </ul>
                                         </li>
-                                    <?php
+                                        <?php
                                     }
                                     ?>
                                     <div class="login-btn">
                                         <?php
                                         //Green Button Space; Either logout or login
                                         if (isset($_SESSION['username'])) {
-                                        ?>
+                                            ?>
                                             <a href="php\logout.php">
-                                            <?php
+                                                <?php
                                         } else {
                                             ?>
                                                 <a href="login.php">
-                                                <?php
-                                            }
+                                                    <?php
+                                        }
 
-                                            if (isset($_SESSION['username'])) {
-                                                echo "Log Out";
-                                            } else {
-                                                echo "Login / Sign Up";
-                                            }
-                                                ?>
-                                                </a>
+                                        if (isset($_SESSION['username'])) {
+                                            echo "Log Out";
+                                        } else {
+                                            echo "Login / Sign Up";
+                                        }
+                                        ?>
+                                            </a>
                                     </div>
                                 </ul>
                             </div>
@@ -308,16 +314,19 @@ CSD 460 - Red Team
                                         <div class="row">
                                             <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                                                 <div class="hotel-location-text text-start custom-form-check">
-                                                    <input type="checkbox" class="form-check-input" name="wifi" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" name="wifi"
+                                                        id="exampleCheck1">
                                                     WiFi
                                                     +$12.99 flat fee
                                                 </div>
                                                 <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                    <input type="checkbox" class="form-check-input" name="Parking" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" name="parking"
+                                                        id="exampleCheck1">
                                                     Parking + $19.99 per night
                                                 </div>
                                                 <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                    <input type="checkbox" class="form-check-input" name="Breakfest" id="exampleCheck1">
+                                                    <input type="checkbox" class="form-check-input" name="breakfest"
+                                                        id="exampleCheck1">
                                                     Breakfast + $8.99 per night
                                                 </div>
                                             </div>
@@ -326,11 +335,13 @@ CSD 460 - Red Team
                                                     with
                                                     every stay: </div>
                                                 <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                    <input type="checkbox" class="form-check-input" onclick="return false;" id="exampleCheck1" checked> Earn 150
+                                                    <input type="checkbox" class="form-check-input"
+                                                        onclick="return false;" id="exampleCheck1" checked> Earn 150
                                                     Provisio points per night
                                                 </div>
                                                 <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                    <input type="checkbox" class="form-check-input" onclick="return false;" id="exampleCheck1" checked> Gym/ Pool
+                                                    <input type="checkbox" class="form-check-input"
+                                                        onclick="return false;" id="exampleCheck1" checked> Gym/ Pool
                                                     Access
                                                 </div>
                                             </div>

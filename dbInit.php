@@ -96,8 +96,12 @@ CSD 460 - Red Team
     $sql = "CREATE TABLE `provisio`.`hotel` (
     `hotelID` int NOT NULL AUTO_INCREMENT,
     `hotelName`	 VARCHAR(30) NOT NULL,
-    `hotelAddress` VARCHAR(100),
+    `hotelAddress` VARCHAR(20),
+    `hotelCity` VARCHAR(20),
+    `hotelState` VARCHAR(2),
+    `hotelZip` VARCHAR(5),
     `hotelEmail` VARCHAR(50),
+    `hotelPhone` VARCHAR(20),
     `pictureAddress` VARCHAR(100),
     PRIMARY KEY (`hotelID`)
     );";
@@ -110,8 +114,8 @@ CSD 460 - Red Team
 
     //Create all hotel locations
     $sql = "INSERT INTO `provisio`.`hotel`
-        (hotelName,hotelAddress,hotelEmail,pictureAddress)
-        VALUES ('New York','1234 Test Street, City State Zip','test@email.com','images/location-newyork-img.png')";
+        (hotelName,hotelAddress,hotelCity,hotelState,hotelZip,hotelEmail,hotelPhone,pictureAddress)
+        VALUES ('New York City','123 Imaginary Street','New York','NY', '10001','info@provisiohotel-nyc.com','(555) 123-4567','images/location-newyork-img.png')";
 
     if (mysqli_query($conn, $sql)) {
         echo "Hotel New York added successfully<br>";
@@ -120,8 +124,8 @@ CSD 460 - Red Team
     }
 
     $sql = "INSERT INTO `provisio`.`hotel`
-        (hotelName,hotelAddress,hotelEmail,pictureAddress)
-        VALUES ('Las Vegas','1234 Test Street, City State Zip','test@email.com','images/location-lasvegas-img.png')";
+        (hotelName,hotelAddress,hotelCity,hotelState,hotelZip,hotelEmail,hotelPhone,pictureAddress)
+        VALUES ('Las Vegas','1234 Mirage Lane','Las Vegas','NV', '89101','info@provisiohotelvegas.com','(555) 123-4568','images/location-lasvegas-img.png')";
 
     if (mysqli_query($conn, $sql)) {
         echo "Hotel Las Vegas added successfully<br>";
@@ -130,8 +134,8 @@ CSD 460 - Red Team
     }
 
     $sql = "INSERT INTO `provisio`.`hotel`
-        (hotelName,hotelAddress,hotelEmail,pictureAddress)
-        VALUES ('Honolulu','1234 Test Street, City State Zip','test@email.com','images/location-honolulu-img.png')";
+        (hotelName,hotelAddress,hotelCity,hotelState,hotelZip,hotelEmail,hotelPhone,pictureAddress)
+        VALUES ('Honolulu','1234 Aloha Lane','Honolulu','HI', '96815','info@provisiohawaii.com','(555) 123-4569','images/location-honolulu-img.png')";
 
     if (mysqli_query($conn, $sql)) {
         echo "Hotel Honolulu added successfully<br>";
@@ -169,8 +173,8 @@ CSD 460 - Red Team
 
     $sql = "INSERT INTO `provisio`.`room`
     (roomType,roomCost,pictureAddress)
-    VALUES ('Double Queen Beds',125,'images/double-queen-bed.png')"; 
- 
+    VALUES ('Double Queen Beds',125,'images/double-queen-bed.png')";
+
     if (mysqli_query($conn, $sql)) {
         echo "Double Queen Beds added successfully<br>";
     } else {

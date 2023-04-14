@@ -32,6 +32,10 @@ CSD 460 - Red Team
     } else {
         header("Location: index.php");
     }
+
+    //Need to add a check to make sure user doesnt navigate to this page on there own.
+    //IE Check if reservation session fields exist
+    //If these do not exist, kick user back to landing page.
     ?>
 </head>
 
@@ -189,10 +193,10 @@ CSD 460 - Red Team
                                                     <ul>
                                                         <li><span>Number of Nights:</span></li>
                                                         <li>
-                                                        <?php
+                                                            <?php
                                                             $numNights = (strtotime($_SESSION["checkOut"]) - strtotime($_SESSION['checkIn'])) / 86400;
                                                             echo $numNights;
-                                                        ?>
+                                                            ?>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -225,21 +229,21 @@ CSD 460 - Red Team
                                                         <li><span>Total Price:</span></li>
                                                         <li>
                                                             <?php
-                                                                $reservTotal = getRoomInfo($_SESSION['room'])['roomCost'] * $numNights;
+                                                            $reservTotal = getRoomInfo($_SESSION['room'])['roomCost'] * $numNights;
 
-                                                                if($_SESSION['hasWifi'] == "Yes"){
-                                                                    $reservTotal += 12.99;
-                                                                }
+                                                            if ($_SESSION['hasWifi'] == "Yes") {
+                                                                $reservTotal += 12.99;
+                                                            }
 
-                                                                if($_SESSION['hasBreakfest'] == "Yes"){
-                                                                    $reservTotal += 9.99 * $numNights;
-                                                                }
+                                                            if ($_SESSION['hasBreakfest'] == "Yes") {
+                                                                $reservTotal += 9.99 * $numNights;
+                                                            }
 
-                                                                if($_SESSION['hasParking'] == "Yes"){
-                                                                    $reservTotal += 19.99 * $numNights;
-                                                                }
+                                                            if ($_SESSION['hasParking'] == "Yes") {
+                                                                $reservTotal += 19.99 * $numNights;
+                                                            }
 
-                                                                echo '$' . number_format($reservTotal, 2);
+                                                            echo '$' . number_format($reservTotal, 2);
                                                             ?>
                                                         </li>
                                                     </ul>
@@ -247,8 +251,8 @@ CSD 460 - Red Team
                                             </div>
                                         </div>
                                         <div class="submit-btns text-center">
-                                            <button type="button">Cancel</button>
-                                            <button type="button">Submit</button>
+                                            <button type="button" onclick="history.back()">Cancel</button>
+                                            <button type="button" onclick="">Submit</button>
                                         </div>
                                         <div class="earn-points-text">
                                             <p>Earn 150 Provisio points per night </p>

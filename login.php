@@ -3,8 +3,8 @@ Nicholas Werner, James Bailey, Larissa Passamani Lima
 CSD 460 - Red Team
  -->
 <?php
-  session_start();
-  ob_start();
+session_start();
+ob_start();
 ?>
 <!doctype html>
 <html lang="en">

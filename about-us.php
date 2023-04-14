@@ -1,3 +1,7 @@
+<!-- 
+Nicholas Werner, James Bailey, Larissa Passamani Lima
+CSD 460 - Red Team
+ -->
 <?php session_start(); ?>
 
 <!doctype html>
@@ -24,8 +28,6 @@
         if (validateUser($_SESSION['username']) == false) {
             signOutUser();
         }
-    } else {
-        header("Location: index.php");
     }
     ?>
 </head>
@@ -39,13 +41,10 @@
                         <div class="container-fluid">
                             <a class="navbar-brand nav-bar" href="index.html"><img class="img-fluid"
                                     src="images/provisiologo.svg" /></a>
-<<<<<<< HEAD
-=======
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
->>>>>>> 71136b86d913c089681046e288404797dff7b5ed
                             </button>
                             <div class="collapse navbar-collapse navbar-nav-custom" id="navbarSupportedContent">
                                 <ul class="navbar-nav custom-nav">
@@ -56,11 +55,7 @@
                                         <a class="nav-link" href="about-us.php">About Us</a>
                                     </li>
                                     <li class="nav-item">
-<<<<<<< HEAD
                                         <a class="nav-link" href="location.php">Location</a>
-=======
-                                        <a class="nav-link" href="#">Location</a>
->>>>>>> 71136b86d913c089681046e288404797dff7b5ed
                                     </li>
                                     <?php
                                     //Show the dropdown if a user is signed in
@@ -74,7 +69,6 @@
                                                 ?>
                                             </a>
                                             <ul class="dropdown-menu">
-<<<<<<< HEAD
                                                 <li><a class="dropdown-item" href="hotel-reservation.php">Start a
                                                         Reservation</a></li>
                                                 <li><a class="dropdown-item" href="manageReservation.php">Manage
@@ -83,14 +77,6 @@
                                                     <hr class="dropdown-divider">
                                                 </li>
                                                 <li><a class="dropdown-item" href="propoints.php">ProPoints</a></li>
-=======
-                                                <li><a class="dropdown-item" href="#">Start a Reservation</a></li>
-                                                <li><a class="dropdown-item" href="#">Manage Reservations</a></li>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item" href="#">ProPoints</a></li>
->>>>>>> 71136b86d913c089681046e288404797dff7b5ed
                                             </ul>
                                         </li>
                                         <?php
@@ -166,45 +152,28 @@
                         <h3>You can also contact one of our hotels directly</h3>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                    <div class="directly-text mt-50">
-                        <p>Provisio Hotel - New York City<br />
-                            123 Imaginary Street<br />
-                            New York, NY 10001<br />
-                            Phone: (555) 123-4567<br />
-                            Email: <a href="mailto:info@provisiohotel-nyc.com">info@provisiohotel-nyc.com</a>
-                        </p>
-                    </div>
-                    <div class="directly-img">
-                        <img class="img-fluid" src="images/directly-1-img.png" />
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                    <div class="directly-text mt-50">
-                        <p>Provisio Hotel - Las Vegas<br />
-                            1234 Mirage Lane <br />
-                            Las Vegas, NV 89101<br />
-                            Phone: (555) 123-4568<br />
-                            Email: <a href="mailto:info@provisiohotelvegas.com">info@provisiohotelvegas.com</a>
-                        </p>
-                    </div>
-                    <div class="directly-img">
-                        <img class="img-fluid" src="images/directly-2-img.png" />
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                    <div class="directly-text mt-50">
-                        <p>Provisio Hotel - Honolulu<br />
-                            1234 Aloha Lane, <br />
-                            Honolulu, HI 96815<br />
-                            Phone: (555) 123-4569<br />
-                            Email: <a href="mailto:info@provisiohawaii.com">info@provisiohawaii.com</a>
-                        </p>
-                    </div>
-                    <div class="directly-img">
-                        <img class="img-fluid" src="images/directly-3-img.png" />
-                    </div>
-                </div>
+                <?php
+                $hotelList = getAllHotels();
+                if ($hotelList == false) {
+                    echo "Error accessing hotel list try again later";
+                } else {
+                    while ($hotel = mysqli_fetch_assoc($hotelList)) {
+                        echo "<div class='col-lg-4 col-md-6 col-sm-12 col-12'>";
+                        echo "  <div class='directly-text mt-50'>";
+                        echo "      <p>Provisio Hotel - " . $hotel['hotelName'] . "<br />";
+                        echo $hotel['hotelAddress'] . "<br />";
+                        echo $hotel['hotelCity'] . "," . $hotel['hotelState'] . " " . $hotel['hotelState'] . " " . $hotel['hotelZip'] . "<br />";
+                        echo "          Phone: " . $hotel['hotelPhone'] . "<br />";
+                        echo "          Email: <a href='mailto:" . $hotel['hotelEmail'] . "'>" . $hotel['hotelEmail'] . "</a>";
+                        echo "      </p>";
+                        echo "  </div>";
+                        echo "  <div class='directly-img'>";
+                        echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
+                        echo "  </div>";
+                        echo "</div>";
+                    }
+                }
+                ?>
             </div>
         </div>
     </section>
