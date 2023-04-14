@@ -162,7 +162,7 @@ CSD 460 - Red Team
                         echo "  <div class='directly-text mt-50'>";
                         echo "      <p>Provisio Hotel - " . $hotel['hotelName'] . "<br />";
                         echo $hotel['hotelAddress'] . "<br />";
-                        echo $hotel['hotelCity'] . "," . $hotel['hotelState'] . " " . $hotel['hotelState'] . " " . $hotel['hotelZip'] . "<br />";
+                        echo $hotel['hotelCity'] . ", " . $hotel['hotelState'] . " " . $hotel['hotelZip'] . "<br />";
                         echo "          Phone: " . $hotel['hotelPhone'] . "<br />";
                         echo "          Email: <a href='mailto:" . $hotel['hotelEmail'] . "'>" . $hotel['hotelEmail'] . "</a>";
                         echo "      </p>";

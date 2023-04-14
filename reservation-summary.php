@@ -141,7 +141,8 @@ CSD 460 - Red Team
                                                 </h2>
                                                 <p>
                                                     <?php
-                                                    echo getHotelInfo($_SESSION['hotel'])['hotelAddress'];
+                                                    $hotel = getHotelInfo($_SESSION['hotel']);
+                                                    echo $hotel['hotelAddress'] . " " . $hotel['hotelCity'] . ", " . $hotel['hotelState'] . " " . $hotel['hotelZip'];
                                                     ?>
                                                 </p>
                                             </div>
