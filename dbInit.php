@@ -228,6 +228,13 @@ CSD 460 - Red Team
         echo "Error creating table: " . mysqli_error($conn);
     }
 
+    $sql = "ALTER TABLE `provisio`.`reservations` auto_increment = 1000;";
+    if (mysqli_query($conn, $sql)) {
+        echo "Set ReservationID to start @ 1000<br>";
+    } else {
+        echo "Error: " . mysqli_error($conn);
+    }
+
     echo "<br>";
 
 

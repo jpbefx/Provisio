@@ -299,7 +299,7 @@ CSD 460 - Red Team
                                                 echo "<script>alert('An error occurred while submitting your reservation. Please try again.');</script>";
                                             } else {
                                                 // Redirect to the landing page with a success message
-                                                echo "<script>alert('Your reservation was submitted successfully! $result'); location.replace('index.php');</script>";
+                                                echo "<script>alert('Your reservation was submitted successfully! Your Reservation # is: $result'); location.replace('php/sessionUpdate.php');</script>";
                                             }
                                         }
                                         ?>

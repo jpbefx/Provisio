@@ -238,17 +238,7 @@ function addReservation($userID, $hotelID, $roomID, $checkIn, $checkOut, $numGue
         return false;
     }
 
-    $selectStmt = "select * from reservations where userID = '$userID' and hotelID = '$hotelID'
-        and roomID = '$roomID' and checkIn = '$checkIn' and checkOut = '$checkOut'
-        and numGuests = '$numGuests' and hasPaidWifi = '$hasPaidWifi' and hasPaidParking = '$hasPaidParking'
-        and hasPaidBreakfast = '$hasPaidBreakfast' and reservTotal = '$reservTotal'";
-
-    $result = mysqli_query($dbConnection, $selectStmt);
-    if ($result == false) {
-        return false;
-    }
-
-    return mysqli_fetch_assoc($result)['reservationID'];
+    return $dbConnection->insert_id;
 }
 
 /*
