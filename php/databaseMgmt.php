@@ -187,6 +187,71 @@ function createUser($user, $pass, $fname, $lname, $email): string|bool
 }
 
 /*
+returns array of user information using username
+@param $username - username of user to return
+@return array - properties of user
+false - unable to retrieve
+*/
+function getUserInfo($username): bool|array
+{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from users where username = '$username' limit 1;";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_assoc($result);
+        }
+    }
+    return false;
+}
+
+/*
+Create a reservation inside the reservations table
+@return reservationID - reservation was created successfully
+false - reservation creation failed
+*/
+
+function addReservation($userID, $hotelID, $roomID, $checkIn, $checkOut, $numGuests, $hasPaidWifi, $hasPaidParking, $hasPaidBreakfast, $reservTotal): string|bool
+{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+
+    $insertStmt = "INSERT INTO `provisio`.`reservations` 
+            (userID, hotelID , roomID, checkIn, checkOut, numGuests,
+            hasPaidWifi, hasPaidParking, hasPaidBreakfast, reservTotal)
+            VALUES ('$userID', '$hotelID', '$roomID', '$checkIn',
+            '$checkOut', '$numGuests', '$hasPaidWifi', '$hasPaidParking',
+            '$hasPaidBreakfast', '$reservTotal'
+            );";
+
+    $result = mysqli_query($dbConnection, $insertStmt);
+    if ($result == false) {
+        return false;
+    }
+
+    $selectStmt = "select * from reservations where userID = '$userID' and hotelID = '$hotelID'
+        and roomID = '$roomID' and checkIn = '$checkIn' and checkOut = '$checkOut'
+        and numGuests = '$numGuests' and hasPaidWifi = '$hasPaidWifi' and hasPaidParking = '$hasPaidParking'
+        and hasPaidBreakfast = '$hasPaidBreakfast' and reservTotal = '$reservTotal'";
+
+    $result = mysqli_query($dbConnection, $selectStmt);
+    if ($result == false) {
+        return false;
+    }
+
+    return mysqli_fetch_assoc($result)['reservationID'];
+}
+
+/*
 global function to connect to the provisio database using global variables
 @return true - connection is successful
 false - unable to connect
@@ -205,5 +270,4 @@ function connectDB(): bool
     }
     return true;
 }
-
 ?>

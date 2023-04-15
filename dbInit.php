@@ -94,16 +94,16 @@ CSD 460 - Red Team
 
     //Create hotel table
     $sql = "CREATE TABLE `provisio`.`hotel` (
-    `hotelID` int NOT NULL AUTO_INCREMENT,
-    `hotelName`	 VARCHAR(30) NOT NULL,
-    `hotelAddress` VARCHAR(20),
-    `hotelCity` VARCHAR(20),
-    `hotelState` VARCHAR(2),
-    `hotelZip` VARCHAR(5),
-    `hotelEmail` VARCHAR(50),
-    `hotelPhone` VARCHAR(20),
-    `pictureAddress` VARCHAR(100),
-    PRIMARY KEY (`hotelID`)
+            `hotelID` int NOT NULL AUTO_INCREMENT,
+            `hotelName`	 VARCHAR(30) NOT NULL,
+            `hotelAddress` VARCHAR(20),
+            `hotelCity` VARCHAR(20),
+            `hotelState` VARCHAR(2),
+            `hotelZip` VARCHAR(5),
+            `hotelEmail` VARCHAR(50),
+            `hotelPhone` VARCHAR(20),
+            `pictureAddress` VARCHAR(100),
+            PRIMARY KEY (`hotelID`)
     );";
 
     if (mysqli_query($conn, $sql)) {
@@ -147,11 +147,11 @@ CSD 460 - Red Team
 
     // Create room table
     $sql = "CREATE TABLE `provisio`.`room` (
-    `roomID` int NOT NULL AUTO_INCREMENT,
-    `roomType` VARCHAR(30) NOT NULL,
-    `roomCost` int NOT NULL,
-    `pictureAddress` VARCHAR(100) NOT NULL,
-    PRIMARY KEY (`roomID`)
+            `roomID` int NOT NULL AUTO_INCREMENT,
+            `roomType` VARCHAR(30) NOT NULL,
+            `roomCost` int NOT NULL,
+            `pictureAddress` VARCHAR(100) NOT NULL,
+            PRIMARY KEY (`roomID`)
     );";
 
     if (mysqli_query($conn, $sql)) {
@@ -204,23 +204,23 @@ CSD 460 - Red Team
     echo "<br>";
 
     // Create reservations table
-    $sql = "CREATE TABLE provisio.reservations (
-    reservationID int NOT NULL AUTO_INCREMENT,
-    userID int NOT NULL,
-    hotelID int NOT NULL,
-    roomID int NOT NULL,
-    checkIn date NOT NULL,
-    checkOut date NOT NULL,
-    numGuests int NOT NULL,
-    hasPaidWifi boolean NOT NULL,
-    hasPaidParking boolean NOT NULL,
-    hasPaidBreakfast boolean NOT NULL,
-    reservTotal double NOT NULL,
-    PRIMARY KEY (reservationID),
-    FOREIGN KEY (userID) REFERENCES provisio.users(userID),
-    FOREIGN KEY (hotelID) REFERENCES provisio.hotel(hotelID),
-    FOREIGN KEY (roomID) REFERENCES provisio.room(roomID)
-)";
+    $sql = "CREATE TABLE `provisio`.`reservations` (
+            `reservationID` int NOT NULL AUTO_INCREMENT,
+            `userID` int NOT NULL,
+            `hotelID` int NOT NULL,
+            `roomID` int NOT NULL,
+            `checkIn` date NOT NULL,
+            `checkOut` date NOT NULL,
+            `numGuests` int NOT NULL,
+            `hasPaidWifi` boolean NOT NULL,
+            `hasPaidParking` boolean NOT NULL,
+            `hasPaidBreakfast` boolean NOT NULL,
+            `reservTotal` double NOT NULL,
+            PRIMARY KEY (reservationID),
+            FOREIGN KEY (userID) REFERENCES provisio.users(userID),
+            FOREIGN KEY (hotelID) REFERENCES provisio.hotel(hotelID),
+            FOREIGN KEY (roomID) REFERENCES provisio.room(roomID)
+    )";
 
     if (mysqli_query($conn, $sql)) {
         echo "Reservations table created successfully<br>";
@@ -229,6 +229,7 @@ CSD 460 - Red Team
     }
 
     echo "<br>";
+
 
     // Create sysAdmin user
     $sql = "DROP USER IF EXISTS 'serverUser'@'localhost';";

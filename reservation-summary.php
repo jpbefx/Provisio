@@ -245,25 +245,76 @@ CSD 460 - Red Team
                                                             }
 
                                                             echo '$' . number_format($reservTotal, 2);
+
+                                                            $_SESSION['reservTotal'] = $reservTotal;
                                                             ?>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="submit-btns text-center">
-                                            <button type="button" onclick="history.back()">Cancel</button>
-                                            <button type="button" onclick="">Submit</button>
+                                            <form method="post">
+                                                <button type="button" onclick="history.back()">Cancel</button>
+
+
+                                                <button type="submit" name="submit">Submit</button>
+
                                         </div>
-                                        <div class="earn-points-text">
-                                            <p>Earn 150 Provisio points per night </p>
-                                        </div>
+                                        <?php
+                                        if (array_key_exists('submit', $_POST)) {
+                                            submitReservation();
+                                        }
+
+                                        function submitReservation()
+                                        {
+                                            $hasParking = false;
+                                            if ($_SESSION['hasParking'] == "Yes") {
+                                                $hasParking = true;
+                                            }
+
+                                            $hasBreakfest = false;
+                                            if ($_SESSION['hasBreakfest'] == "Yes") {
+                                                $hasBreakfest = true;
+                                            }
+
+                                            $hasWifi = false;
+                                            if ($_SESSION['hasWifi'] == "Yes") {
+                                                $hasWifi = true;
+                                            }
+
+                                            // Insert the reservation into the database
+                                            $result = addReservation(
+                                                getUserInfo($_SESSION['username'])['userID'], getHotelInfo($_SESSION['hotel'])['hotelID'],
+                                                getRoomInfo($_SESSION['room'])['roomID'], $_SESSION['checkIn'],
+                                                $_SESSION['checkOut'], $_SESSION['numGuests'],
+                                                $hasWifi,
+                                                $hasParking,
+                                                $hasBreakfest, $_SESSION['reservTotal']
+                                            );
+
+                                            if ($result == false) {
+                                                // Redirect to the landing page with an error message
+                                                echo "<script>alert('An error occurred while submitting your reservation. Please try again.');</script>";
+                                            } else {
+                                                // Redirect to the landing page with a success message
+                                                echo "<script>alert('Your reservation was submitted successfully! $result'); location.replace('index.php');</script>";
+                                            }
+                                        }
+                                        ?>
                                     </div>
+                                    </form>
+                                </div>
+                                <div class="earn-points-text">
+                                    <p>Earn 150 Provisio points per night </p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
     </section>
 
     <footer>
