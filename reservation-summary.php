@@ -262,26 +262,26 @@ CSD 460 - Red Team
                                                 <button type="submit" name="submit">Submit</button>
 
                                         </div>
-                                        <?php
+                                        <?php ini_set("display_errors", 1);
                                         if (array_key_exists('submit', $_POST)) {
                                             submitReservation();
                                         }
 
                                         function submitReservation()
                                         {
-                                            $hasParking = false;
+                                            $hasParking = 0;
                                             if ($_SESSION['hasParking'] == "Yes") {
-                                                $hasParking = true;
+                                                $hasParking = 1;
                                             }
 
-                                            $hasBreakfest = false;
+                                            $hasBreakfest = 0;
                                             if ($_SESSION['hasBreakfest'] == "Yes") {
-                                                $hasBreakfest = true;
+                                                $hasBreakfest = 1;
                                             }
 
-                                            $hasWifi = false;
+                                            $hasWifi = 0;
                                             if ($_SESSION['hasWifi'] == "Yes") {
-                                                $hasWifi = true;
+                                                $hasWifi = 1;
                                             }
 
                                             // Insert the reservation into the database
@@ -293,7 +293,9 @@ CSD 460 - Red Team
                                                 $hasParking,
                                                 $hasBreakfest, $_SESSION['reservTotal']
                                             );
-
+                                            echo $result;
+                                            //  die();
+                                        
                                             if ($result == false) {
                                                 // Redirect to the landing page with an error message
                                                 echo "<script>alert('An error occurred while submitting your reservation. Please try again.');</script>";
