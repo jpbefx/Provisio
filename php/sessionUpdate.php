@@ -1,16 +1,27 @@
 <!-- 
 Nicholas Werner, James Bailey, Larissa Passamani Lima
 CSD 460 - Red Team
-->
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Provisio</title>
+</head>
+
+<body>
+    <h1>Redirecting.....</h1>
+</body>
+
 <?php
-$username = $_SESSION['username'];
+require("databaseMgmt.php");
+session_start();
 
-session_unset();
-
-sleep(1);
-
-$_SESSION['username'] = $username;
+closeSessionVars();
 
 header("Location: ../index.php");
 
 ?>
+
+</html>

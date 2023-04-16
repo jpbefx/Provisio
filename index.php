@@ -24,7 +24,7 @@ CSD 460 - Red Team
   //Global user check
   require("php/databaseMgmt.php");
 
-
+  closeSessionVars();
   if (isset($_SESSION['username'])) {
     if (validateUser($_SESSION['username']) == false) {
       signOutUser();

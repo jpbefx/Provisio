@@ -19,7 +19,6 @@ CSD 460 - Red Team
   //Global user check
   require("php/databaseMgmt.php");
 
-
   if (isset($_SESSION['username'])) {
     if (validateUser($_SESSION['username']) == false) {
       signOutUser();
@@ -179,7 +178,7 @@ CSD 460 - Red Team
                       }
                       if ($hasError == false) {
                         $ret = createUser($_POST["username"], password_hash($_POST["password"], PASSWORD_DEFAULT), $_POST["firstName"], $_POST["lastName"], $_POST["email"]);
-                        if ($ret == true) {
+                        if ($ret == "") {
                           echo "<li>Account Created Successfully... Sign In <a href='login.php'> Here </a></li>";
                         } else {
                           echo $ret;

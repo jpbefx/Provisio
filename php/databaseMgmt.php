@@ -157,6 +157,22 @@ function signOutUser()
 }
 
 /*
+Unsets all hotel reservation variables if they exist or not
+*/
+function closeSessionVars()
+{
+    unset($_SESSION['hotel']);
+    unset($_SESSION['room']);
+    unset($_SESSION['checkIn']);
+    unset($_SESSION['checkOut']);
+    unset($_SESSION['numGuests']);
+    unset($_SESSION['hasParking']);
+    unset($_SESSION['hasBreakfest']);
+    unset($_SESSION['hasWifi']);
+    unset($_SESSION['reservTotal']);
+}
+
+/*
 Create a user inside of the users table
 @param $user - username of user
 @param $pass - pre-hashed password
@@ -166,7 +182,7 @@ Create a user inside of the users table
 return true - user was created correctly
 errorString - reason user creation failed to show end user
 */
-function createUser($user, $pass, $fname, $lname, $email): string|bool
+function createUser($user, $pass, $fname, $lname, $email): string
 {
     global $dbConnection;
     if ($dbConnection == null) {
@@ -174,16 +190,17 @@ function createUser($user, $pass, $fname, $lname, $email): string|bool
             return "Unable to create account, try again later";
         }
     }
-    $dupUserCheck = mysqli_query($dbConnection, "select * from users where username = '$user' limit 1");
-    if ($dupUserCheck && mysqli_num_rows($dupUserCheck) > 0) {
+    $dupUserCheck = mysqli_fetch_assoc(mysqli_query($dbConnection, "select COUNT(*) from users where username = '$user';"))['COUNT(*)'];
+    if ($dupUserCheck > 0) {
         return "Username is taken, try another one!";
+    } else {
+        $insertStmt = "INSERT INTO users (username,password,email,firstName,lastName,proPoints) VALUES ('$user','$pass','$email','$fname','$lname',0)";
+        $result = mysqli_query($dbConnection, $insertStmt);
+        if ($result == false) {
+            return "Unable to create account, try again later";
+        }
+        return "";
     }
-    $insertStmt = "INSERT INTO users (username,password,email,firstName,lastName,proPoints) VALUES ('$user','$pass','$email','$fname','$lname',0)";
-    $result = mysqli_query($dbConnection, $insertStmt);
-    if ($result == false) {
-        return "Unable to create account, try again later";
-    }
-    return true;
 }
 
 /*

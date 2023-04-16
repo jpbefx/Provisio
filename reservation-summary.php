@@ -29,6 +29,34 @@ CSD 460 - Red Team
         if (validateUser($_SESSION['username']) == false) {
             signOutUser();
         }
+        $invalidateSession = false;
+        if (isset($_SESSION['hotel']) == false) {
+            $invalidateSession = true;
+        }
+        if (isset($_SESSION['room']) == false) {
+            $invalidateSession = true;
+        }
+        if (isset($_SESSION['checkIn']) == false) {
+            $invalidateSession = true;
+        }
+        if (isset($_SESSION['checkOut']) == false) {
+            $invalidateSession = true;
+        }
+        if (isset($_SESSION['numGuests']) == false) {
+            $invalidateSession = true;
+        }
+        if (isset($_SESSION['hasWifi']) == false) {
+            $invalidateSession = true;
+        }
+        if (isset($_SESSION['hasBreakfest']) == false) {
+            $invalidateSession = true;
+        }
+        if (isset($_SESSION['hasParking']) == false) {
+            $invalidateSession = true;
+        }
+        if ($invalidateSession == true) {
+            header("Location: index.php");
+        }
     } else {
         header("Location: index.php");
     }
@@ -300,7 +328,7 @@ CSD 460 - Red Team
                                                 // Redirect to the landing page with an error message
                                                 echo "<script>alert('An error occurred while submitting your reservation. Please try again.');</script>";
                                             } else {
-                                                // Redirect to the landing page with a success message
+                                                // Redirect to the sessionUpdate page with a success message
                                                 echo "<script>alert('Your reservation was submitted successfully! Your Reservation # is: $result'); location.replace('php/sessionUpdate.php');</script>";
                                             }
                                         }

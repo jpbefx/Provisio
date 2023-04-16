@@ -194,7 +194,7 @@ ob_start();
           </div>
           <div class="join-text">
             <ul>
-              <li>Exclusive Deals sent stright to your inbox!</li>
+              <li>Exclusive Deals sent straight to your inbox!</li>
               <li>Quick and Easy Search of our available suites</li>
               <li>Manage Past and Upcoming Reservations</li>
               <li>Earn ProPoints for each visit, Use points to save on your vacations!</li>
