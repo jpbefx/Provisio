@@ -69,7 +69,7 @@ ob_start();
                       </a>
                       <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="hotel-reservation.php">Start a Reservation</a></li>
-                        <li><a class="dropdown-item" href="manageReservation.php">Manage Reservations</a></li>
+                        <li><a class="dropdown-item" href="reservation-lookup.php">Manage Reservations</a></li>
                         <li>
                           <hr class="dropdown-divider">
                         </li>

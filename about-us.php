@@ -71,7 +71,7 @@ CSD 460 - Red Team
                                             <ul class="dropdown-menu">
                                                 <li><a class="dropdown-item" href="hotel-reservation.php">Start a
                                                         Reservation</a></li>
-                                                <li><a class="dropdown-item" href="manageReservation.php">Manage
+                                                <li><a class="dropdown-item" href="reservation-lookup.php">Manage
                                                         Reservations</a></li>
                                                 <li>
                                                     <hr class="dropdown-divider">
