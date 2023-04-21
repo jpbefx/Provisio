@@ -228,6 +228,7 @@ CSD 460 - Red Team
         echo "Error creating table: " . mysqli_error($conn);
     }
 
+    //Set Reservation PK to start at 1000
     $sql = "ALTER TABLE `provisio`.`reservations` auto_increment = 1000;";
     if (mysqli_query($conn, $sql)) {
         echo "Set ReservationID to start @ 1000<br>";
@@ -237,6 +238,41 @@ CSD 460 - Red Team
 
     echo "<br>";
 
+    //Create globalVariables table
+    $sql = "CREATE TABLE `provisio`.`globalVariables` (
+        `var` varchar(30) NOT NULL,
+        `val` varchar(30) NOT NULL,
+        PRIMARY KEY (var)
+        );";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Global Variables table created successfully<br>";
+    } else {
+        echo "Error creating table: " . mysqli_error($conn);
+    }
+
+    //Insert values into globalVariables
+    $sql = "INSERT INTO `provisio`.`globalVariables`
+            (var,val)
+            VALUES ('demandRate','0.05')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "demandRate added successfully<br>";
+    } else {
+        echo "Error creating table: " . mysqli_error($conn);
+    }
+
+    $sql = "INSERT INTO `provisio`.`globalVariables`
+            (var,val)
+            VALUES ('holidayRate','0.05')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "holidayRate added successfully<br>";
+    } else {
+        echo "Error creating table: " . mysqli_error($conn);
+    }
+
+    echo "<br>";
 
     // Create sysAdmin user
     $sql = "DROP USER IF EXISTS 'serverUser'@'localhost';";

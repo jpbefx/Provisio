@@ -23,7 +23,7 @@ CSD 460 - Red Team
     <?php
     //Global user check
     require("php/databaseMgmt.php");
-
+    require("php/dateMgmt.php");
 
     if (isset($_SESSION['username'])) {
         if (validateUser($_SESSION['username']) == false) {
@@ -223,7 +223,7 @@ CSD 460 - Red Team
                                                         <li><span>Number of Nights:</span></li>
                                                         <li>
                                                             <?php
-                                                            $numNights = (strtotime($_SESSION["checkOut"]) - strtotime($_SESSION['checkIn'])) / 86400;
+                                                            $numNights = round((strtotime($_SESSION["checkOut"]) - strtotime($_SESSION['checkIn'])) / 86400);
                                                             echo $numNights;
                                                             ?>
                                                         </li>
@@ -258,7 +258,16 @@ CSD 460 - Red Team
                                                         <li><span>Total Price:</span></li>
                                                         <li>
                                                             <?php
-                                                            $reservTotal = getRoomInfo($_SESSION['room'])['roomCost'] * $numNights;
+                                                            $demandRate = floatval(getDemandRate());
+                                                            $holidayRate = 0;
+                                                            if (checkForHolidays($_SESSION['checkIn'], $_SESSION['checkOut'])) {
+                                                                $holidayRate = floatval(getHolidayRate());
+                                                            }
+
+                                                            $roomCost = (getRoomInfo($_SESSION['room'])['roomCost'] * $demandRate) + getRoomInfo($_SESSION['room'])['roomCost'];
+                                                            $roomCost = ($roomCost * $holidayRate) + $roomCost;
+
+                                                            $reservTotal =  $roomCost * $numNights;
 
                                                             if ($_SESSION['hasWifi'] == "Yes") {
                                                                 $reservTotal += 12.99;

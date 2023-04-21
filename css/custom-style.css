@@ -4,1089 +4,1326 @@ CSD 460 - Red Team
 */
 
 @charset "utf-8";
+
 /* CSS Document */
-body{font-family: 'Tiro Bangla', serif !important; margin:0; padding:0;}
-.mb-61{margin-bottom:11px;}
-.mt-50{margin-top:50px !important;}
-.mt-70{margin-top:70px;}
-.mt-80{margin-top:80px;}
-.mtop-20rem{margin-top:-20rem;}
-.response-text{
-	font-weight:400;
-	font-size:20px;
-	line-height:27px;
-	color:#AC1414;
-	margin-top:6px !important;
+body {
+	font-family: 'Tiro Bangla', serif !important;
+	margin: 0;
+	padding: 0;
 }
-header .custom-nav li a{
+
+.mb-61 {
+	margin-bottom: 11px;
+}
+
+.mt-50 {
+	margin-top: 50px !important;
+}
+
+.mt-70 {
+	margin-top: 70px;
+}
+
+.mt-80 {
+	margin-top: 80px;
+}
+
+.mtop-20rem {
+	margin-top: -20rem;
+}
+
+.response-text {
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 27px;
+	color: #AC1414;
+	margin-top: 6px !important;
+}
+
+header .custom-nav li a {
 	font-family: 'Tiro Bangla';
 	font-style: normal;
 	font-weight: 400;
 	font-size: 20px;
-	line-height: 27px;	
-	color:#000;
-	padding:10px 30px !important;
+	line-height: 27px;
+	color: #000;
+	padding: 10px 30px !important;
 }
-header .navbar-nav-custom{
-    flex-grow:0 !important;
+
+header .navbar-nav-custom {
+	flex-grow: 0 !important;
 }
-header .login-btn{
-	margin-top:10px;	
+
+header .login-btn {
+	margin-top: 10px;
 }
-header .login-btn a{
-	background:#143A2F;
-    color:#fff;
-    border-radius:50px;
-    padding:8px 56px;
-	text-decoration:none;	
+
+header .login-btn a {
+	background: #143A2F;
+	color: #fff;
+	border-radius: 50px;
+	padding: 8px 56px;
+	text-decoration: none;
 }
-.first-section{
-	background:#D1E1D6;
+
+.first-section {
+	background: #D1E1D6;
 	/*margin-right: 100px;*/
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-	height:360px;
-	margin:60px 0;
-	position:absolute;
-	width:94%;
-    z-index:-999;
+	border-top-right-radius: 20px;
+	border-bottom-right-radius: 20px;
+	height: 360px;
+	margin: 60px 0;
+	position: absolute;
+	width: 94%;
+	z-index: -999;
 }
-section .book-stay-img{
-	margin-top:90px;
-	text-align:center;	
+
+section .book-stay-img {
+	margin-top: 90px;
+	text-align: center;
 }
-section .book-stay-img a{
-	font-size:36px;
-	font-weight:400;
-	color:#143A2F;
-	line-height:48px;
-	text-decoration:none;	
+
+section .book-stay-img a {
+	font-size: 36px;
+	font-weight: 400;
+	color: #143A2F;
+	line-height: 48px;
+	text-decoration: none;
 }
-section .book-stay-text{
-    margin-top: 130px;	
+
+section .book-stay-text {
+	margin-top: 130px;
 }
-section .book-stay-text p{
-	font-size:24px;
-	font-weight:400;
-	line-height:32px;
-	text-align:left;
+
+section .book-stay-text p {
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 32px;
+	text-align: left;
 	margin-bottom: 0;
 	padding: 40px;
 }
-section .manage-reservation-bg{	
-	background:#D1E1D6;
-    border-top-left-radius:20px;
-    border-bottom-left-radius:20px;
-	margin-top:70px;
-    height:282px;
-    position:absolute;
-    width:41%;
-    z-index:-999;
+
+section .manage-reservation-bg {
+	background: #D1E1D6;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	margin-top: 70px;
+	height: 282px;
+	position: absolute;
+	width: 41%;
+	z-index: -999;
 }
-section .manage-reservation{
-	margin-top: 90px;	
+
+section .manage-reservation {
+	margin-top: 90px;
 }
-section .manage-reservation p{
-	font-size:24px;
-	font-weight:400;
-	line-height:32px;
-	text-align:left;
+
+section .manage-reservation p {
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 32px;
+	text-align: left;
 	margin-bottom: 0;
-	padding: 40px;	
+	padding: 40px;
 }
-section .manage-reservation-img{
+
+section .manage-reservation-img {
 	/*margin-top:90px;*/
-	text-align:center;	
+	text-align: center;
 }
-section .manage-reservation-img a{
-	font-size:36px;
-	font-weight:400;
-	color:#143A2F;
-	line-height:48px;
-	text-decoration:none;	
+
+section .manage-reservation-img a {
+	font-size: 36px;
+	font-weight: 400;
+	color: #143A2F;
+	line-height: 48px;
+	text-decoration: none;
 }
-section .propoints-bg{	
-	background:#D1E1D6;
-    border-top-left-radius:20px;
-    border-bottom-left-radius:20px;
-	margin-top:70px;
-    height:335px;
-    position:absolute;
-    width:77%;
-    z-index:-999;
-	right:0;
+
+section .propoints-bg {
+	background: #D1E1D6;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	margin-top: 70px;
+	height: 335px;
+	position: absolute;
+	width: 77%;
+	z-index: -999;
+	right: 0;
 }
-section .register{
-	background:#D1E1D6;
-	border-radius:12px;
-	padding:44px 70px;
-	margin-top:60px;
+
+section .register {
+	background: #D1E1D6;
+	border-radius: 12px;
+	padding: 44px 70px;
+	margin-top: 60px;
 }
-section .login-account-box{
-	background:#D1E1D6;
-    border-radius:12px;
-    padding:44px 38px;
-	margin-top:60px;	
+
+section .login-account-box {
+	background: #D1E1D6;
+	border-radius: 12px;
+	padding: 44px 38px;
+	margin-top: 60px;
 }
-section .login-account-box p{
-	font-weight:400;
-	font-size:32px;
-	line-height:43px;
-	text-align:center;
-	color:#143A2F;
-	padding:0 20px;
+
+section .login-account-box p {
+	font-weight: 400;
+	font-size: 32px;
+	line-height: 43px;
+	text-align: center;
+	color: #143A2F;
+	padding: 0 20px;
 }
-section .register p{
-	font-size:16px;
-	font-weight:400;
-	line-height:21px;
-	text-align:center;
-	color:#000;
-	margin-top:16px;
+
+section .register p {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 21px;
+	text-align: center;
+	color: #000;
+	margin-top: 16px;
 
 }
-section .register-text h1{
-	font-size:64px;
-	font-weight:400;
-	line-height:85px;
-	text-align:center;
-	color:#143A2F;
+
+section .register-text h1 {
+	font-size: 64px;
+	font-weight: 400;
+	line-height: 85px;
+	text-align: center;
+	color: #143A2F;
 }
-section .register-text p{
-	font-style:normal;
-	font-weight:400;
-	font-size:36px;
-	line-height:48px;
-	text-align:center;
-	color:#143A2F;
+
+section .register-text p {
+	font-style: normal;
+	font-weight: 400;
+	font-size: 36px;
+	line-height: 48px;
+	text-align: center;
+	color: #143A2F;
 }
-section .register-text p a{
-	color:#259B4D;
-	text-decoration:none;	
+
+section .register-text p a {
+	color: #259B4D;
+	text-decoration: none;
 }
-section .form-input{
-	padding:0 98px;	
+
+section .form-input {
+	padding: 0 98px;
 }
-section .custom-form label{
-	font-size:24px;
-	font-weight:400;
-	line-height:32px;
-	text-align:left;
-	margin-bottom:0;
+
+section .custom-form label {
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 32px;
+	text-align: left;
+	margin-bottom: 0;
 }
-section .custom-form input{
-	background:#FFFFFF;
-	border:1px solid #6E7D78 !important;
-	border-radius:0 !important;
-	height:43px; 
+
+section .custom-form input {
+	background: #FFFFFF;
+	border: 1px solid #6E7D78 !important;
+	border-radius: 0 !important;
+	height: 43px;
 }
-section .custom-form-check input{
-	border-radius:0 !important;
-	border:3px solid #6E7D78;
-	margin-top:3px;
+
+section .custom-form-check input {
+	border-radius: 0 !important;
+	border: 3px solid #6E7D78;
+	margin-top: 3px;
 }
-section .custom-form-check input:checked{
-	background-color:#6E7D78;
-	border-color:#6E7D78;	
+
+section .custom-form-check input:checked {
+	background-color: #6E7D78;
+	border-color: #6E7D78;
 }
-section .custom-form-check label{
-	font-weight:400 !important;
-	font-size:20px !important;
-	color:#143A2F !important;	
+
+section .custom-form-check label {
+	font-weight: 400 !important;
+	font-size: 20px !important;
+	color: #143A2F !important;
 }
-section .custom-form-check{
-	margin:0 auto;
-    width:91%;
+
+section .custom-form-check {
+	margin: 0 auto;
+	width: 91%;
 }
-section .create-account-btn button{
-	background:#143A2F;
-	border-radius:60px;
-	font-size:36px;
-	font-weight:700;
-	line-height:36px;
-	color:#fff;
-	padding:15px 33px;
-	border:none;
-	font-family:'Lato';
-	width:320px;	
+
+section .create-account-btn button {
+	background: #143A2F;
+	border-radius: 60px;
+	font-size: 36px;
+	font-weight: 700;
+	line-height: 36px;
+	color: #fff;
+	padding: 15px 33px;
+	border: none;
+	font-family: 'Lato';
+	width: 320px;
 }
-section .create-account-btn button:hover{
+
+section .create-account-btn button:hover {
 	background: rgba(20, 58, 47, 0.8);
-	color:#fff;
+	color: #fff;
 }
-section .login-text-heading h2{
-	font-weight:400;
-	font-size:40px;
-	line-height:64px;
-	text-align:center;
-	color:#143A2F;
-	margin-bottom:30px;	
+
+section .login-text-heading h2 {
+	font-weight: 400;
+	font-size: 40px;
+	line-height: 64px;
+	text-align: center;
+	color: #143A2F;
+	margin-bottom: 30px;
 }
-section .join-text ul{
+
+section .join-text ul {
 	list-style: disc;
 }
-section .join-text li{
-	font-weight:400;
-	font-size:24px;
-	line-height:36px;
-	color:#000000;	
+
+section .join-text li {
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 36px;
+	color: #000000;
 }
 
 /* Start About Us CSS */
-.about-header-bg{
-	background:url(../images/about-us-bg.png) no-repeat;
-	background-size:cover;
-	background-position:center;	
-	height:560px;
+.about-header-bg {
+	background: url(../images/about-us-bg.png) no-repeat;
+	background-size: cover;
+	background-position: center;
+	height: 560px;
 	position: relative;
 }
-section .about-us-btn{
-	background:#143A2F;
-	border-radius:10px;	
-	font-weight:400;
-	font-size:36px;
-	line-height:48px;
-	text-align:center;
-	color:#FFFFFF;
-	width:300px;
-	margin:0 auto;
-	padding:0;
+
+section .about-us-btn {
+	background: #143A2F;
+	border-radius: 10px;
+	font-weight: 400;
+	font-size: 36px;
+	line-height: 48px;
+	text-align: center;
+	color: #FFFFFF;
+	width: 300px;
+	margin: 0 auto;
+	padding: 0;
 }
-.about-us-wrapper{
-	position:relative;
-    width:100%;
-    margin:0 auto;
-    	
+
+.about-us-wrapper {
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+
 }
-section .about-content{
-	background:#D1E1D6;
-	border-radius:22px;
-	padding:60px;
-	margin-top:32px;
-	height:760px	
+
+section .about-content {
+	background: #D1E1D6;
+	border-radius: 22px;
+	padding: 60px;
+	margin-top: 32px;
+	height: 760px
 }
-section .about-content p{
-	font-weight:400;
-	font-size:24px;
-	line-height:32px;
-	text-align:center;
-	color:#000000;	
+
+section .about-content p {
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 32px;
+	text-align: center;
+	color: #000000;
 }
-section .about-us-img{
-	text-align:center;
-    position:absolute;
-    bottom:-8rem;
-    width:100%;
-    margin:0 auto;
-    z-index:999;	
+
+section .about-us-img {
+	text-align: center;
+	position: absolute;
+	bottom: -8rem;
+	width: 100%;
+	margin: 0 auto;
+	z-index: 999;
 }
-section .contact-us-wrapper{
-	background:#D1E1D6;
-	border:5px solid #6E7D78;
-	border-radius:26px;
-	padding:40px 70px;
-	position:relative;
-    margin-top:20px;
-    width:100%;
-    margin:11rem 0 0 auto;
-	text-align:center;	
+
+section .contact-us-wrapper {
+	background: #D1E1D6;
+	border: 5px solid #6E7D78;
+	border-radius: 26px;
+	padding: 40px 70px;
+	position: relative;
+	margin-top: 20px;
+	width: 100%;
+	margin: 11rem 0 0 auto;
+	text-align: center;
 }
-section .main-wrapper{
-	width:80%;
-	margin:0 auto;
-	position:relative;
+
+section .main-wrapper {
+	width: 80%;
+	margin: 0 auto;
+	position: relative;
 }
-section .contact-us-wrapper h2{
-	font-weight:400;
-	font-size:44px;
-	line-height:64px;
-	color:#143A2F;	
+
+section .contact-us-wrapper h2 {
+	font-weight: 400;
+	font-size: 44px;
+	line-height: 64px;
+	color: #143A2F;
 }
-section .contact-us-wrapper p{
-	font-weight:400;
-	font-size:36px;
-	line-height:48px;
-	color:#000000;
+
+section .contact-us-wrapper p {
+	font-weight: 400;
+	font-size: 36px;
+	line-height: 48px;
+	color: #000000;
 }
-section .contact-us-wrapper p a{
-	color:#143A2F;
-	text-decoration:none;
+
+section .contact-us-wrapper p a {
+	color: #143A2F;
+	text-decoration: none;
 }
-section .hotels-directly h3{
-	font-weight:400;
-	font-size:40px;
-	line-height:53px;
-	color:#143A2F;
-	text-align:center;
-	margin-bottom:0;	
+
+section .hotels-directly h3 {
+	font-weight: 400;
+	font-size: 40px;
+	line-height: 53px;
+	color: #143A2F;
+	text-align: center;
+	margin-bottom: 0;
 }
-section .directly-text p{
-	font-weight:400;
-	font-size:24px;
-	line-height:32px;
-	color:#000;
-	margin-bottom:24px	
+
+section .directly-text p {
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 32px;
+	color: #000;
+	margin-bottom: 24px
 }
-section .directly-text p a{
-	color:#000;	
-	text-decoration:underline;
-	font-size:20px;
+
+section .directly-text p a {
+	color: #000;
+	text-decoration: underline;
+	font-size: 20px;
 }
-section .directly-img{
-		
-}
+
+section .directly-img {}
+
 /* End of About Us CSS */
 /* Start Location CSS */
-section .location-btn{
-	background:#143A2F;
-	border-radius:10px;	
-	font-weight:400;
-	font-size:40px;
-	line-height:48px;
-	text-align:center;
-	color:#FFFFFF;
-	width:432px;
-	margin:0 auto;
-	padding:30px 0;
-	margin-bottom:40px;
+section .location-btn {
+	background: #143A2F;
+	border-radius: 10px;
+	font-weight: 400;
+	font-size: 40px;
+	line-height: 48px;
+	text-align: center;
+	color: #FFFFFF;
+	width: 432px;
+	margin: 0 auto;
+	padding: 30px 0;
+	margin-bottom: 40px;
 }
-section .location-wrapper{
-	background:#fff;
-	padding:96px 77px;	
-	border-radius:28px;
+
+section .location-wrapper {
+	background: #fff;
+	padding: 96px 77px;
+	border-radius: 28px;
 }
-.location-header-bg{
-	background:url(../images/location-main-img.png) no-repeat;
-	background-size:cover;
-	background-position:center;	
-	height:560px;
+
+.location-header-bg {
+	background: url(../images/location-main-img.png) no-repeat;
+	background-size: cover;
+	background-position: center;
+	height: 560px;
 	position: relative;
 }
-.location-bg{
-	position:relative;
-    width:100%;
-    margin:0 auto;
-	background:#d1e1d6;
-	padding-bottom:60px;	
+
+.location-bg {
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+	background: #d1e1d6;
+	padding-bottom: 60px;
 }
-section .ny-text{		
+
+section .ny-text {}
+
+section .ny-text h1 {
+	font-weight: 400;
+	font-size: 64px;
+	line-height: 85px;
+	color: #143A2F;
 }
-section .ny-text h1{
-	font-weight:400;
-	font-size:64px;
-	line-height:85px;
-	color:#143A2F;		
-}
-section .ny-text p{	
-	font-weight:400;
-	font-size:24px;
-	line-height:32px;
-	color:#6E7D78;	
-}
-section .ny-img{}
-section .nyc-location{
-	margin-top:28px;	
-}
-section .nyc-location-text{
-	font-weight:400;
-	font-size:36px;
-	line-height:48px;
-	color:#143A2F;
-	text-align:center;
-	margin-top:8px;
-}
-section .hotel-location-text{
-	font-weight:400;
+
+section .ny-text p {
+	font-weight: 400;
 	font-size: 24px;
-	line-height:32px;
-	color:#6E7D78;
-	text-align:center;
-	margin-top:8px;
-	margin-bottom:8px;
+	line-height: 32px;
+	color: #6E7D78;
 }
+
+section .ny-img {}
+
+section .nyc-location {
+	margin-top: 28px;
+}
+
+section .nyc-location-text {
+	font-weight: 400;
+	font-size: 36px;
+	line-height: 48px;
+	color: #143A2F;
+	text-align: center;
+	margin-top: 8px;
+}
+
+section .hotel-location-text {
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 32px;
+	color: #6E7D78;
+	text-align: center;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
 /* End of Location CSS */
 /* Start Hotel Reservation CSS */
-section .check-text label{
-	font-weight:400;
-	font-size:24px;
-	line-height:32px;
-	color:#6E7D78;	
+section .check-text label {
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 32px;
+	color: #6E7D78;
 }
-section .check-text input{
-	border:1px solid #000000;
-	height:54px;
-	border-radius:0;
+
+section .check-text input {
+	border: 1px solid #000000;
+	height: 54px;
+	border-radius: 0;
 }
-section .hotels-directly{
-	position:relative;	
+
+section .hotels-directly {
+	position: relative;
 }
-section .hotels-directly h3{
-	font-weight:400;
-	font-size:40px;
-	line-height:53px;
-	color:#143A2F;
-	text-align:center;
-	margin-bottom:0;	
+
+section .hotels-directly h3 {
+	font-weight: 400;
+	font-size: 40px;
+	line-height: 53px;
+	color: #143A2F;
+	text-align: center;
+	margin-bottom: 0;
 }
-section .hotels-directly input{
-	border-radius:0;
-	width:40px;
-	height:40px;
-	border:1px solid #000;
-	padding:10px;
-	position:absolute;
-    top:6px;
-    right:22rem;	
+
+section .hotels-directly input {
+	border-radius: 0;
+	width: 40px;
+	height: 40px;
+	border: 1px solid #000;
+	padding: 10px;
+	position: absolute;
+	top: 6px;
+	right: 22rem;
 }
-section .amenities-box{
-	border:6px solid #D1E1D6;
-	border-radius:20px;
-	padding:60px 80px;	
+
+section .amenities-box {
+	border: 6px solid #D1E1D6;
+	border-radius: 20px;
+	padding: 60px 80px;
 }
-section .booknow-btn button{
-	background:#143A2F;
-	border-radius:12px;
-	font-weight:400;
-	font-size:32px;
-	line-height:43px;
-	text-align:center;
-	color:#FFFFFF;
-	padding:9px 110px;
-	border:none;	
+
+section .booknow-btn button {
+	background: #143A2F;
+	border-radius: 12px;
+	font-weight: 400;
+	font-size: 32px;
+	line-height: 43px;
+	text-align: center;
+	color: #FFFFFF;
+	padding: 9px 110px;
+	border: none;
 }
-section .booknow-btn button:hover{
+
+section .booknow-btn button:hover {
 	background: rgba(20, 58, 47, 0.8);
-	color:#fff;
+	color: #fff;
 }
+
 /* End of Hotel Reservation CSS */
 /* Start Customer Loyalty Points CSS */
-section .loyalty-heading{
-	background:#143A2F;
-	border-radius:13px;	
-	font-weight:400;
-	font-size:36px;
-	line-height:140px;
-	text-align:center;
-	color:#FFFFFF;
-	width:750px;
-	height:140px;
-	margin:0 auto;
-	padding:0;	
+section .loyalty-heading {
+	background: #143A2F;
+	border-radius: 13px;
+	font-weight: 400;
+	font-size: 36px;
+	line-height: 140px;
+	text-align: center;
+	color: #FFFFFF;
+	width: 750px;
+	height: 140px;
+	margin: 0 auto;
+	padding: 0;
 }
-section .loyalty-heading span{
-	width:96px;
-	height:96px;
-	left:665px;
-	top:268px;
-	background:#D1E1D6;
-	padding:22px 30px;
-    border-radius:60%;
-	color:#000;	
+
+section .loyalty-heading span {
+	width: 96px;
+	height: 96px;
+	left: 665px;
+	top: 268px;
+	background: #D1E1D6;
+	padding: 22px 30px;
+	border-radius: 60%;
+	color: #000;
 }
-section .loyalty-wrapper{
-	background:#D1E1D6;
-	border-radius:22px;
-	padding:60px;
-	margin-top:32px;
+
+section .loyalty-wrapper {
+	background: #D1E1D6;
+	border-radius: 22px;
+	padding: 60px;
+	margin-top: 32px;
 }
-section .loyalty-content-bg{
-	background:#fff;	
+
+section .loyalty-content-bg {
+	background: #fff;
 }
-section .custom-table-dark{
-	background:#143A2F;
-	color:#fff;
+
+section .custom-table-dark {
+	background: #143A2F;
+	color: #fff;
 }
-section .custom-table-dark tr th{
+
+section .custom-table-dark tr th {
 	font-weight: 400;
 	font-size: 13px;
-	line-height: 20px;	
+	line-height: 20px;
 }
-section .custom-table-body tr td{
-	font-family:'Lato';
+
+section .custom-table-body tr td {
+	font-family: 'Lato';
 }
-.customer-loyalty-bg{
-	background:url(../images/customer-loyalty.png) no-repeat;
-	background-size:cover;
-	background-position:center;	
-	height:560px;
+
+.customer-loyalty-bg {
+	background: url(../images/customer-loyalty.png) no-repeat;
+	background-size: cover;
+	background-position: center;
+	height: 560px;
 	position: relative;
 }
+
 /* End of Customer Loyalty Points CSS */
 /* Start Reservation Lookup CSS */
-header .booking-text{
-	width:55%;	
-	position:relative;
-	margin:140px auto;
+header .booking-text {
+	width: 55%;
+	position: relative;
+	margin: 140px auto;
 }
-header .booking-text h2{
-	font-weight:400;
-	font-size:48px;
-	line-height:64px;
-	color:#D1E1D6;
-	text-align:center;
-	margin-bottom:30px;	
-}
-header .search-bar{
-	background:#D1E1D6;
-	border-radius:7px;
-	padding:16px 30px;	
-}
-header .search-bar ul{
-	list-style:none;
-	margin:0;
-	padding:0;
-	text-align:center;	
-}
-header .search-bar li{
-	font-weight:400;
-	font-size:28px;
-	line-height:37px;
-	color:#143A2F;	
-	display:inline-block;
-	margin-right:12px;
-}
-header .search-bar li:last-child{
-	margin-right:0;	
-}
-header .search-bar li input{
-	width:143px;
-	height:38px;
-	background:#FFFFFF;
-	border:1px solid #000000;
-	border-radius:6px;	
-}
-header .search-bar li button{
-	width:133px;
-	height:37px;
-	background:#143A2F;
-	border-radius:6px;
-	color:#fff;
-	font-weight:400;
-	font-size:20px;
-	line-height:27px;
-	border:0;	
-}
-header .check-propoints{
-	background:#143A2F;
-	border-radius:6px;
-	font-weight:400;
-	font-size:24px;
-	line-height:32px;
-	color:#FFFFFF;
-	text-align:center;
-	padding:10px 37px;
-	width:71%;
-	margin:36px auto;	
-}
-section .reservation-list{
-	background:#FFFFFF;
-	border-radius:26px;	
-	padding:45px;
-}
-section .reservation-list-wrapper{
-	border:6px solid #D1E1D6;
-	border-radius:20px;
-	padding:40px;
-}
-section .reservation-content ul{
-	list-style:none;
-	padding-left:0;
-}
-section .reservation-content li span{
-	font-weight:400;
-	font-size:28px;
-	line-height:37px;
-	color:#143A2F;
-}
-section .reservation-content li{
-	font-weight:400;
-	font-size:24px;
-	line-height:32px;
-	color:#6E7D78;
-	display:inline-block;
-	margin-right:12px;
-}
-section .reservation-content li:last-child{
-	margin-right:0px;	
-}
-section .hotel-heading h2{
-	font-weight:400;
-	font-size:40px;
-	line-height:53px;
-	color:#143A2F;	
-}
-section .hotel-heading p{
-	font-weight:400;
-	font-size:24px;
-	line-height:32px;
-	color:#6E7D78;
-}
-section .reservation-id{
-	font-weight:400;
-	font-size:24px;
-	line-height:32px;
-	color:#143A2F;	
-}
-section .current-reservation-heading{
-	font-weight:400;
-	font-size:40px;
-	line-height:53px;
-	color:#143A2F;	
-}
-section .earn-points-text p{
-	font-weight:400;
-	font-size:24px;
-	line-height:32px;
-	color:#6E7D78;
-	text-align:center;
-	margin-top:20px;	
-}
-section .submit-btns button{
-	background:#143A2F;
-	border-radius:12px;
+
+header .booking-text h2 {
 	font-weight: 400;
-	font-size:32px;
-	line-height:43px;
-	text-align:center;
-	color:#FFFFFF;
-	border:none;
-	padding:9px 94px;
-	margin-top:10px;
+	font-size: 48px;
+	line-height: 64px;
+	color: #D1E1D6;
+	text-align: center;
+	margin-bottom: 30px;
 }
-section .submit-btns button:hover{
+
+header .search-bar {
+	background: #D1E1D6;
+	border-radius: 7px;
+	padding: 16px 30px;
+}
+
+header .search-bar ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+header .search-bar li {
+	font-weight: 400;
+	font-size: 28px;
+	line-height: 37px;
+	color: #143A2F;
+	display: inline-block;
+	margin-right: 12px;
+}
+
+header .search-bar li:last-child {
+	margin-right: 0;
+}
+
+header .search-bar li input {
+	width: 143px;
+	height: 38px;
+	background: #FFFFFF;
+	border: 1px solid #000000;
+	border-radius: 6px;
+}
+
+header .search-bar li button {
+	width: 133px;
+	height: 37px;
+	background: #143A2F;
+	border-radius: 6px;
+	color: #fff;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 27px;
+	border: 0;
+}
+
+header .check-propoints {
+	background: #143A2F;
+	border-radius: 6px;
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 32px;
+	color: #FFFFFF;
+	text-align: center;
+	padding: 10px 37px;
+	width: 71%;
+	margin: 36px auto;
+}
+
+section .reservation-list {
+	background: #FFFFFF;
+	border-radius: 26px;
+	padding: 45px;
+}
+
+section .reservation-list-wrapper {
+	border: 6px solid #D1E1D6;
+	border-radius: 20px;
+	padding: 40px;
+}
+
+section .reservation-content ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+section .reservation-content li span {
+	font-weight: 400;
+	font-size: 28px;
+	line-height: 37px;
+	color: #143A2F;
+}
+
+section .reservation-content li {
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 32px;
+	color: #6E7D78;
+	display: inline-block;
+	margin-right: 12px;
+}
+
+section .reservation-content li:last-child {
+	margin-right: 0px;
+}
+
+section .hotel-heading h2 {
+	font-weight: 400;
+	font-size: 40px;
+	line-height: 53px;
+	color: #143A2F;
+}
+
+section .hotel-heading p {
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 32px;
+	color: #6E7D78;
+}
+
+section .reservation-id {
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 32px;
+	color: #143A2F;
+}
+
+section .current-reservation-heading {
+	font-weight: 400;
+	font-size: 40px;
+	line-height: 53px;
+	color: #143A2F;
+}
+
+section .earn-points-text p {
+	font-weight: 400;
+	font-size: 24px;
+	line-height: 32px;
+	color: #6E7D78;
+	text-align: center;
+	margin-top: 20px;
+}
+
+section .submit-btns button {
+	background: #143A2F;
+	border-radius: 12px;
+	font-weight: 400;
+	font-size: 32px;
+	line-height: 43px;
+	text-align: center;
+	color: #FFFFFF;
+	border: none;
+	padding: 9px 94px;
+	margin-top: 10px;
+}
+
+section .submit-btns button:hover {
 	background: rgba(20, 58, 47, 0.8);
-	color:#fff;
+	color: #fff;
 }
+
 /* End of Reservation Lookup CSS */
 
-footer{
-	background:#143A2F;
-	padding:28px 0;
+footer {
+	background: #143A2F;
+	padding: 28px 0;
 	/*margin-top:70px;*/
 }
-footer .copyright-text{
-	font-size:16px;
-	font-weight:400;
-	line-height:22px;
+
+footer .copyright-text {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 22px;
 	text-align: center;
-	color:#fff;
-	
+	color: #fff;
+
 }
-@media (max-width: 450px){
-section .location-btn{
-    font-size:34px !important;
-    width:320px;
-	padding:15px 0;
-}
-section .reservation-list{
-    padding:20px;
-}
-section .hotel-heading h2{
-    font-size:28px !important;
-    line-height:38px;
-}
-section .reservation-list-wrapper{
-    padding:10px;
-}
-section .reservation-content li{
-    font-size:18px !important;
-}
-section .submit-btns button{
-    padding:9px 60px;
-}
-section .loyalty-content-bg{
-    width: 100%;
-    overflow:scroll;
-}
-section .loyalty-wrapper{
-    padding:20px;
-}
-section .loyalty-heading{
-	width:100%;
-	font-size:30px;
-    line-height:120px;
-    height:120px;	
-}
-header .search-bar{
-    padding:16px 16px;
-}
-header .search-bar li{
-    font-size:24px;
-}
-section .current-reservation-heading{
-    font-size:26px !important;
-}
-header .check-propoints{
-	width:100%;
-	font-size:20px !important;
-    padding:10px 10px;	
-}
-section .reservation-content li span{
-    font-size:26px !important;
-}
-section .about-content p{
-    font-size:18px !important;
-}
-section .contact-us-wrapper h2{
-    font-size:26px !important;
-    line-height:40px;
-}
-section .hotels-directly h3{
-    font-size:26px !important;
-	line-height:40px;
-}
-section .hotels-directly input{
-    right:-1rem;
-	width:30px;
-    height:30px;
-}
-section .booknow-btn button{
-    padding:9px 50px;
-}
-section .book-stay-text{
-    margin-top:60px !important;
-}
-section .ny-text h1{
-    font-size:33px !important;
-}
-section .register{
-    padding:30px 20px;
-}
-section .login-text-heading h2{
-    font-size:36px;
-	line-height:46px;
-}
-section .create-account-btn button{
-	width:100%;
-	font-size:32px !important;	
-}
-section .login-account-box{
-    padding:30px 20px;
-}
-section .login-account-box p{
-    font-size:28px;
-    padding:0;
-}
-section .join-text ul{
-    padding-left:14px;
-}
-}
-@media (max-width: 540px){
-section .book-stay-text {
-    margin-top:40px;
-}
-section .book-stay-text p{
-    padding:15px;
-}
-section .manage-reservation-bg{
-    width:97% !important;
-	margin-top:30px !important;
-}
-section .manage-reservation{
-    margin-top:10px !important;
-}
-section .manage-reservation p {
-    padding:34px;
-	font-size:20px !important;
-}
-section .manage-reservation-img a{
-    font-size:32px;
-}
-section .manage-reservation-img{
-    margin-top:40px;
-}
-section .form-input{
-    padding: 0px;
-}
-section .main-wrapper{
-    width:100%;
-}
-section .about-content{
-    padding:25px;
-}
-section .about-us-img{
-    bottom:-12rem;
-}
-section .contact-us-wrapper{
-    width:100%;
-	margin-top:15rem;
-	padding: 40px 10px;
-}
-section .contact-us-wrapper h2{
-    font-size:36px;
-    line-height:48px;
-}
-section .contact-us-wrapper p{
-    font-size:24px;
-    line-height:40px;
-}
-section .location-wrapper{
-    padding:50px 30px;
-}
-section .hotels-directly h3{
-    font-size:38px;
-}
-section .hotels-directly input{
-    right:0rem;
-}
-section .nyc-location{
-    text-align:center;
-}
-section .amenities-box{
-    padding:40px 18px;
-}
-section .check-text label{
-    margin-top:16px;
-}
-section .location-wrapper{
-    padding:50px 30px;
-}
-section .ny-text h1{
-    font-size:44px;
-}
-section .hotel-heading h2{
-    font-size:38px;
-}
-section .reservation-content li{
-    font-size:20px;
-}
-section .loyalty-wrapper{
-    padding:20px;
-}
-section .loyalty-heading{
-	width:100%;	
-}
-header .booking-text{
-    width:100%;
-    margin:90px auto;
-}
-section .current-reservation-heading{
-    font-size:36px;
-}
-}
-@media (min-width: 541px) and (max-width: 767px){
+
+@media (max-width: 450px) {
+	section .location-btn {
+		font-size: 34px !important;
+		width: 320px;
+		padding: 15px 0;
+	}
+
+	section .reservation-list {
+		padding: 20px;
+	}
+
+	section .hotel-heading h2 {
+		font-size: 28px !important;
+		line-height: 38px;
+	}
+
+	section .reservation-list-wrapper {
+		padding: 10px;
+	}
+
+	section .reservation-content li {
+		font-size: 18px !important;
+	}
+
+	section .submit-btns button {
+		padding: 9px 60px;
+	}
+
+	section .loyalty-content-bg {
+		width: 100%;
+		overflow: scroll;
+	}
+
+	section .loyalty-wrapper {
+		padding: 20px;
+	}
+
+	section .loyalty-heading {
+		width: 100%;
+		font-size: 30px;
+		line-height: 120px;
+		height: 120px;
+	}
+
+	header .search-bar {
+		padding: 16px 16px;
+	}
+
+	header .search-bar li {
+		font-size: 24px;
+	}
+
+	section .current-reservation-heading {
+		font-size: 26px !important;
+	}
+
+	header .check-propoints {
+		width: 100%;
+		font-size: 20px !important;
+		padding: 10px 10px;
+	}
+
+	section .reservation-content li span {
+		font-size: 26px !important;
+	}
+
+	section .about-content p {
+		font-size: 18px !important;
+	}
+
+	section .contact-us-wrapper h2 {
+		font-size: 26px !important;
+		line-height: 40px;
+	}
+
+	section .hotels-directly h3 {
+		font-size: 26px !important;
+		line-height: 40px;
+	}
+
+	section .hotels-directly input {
+		right: -1rem;
+		width: 30px;
+		height: 30px;
+	}
+
+	section .booknow-btn button {
+		padding: 9px 50px;
+	}
+
 	section .book-stay-text {
-    margin-top: 40px;
-}
-section .book-stay-text p{
-     padding:0px; 
-}
-section .manage-reservation-bg{
-    width: 84% !important;
-}
-section .form-input{
-    padding: 0px;
-}
-section .main-wrapper {
-    width:100%;
-}
-section .contact-us-wrapper{
-    width:100%;
-	margin-top:13rem;
-	padding: 40px 10px;
-}
-section .about-content{
-    padding:30px
-}
-section .about-us-img{
-    bottom:-11rem;
-}
-section .nyc-location{
-    text-align:center;
-}
-section .amenities-box{
-    padding:40px 20px;
-}
-section .hotels-directly input{
-    right:-2rem;
-}
-section .location-wrapper{
-    padding:50px 50px;
-}
-section .ny-text h1{
-    font-size:48px;
-}
-section .hotels-directly h3{
-    font-size:36px;
-}
-section .loyalty-wrapper{
-    padding:30px;
-}
-section .loyalty-heading{
-	width:100%;	
-}
-header .booking-text{
-    width:100%;
-    margin:90px auto;
-}
-header .check-propoints{
-	width:80%;	
-}
-header .search-bar li button{
-    width:110px;
-}
-header .search-bar li input{
-    width:100px;
-}
-header .search-bar li{
-    font-size:20px;
-}
-header .search-bar{
-    padding:16px 10px;
-}
-header .check-propoints{
-    padding:10px 20px;
-}
-}
-@media (min-width: 768px) and (max-width: 990px){
-section .book-stay-text {
-    margin-top: 30px;
-}
-section .manage-reservation-bg{
-    width: 85% !important;
-	margin-top:30px !important;
-}
-section .manage-reservation{
-    margin-top: 50px;
-}
-section .manage-reservation-img{
-    margin-top:90px
-}
-section .form-input{
-    padding: 0px;
-}
-section .main-wrapper {
-    width:100%;
-}
-section .contact-us-wrapper{
-    width:100%;
-	margin-top:13rem;
-	padding: 40px 10px;
-}
-section .hotels-directly h3{
-    font-size:34px;
-}
-section .directly-text p{
-    font-size:22px;
-}
-section .about-us-img{
-    bottom:-11rem;
-}
-section .nyc-location{
-    text-align:center;
-}
-section .amenities-box{
-    padding:60px 45px;
-}
-section .hotels-directly input{
-    right:5rem;
-}
-section .ny-text h1{
-    font-size:48px;
-}
-section .reservation-content li span{
-    font-size:25px;
-}
-section .loyalty-heading{
-	width:100%;	
-}
-header .booking-text{
-    width:90%;
-    margin:110px auto;
-}
-header .check-propoints{
-    width:85%;
-}
-header .search-bar{
-    padding:16px 10px;
-}
-}
-@media (min-width: 991px) and (max-width: 1199px){
-section .book-stay-text {
-    margin-top: 100px;
-}
-section .manage-reservation-img{
-    margin-top:36px;
-}
-section .manage-reservation-bg{
-    width:60% !important;
-	margin-top:85px !important;
-    height:250px !important;
-}
-section .manage-reservation-img a{
-    font-size:32px;
-}
-section .propoints-bg {
-    margin-top: 86px;
-    height: 290px;
-    width: 84%;
-}
-section .form-input{
-    padding: 0px;
-}
-section .main-wrapper{
-    width:100%;
-}
-section .hotels-directly input{
-    right:11rem;
-}
-section .hotel-heading h2{
-    font-size:36px;
-}
-section .reservation-content li span{
-    font-size:24px;
-}
-header .booking-text{
-    width:75%;
-    margin:140px auto;
-}
-}
-@media (min-width: 1200px) and (max-width: 1390px){
-section .hotels-directly input{
-    right:17rem;
-}
-header .booking-text{
-    width:61%;
-}
-}
-@media (max-width: 1900px){
-section .manage-reservation-bg{
-    margin-top:60px;
-    width:60%;
-}
-section .propoints-bg{
-    width:88%;
-}
-}
-@media (max-width: 991px){
-header .custom-nav{
-	background:#143a2f;
-	padding-bottom: 20px;
-	position: relative;
-    z-index: 999;
-}
-header .custom-nav li a{	
-	color:#fff;
-}
-header .custom-nav li a:hover{	
-	color:#000;
-}
-header .login-btn a{
-    background: #fff;
-    color: #143a2f;
-}
-header .login-btn {
-    margin-left:28px;
-}
-.nav-bar{
-	width:75%;
-}
-}
-@media (min-width: 1320px){
-section .login-account-box{
-    margin-left:30px;
-}
-section .register{
-	margin-right:30px;	
-}
+		margin-top: 60px !important;
+	}
+
+	section .ny-text h1 {
+		font-size: 33px !important;
+	}
+
+	section .register {
+		padding: 30px 20px;
+	}
+
+	section .login-text-heading h2 {
+		font-size: 36px;
+		line-height: 46px;
+	}
+
+	section .create-account-btn button {
+		width: 100%;
+		font-size: 32px !important;
+	}
+
+	section .login-account-box {
+		padding: 30px 20px;
+	}
+
+	section .login-account-box p {
+		font-size: 28px;
+		padding: 0;
+	}
+
+	section .join-text ul {
+		padding-left: 14px;
+	}
+}
+
+@media (max-width: 540px) {
+	section .book-stay-text {
+		margin-top: 40px;
+	}
+
+	section .book-stay-text p {
+		padding: 15px;
+	}
+
+	section .manage-reservation-bg {
+		width: 97% !important;
+		margin-top: 30px !important;
+	}
+
+	section .manage-reservation {
+		margin-top: 10px !important;
+	}
+
+	section .manage-reservation p {
+		padding: 34px;
+		font-size: 20px !important;
+	}
+
+	section .manage-reservation-img a {
+		font-size: 32px;
+	}
+
+	section .manage-reservation-img {
+		margin-top: 40px;
+	}
+
+	section .form-input {
+		padding: 0px;
+	}
+
+	section .main-wrapper {
+		width: 100%;
+	}
+
+	section .about-content {
+		padding: 25px;
+	}
+
+	section .about-us-img {
+		bottom: -12rem;
+	}
+
+	section .contact-us-wrapper {
+		width: 100%;
+		margin-top: 15rem;
+		padding: 40px 10px;
+	}
+
+	section .contact-us-wrapper h2 {
+		font-size: 36px;
+		line-height: 48px;
+	}
+
+	section .contact-us-wrapper p {
+		font-size: 24px;
+		line-height: 40px;
+	}
+
+	section .location-wrapper {
+		padding: 50px 30px;
+	}
+
+	section .hotels-directly h3 {
+		font-size: 38px;
+	}
+
+	section .hotels-directly input {
+		right: 0rem;
+	}
+
+	section .nyc-location {
+		text-align: center;
+	}
+
+	section .amenities-box {
+		padding: 40px 18px;
+	}
+
+	section .check-text label {
+		margin-top: 16px;
+	}
+
+	section .location-wrapper {
+		padding: 50px 30px;
+	}
+
+	section .ny-text h1 {
+		font-size: 44px;
+	}
+
+	section .hotel-heading h2 {
+		font-size: 38px;
+	}
+
+	section .reservation-content li {
+		font-size: 20px;
+	}
+
+	section .loyalty-wrapper {
+		padding: 20px;
+	}
+
+	section .loyalty-heading {
+		width: 100%;
+	}
+
+	header .booking-text {
+		width: 100%;
+		margin: 90px auto;
+	}
+
+	section .current-reservation-heading {
+		font-size: 36px;
+	}
+}
+
+@media (min-width: 541px) and (max-width: 767px) {
+	section .book-stay-text {
+		margin-top: 40px;
+	}
+
+	section .book-stay-text p {
+		padding: 0px;
+	}
+
+	section .manage-reservation-bg {
+		width: 84% !important;
+	}
+
+	section .form-input {
+		padding: 0px;
+	}
+
+	section .main-wrapper {
+		width: 100%;
+	}
+
+	section .contact-us-wrapper {
+		width: 100%;
+		margin-top: 13rem;
+		padding: 40px 10px;
+	}
+
+	section .about-content {
+		padding: 30px
+	}
+
+	section .about-us-img {
+		bottom: -11rem;
+	}
+
+	section .nyc-location {
+		text-align: center;
+	}
+
+	section .amenities-box {
+		padding: 40px 20px;
+	}
+
+	section .hotels-directly input {
+		right: -2rem;
+	}
+
+	section .location-wrapper {
+		padding: 50px 50px;
+	}
+
+	section .ny-text h1 {
+		font-size: 48px;
+	}
+
+	section .hotels-directly h3 {
+		font-size: 36px;
+	}
+
+	section .loyalty-wrapper {
+		padding: 30px;
+	}
+
+	section .loyalty-heading {
+		width: 100%;
+	}
+
+	header .booking-text {
+		width: 100%;
+		margin: 90px auto;
+	}
+
+	header .check-propoints {
+		width: 80%;
+	}
+
+	header .search-bar li button {
+		width: 110px;
+	}
+
+	header .search-bar li input {
+		width: 100px;
+	}
+
+	header .search-bar li {
+		font-size: 20px;
+	}
+
+	header .search-bar {
+		padding: 16px 10px;
+	}
+
+	header .check-propoints {
+		padding: 10px 20px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 990px) {
+	section .book-stay-text {
+		margin-top: 30px;
+	}
+
+	section .manage-reservation-bg {
+		width: 85% !important;
+		margin-top: 30px !important;
+	}
+
+	section .manage-reservation {
+		margin-top: 50px;
+	}
+
+	section .manage-reservation-img {
+		margin-top: 90px
+	}
+
+	section .form-input {
+		padding: 0px;
+	}
+
+	section .main-wrapper {
+		width: 100%;
+	}
+
+	section .contact-us-wrapper {
+		width: 100%;
+		margin-top: 13rem;
+		padding: 40px 10px;
+	}
+
+	section .hotels-directly h3 {
+		font-size: 34px;
+	}
+
+	section .directly-text p {
+		font-size: 22px;
+	}
+
+	section .about-us-img {
+		bottom: -11rem;
+	}
+
+	section .nyc-location {
+		text-align: center;
+	}
+
+	section .amenities-box {
+		padding: 60px 45px;
+	}
+
+	section .hotels-directly input {
+		right: 5rem;
+	}
+
+	section .ny-text h1 {
+		font-size: 48px;
+	}
+
+	section .reservation-content li span {
+		font-size: 25px;
+	}
+
+	section .loyalty-heading {
+		width: 100%;
+	}
+
+	header .booking-text {
+		width: 90%;
+		margin: 110px auto;
+	}
+
+	header .check-propoints {
+		width: 85%;
+	}
+
+	header .search-bar {
+		padding: 16px 10px;
+	}
+}
+
+@media (min-width: 991px) and (max-width: 1199px) {
+	section .book-stay-text {
+		margin-top: 100px;
+	}
+
+	section .manage-reservation-img {
+		margin-top: 36px;
+	}
+
+	section .manage-reservation-bg {
+		width: 60% !important;
+		margin-top: 85px !important;
+		height: 250px !important;
+	}
+
+	section .manage-reservation-img a {
+		font-size: 32px;
+	}
+
+	section .propoints-bg {
+		margin-top: 86px;
+		height: 290px;
+		width: 84%;
+	}
+
+	section .form-input {
+		padding: 0px;
+	}
+
+	section .main-wrapper {
+		width: 100%;
+	}
+
+	section .hotels-directly input {
+		right: 11rem;
+	}
+
+	section .hotel-heading h2 {
+		font-size: 36px;
+	}
+
+	section .reservation-content li span {
+		font-size: 24px;
+	}
+
+	header .booking-text {
+		width: 75%;
+		margin: 140px auto;
+	}
+}
+
+@media (min-width: 1200px) and (max-width: 1390px) {
+	section .hotels-directly input {
+		right: 17rem;
+	}
+
+	header .booking-text {
+		width: 61%;
+	}
+}
+
+@media (max-width: 1900px) {
+	section .manage-reservation-bg {
+		margin-top: 60px;
+		width: 60%;
+	}
+
+	section .propoints-bg {
+		width: 88%;
+	}
+}
+
+@media (max-width: 991px) {
+	header .custom-nav {
+		background: #143a2f;
+		padding-bottom: 20px;
+		position: relative;
+		z-index: 999;
+	}
+
+	header .custom-nav li a {
+		color: #fff;
+	}
+
+	header .custom-nav li a:hover {
+		color: #000;
+	}
+
+	header .login-btn a {
+		background: #fff;
+		color: #143a2f;
+	}
+
+	header .login-btn {
+		margin-left: 28px;
+	}
+
+	.nav-bar {
+		width: 75%;
+	}
+}
+
+@media (min-width: 1320px) {
+	section .login-account-box {
+		margin-left: 30px;
+	}
+
+	section .register {
+		margin-right: 30px;
+	}
 }

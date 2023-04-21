@@ -111,12 +111,6 @@ CSD 460 - Red Team
     </div>
   </header>
 
-  <section class="popUpSpace">
-    <?php
-    // This is where the confirmation message would go?
-    ?>
-  </section>
-
   <section class="mt-4">
     <div class="container">
       <div class="row">

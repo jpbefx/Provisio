@@ -259,6 +259,50 @@ function addReservation($userID, $hotelID, $roomID, $checkIn, $checkOut, $numGue
 }
 
 /*
+return the global demand rate percent
+@return the global demand rate modifier
+*/
+function getDemandRate(): string|bool
+{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from globalVariables where var = 'demandRate' limit 1;";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_assoc($result)['val'];
+        }
+    }
+    return false;
+}
+
+/*
+return the holiday demand rate percent
+@return the holiday demand rate
+*/
+function getHolidayRate(): string|bool
+{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from globalVariables where var = 'holidayRate' limit 1;";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_assoc($result)['val'];
+        }
+    }
+    return false;
+}
+
+/*
 global function to connect to the provisio database using global variables
 @return true - connection is successful
 false - unable to connect

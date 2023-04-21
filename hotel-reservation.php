@@ -23,7 +23,11 @@ CSD 460 - Red Team
     <?php
     //Global user check
     require("php/databaseMgmt.php");
+    require("php/dateMgmt.php");
 
+    if (!isset($_SESSION['isLocked'])) {
+        $_SESSION['isLocked'] = false;
+    }
 
     if (isset($_SESSION['username'])) {
         if (validateUser($_SESSION['username']) == false) {
@@ -126,6 +130,32 @@ CSD 460 - Red Team
                         <div class="location-btn"> Start your Booking </div>
                         <div class="location-wrapper">
                             <?php
+                            //show room rates
+                            if (array_key_exists('seeRates', $_POST)) {
+                                $hasError = false;
+                                $errorStr = "";
+
+                                $chkDts = checkDates();
+                                if ($chkDts != "") {
+                                    $hasError = true;
+                                    $errorStr .= $chkDts;
+                                }
+
+                                if ($hasError == false) {
+                                    $_SESSION['isLocked'] = true;
+                                    echo "<script> location.replace('#rooms'); </script>";
+                                } else {
+                                    echo "<div class='response-text'>One or more errors:<br><ul>" . $errorStr . "</div>";
+                                }
+
+                            }
+
+                            //unlock check in/out dates
+                            if (array_key_exists('hideRates', $_POST)) {
+                                $_SESSION['isLocked'] = false;
+                                echo "<script> location.replace('#'); </script>";
+                            }
+
                             //Reservation Logic
                             if (array_key_exists('bookButton', $_POST)) {
                                 checkReservationFields();
@@ -133,38 +163,13 @@ CSD 460 - Red Team
 
                             function checkReservationFields()
                             {
-                                global $redirectReady;
                                 $hasError = false;
                                 $errorStr = "";
 
-                                //check in blank
-                                if ($_POST["checkIn"] == "") {
+                                $chkDts = checkDates();
+                                if ($chkDts != "") {
                                     $hasError = true;
-                                    $errorStr .= "<li>Check In is blank!</li>";
-                                } else {
-                                    //check in date is in the past
-                                    if ($_POST["checkIn"] < date("Y-m-d")) {
-                                        $hasError = true;
-                                        $errorStr .= "<li>Check In is earlier then today!</li>";
-                                    }
-                                }
-
-                                //check out blank
-                                if ($_POST["checkOut"] == "") {
-                                    $hasError = true;
-                                    $errorStr .= "<li>Check Out is blank!</li>";
-                                } else {
-                                    //check out date is in the past
-                                    if ($_POST["checkOut"] < date("Y-m-d")) {
-                                        $hasError = true;
-                                        $errorStr .= "<li>Check Out is earlier then today!</li>";
-                                    }
-                                }
-
-                                //check in is before check out
-                                if ($_POST["checkIn"] > $_POST["checkOut"]) {
-                                    $hasError = true;
-                                    $errorStr .= "<li>Check In is after Check Out!</li>";
+                                    $errorStr .= $chkDts;
                                 }
 
                                 //check if hotel is selected
@@ -176,7 +181,7 @@ CSD 460 - Red Team
                                 //check if room is selected
                                 if (isset($_POST['roomGroup']) == false) {
                                     $hasError = true;
-                                    $errorStr .= "<li>Select one of the hotels</li>";
+                                    $errorStr .= "<li>Select one of the rooms</li>";
                                 }
 
                                 //check if num guests has a value
@@ -214,13 +219,44 @@ CSD 460 - Red Team
                                         $hasBreakfest = "Yes";
                                     }
                                     $_SESSION['hasBreakfest'] = $hasBreakfest;
-
                                     echo "<script> location.replace('reservation-summary.php'); </script>";
                                 } else {
                                     echo "<div class='response-text'>One or more errors:<br><ul>" . $errorStr . "</div>";
+                                    echo "<script> location.replace('#'); </script>";
                                 }
                             }
 
+                            function checkDates(): string
+                            {
+                                $errorStr = "";
+
+                                //check in blank
+                                if ($_POST["checkIn"] == "") {
+                                    $errorStr .= "<li>Check In is blank!</li>";
+                                } else {
+                                    //check in date is in the past
+                                    if ($_POST["checkIn"] < date("Y-m-d")) {
+                                        $errorStr .= "<li>Check In is earlier then today!</li>";
+                                    }
+                                }
+
+                                //check out blank
+                                if ($_POST["checkOut"] == "") {
+                                    $errorStr .= "<li>Check Out is blank!</li>";
+                                } else {
+                                    //check out date is in the past
+                                    if ($_POST["checkOut"] < date("Y-m-d")) {
+                                        $errorStr .= "<li>Check Out is earlier then today!</li>";
+                                    }
+                                }
+
+                                //check in is before check out
+                                if ($_POST["checkIn"] > $_POST["checkOut"]) {
+                                    $errorStr .= "<li>Check In is after Check Out!</li>";
+                                }
+
+                                return $errorStr;
+                            }
                             ?>
                             </ul>
                             <div class="hotels-directly">
@@ -233,7 +269,19 @@ CSD 460 - Red Team
                                             <div class="form-group check-text">
                                                 <label for="input_from">Check In</label>
                                                 <?php
-                                                echo "<input type='date' class='form-control' name='checkIn' id='input_from' min=" . date("Y-m-d") . ">";
+                                                if (isset($_POST['checkIn'])) {
+                                                    if ($_SESSION['isLocked'] == false) {
+                                                        echo "<input type='text' class='form-control' name='checkIn' id='input_from' min='" . date("Y-m-d") . "' value='" . $_POST["checkIn"] . "' readonly>";
+                                                    } else {
+                                                        echo "<input type='text' class='form-control' name='checkIn' id='input_from' min='" . date("Y-m-d") . "' value='" . $_POST["checkIn"] . "' readonly>";
+                                                    }
+                                                } else {
+                                                    if ($_SESSION['isLocked'] == false) {
+                                                        echo "<input type='text' class='form-control' name='checkIn' id='input_from' min=" . date("Y-m-d") . " readonly>";
+                                                    } else {
+                                                        echo "<input type='text' class='form-control' name='checkIn' id='input_from' min=" . date("Y-m-d") . " readonly>";
+                                                    }
+                                                }
                                                 ?>
                                             </div>
                                         </div>
@@ -241,16 +289,48 @@ CSD 460 - Red Team
                                             <div class="form-group check-text">
                                                 <label for="input_to">Check Out</label>
                                                 <?php
-                                                echo "<input type='date' class='form-control' name='checkOut' id='input_to' min=" . date('Y-m-d', strtotime("+1 day")) . ">";
+                                                if (isset($_POST['checkOut'])) {
+                                                    if ($_SESSION['isLocked'] == false) {
+                                                        echo "<input type='text' class='form-control' name='checkOut' id='input_to' min='" . date('Y-m-d', strtotime("+1 day")) . "' value='" . $_POST["checkOut"] . "' readonly>";
+                                                    } else {
+                                                        echo "<input type='text' class='form-control' name='checkOut' id='' min='" . date('Y-m-d', strtotime("+1 day")) . "' value='" . $_POST["checkOut"] . "' readonly>";
+                                                    }
+                                                } else {
+                                                    if ($_SESSION['isLocked'] == false) {
+                                                        echo "<input type='text' class='form-control' name='checkOut' id='input_to' min='" . date('Y-m-d', strtotime("+1 day")) . "' readonly>";
+                                                    } else {
+                                                        echo "<input type='text' class='form-control' name='checkOut' id='' min='" . date('Y-m-d', strtotime("+1 day")) . "' readonly>";
+                                                    }
+                                                }
                                                 ?>
                                             </div>
                                         </div>
                                     </div>
+                                    <?php
+                                    if ($_SESSION['isLocked'] == true) {
+                                        ?>
+                                        <div class="booknow-btn text-center mt-5">
+                                            <button type="submit" name="hideRates"> Change Dates </button>
+                                        </div>
+                                        <?php
+                                    }
+                                    ?>
                                 </div>
                                 <div class="mt-5">
                                     <div class="hotels-directly">
                                         <h3>Number of guests:</h3>
-                                        <input class="form-control" type="text" name="numGuests" aria-label="input">
+                                        <?php
+                                        if (isset($_POST['numGuests'])) {
+                                            ?>
+                                            <input class="form-control" type="text" name="numGuests"
+                                                value='<?php echo $_POST['numGuests'] ?>' aria-label="input">
+                                            <?php
+                                        } else {
+                                            ?>
+                                            <input class="form-control" type="text" name="numGuests" aria-label="input">
+                                            <?php
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                                 <div class="hotels-directly mt-5">
@@ -265,43 +345,109 @@ CSD 460 - Red Team
                                                 echo "Error accessing hotel list try again later";
                                             } else {
                                                 while ($hotel = mysqli_fetch_assoc($hotelList)) {
-                                                    echo "<div class='col-lg-4 col-md-6 col-sm-12 col-12'>";
-                                                    echo "  <div class='nyc-location'>";
-                                                    echo "      <div class='hotel-location-text custom-form-check'>" . $hotel['hotelName'];
-                                                    echo "          <input type='radio' name='hotelGroup' class='form-check-input' value='" . $hotel['hotelName'] . "'>";
-                                                    echo "      </div>";
-                                                    echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
-                                                    echo "  </div>";
-                                                    echo "</div>";
+                                                    if (isset($_POST['hotelGroup']) == false) {
+                                                        echo "<div class='col-lg-4 col-md-6 col-sm-12 col-12'>";
+                                                        echo "  <div class='nyc-location'>";
+                                                        echo "      <div class='hotel-location-text custom-form-check'>" . $hotel['hotelName'];
+                                                        echo "          <input type='radio' name='hotelGroup' class='form-check-input' value='" . $hotel['hotelName'] . "'>";
+                                                        echo "      </div>";
+                                                        echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
+                                                        echo "  </div>";
+                                                        echo "</div>";
+                                                    } else {
+                                                        if ($hotel['hotelName'] == $_POST['hotelGroup']) {
+                                                            echo "<div class='col-lg-4 col-md-6 col-sm-12 col-12'>";
+                                                            echo "  <div class='nyc-location'>";
+                                                            echo "      <div class='hotel-location-text custom-form-check'>" . $hotel['hotelName'];
+                                                            echo "          <input type='radio' name='hotelGroup' class='form-check-input' value='" . $hotel['hotelName'] . "' checked>";
+                                                            echo "      </div>";
+                                                            echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
+                                                            echo "  </div>";
+                                                            echo "</div>";
+                                                        } else {
+                                                            echo "<div class='col-lg-4 col-md-6 col-sm-12 col-12'>";
+                                                            echo "  <div class='nyc-location'>";
+                                                            echo "      <div class='hotel-location-text custom-form-check'>" . $hotel['hotelName'];
+                                                            echo "          <input type='radio' name='hotelGroup' class='form-check-input' value='" . $hotel['hotelName'] . "'>";
+                                                            echo "      </div>";
+                                                            echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
+                                                            echo "  </div>";
+                                                            echo "</div>";
+                                                        }
+                                                    }
                                                 }
                                             }
                                             ?>
                                         </div>
                                     </fieldset>
                                 </div>
-                                <div class="hotels-directly mt-5">
+                                <div class="hotels-directly mt-5" id='rooms'>
                                     <h3>Room Type</h3>
+                                    <div class="booknow-btn text-center mt-5">
+                                        <?php
+                                        if ($_SESSION['isLocked'] == false) {
+                                            ?>
+                                            <button type="submit" name="seeRates"> See Room Rates </button>
+                                            <?php
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <fieldset id="roomGroup">
                                         <div class="row">
                                             <?php
-                                            $roomList = getAllRooms();
-                                            if ($roomList == false) {
-                                                echo "Error accessing room list try again later";
+                                            if ($_SESSION['isLocked'] == false) {
+                                                echo "<div class='hotels-directly'>";
+                                                echo "<br><br><h3>Select your check in and check out dates to see room rates!</h3><br><br>";
+                                                echo "</div>";
                                             } else {
-                                                while ($room = mysqli_fetch_assoc($roomList)) {
-                                                    echo "<div class='col-lg-4 offset-lg-1 col-md-6 col-sm-12 col-12'>";
-                                                    echo "  <div class='nyc-location'>";
-                                                    echo "      <div class='hotel-location-text custom-form-check'>" . $room['roomType'] . " $" . $room['roomCost'];
-                                                    echo "          <input type='radio' name='roomGroup'class='form-check-input' value='" . $room['roomType'] . "'>";
-                                                    echo "      </div>";
-                                                    echo "      <img class='img-fluid' src=" . $room['pictureAddress'] . " />";
-                                                    echo "  </div>";
-                                                    echo "</div>";
+                                                $roomList = getAllRooms();
+                                                if ($roomList == false) {
+                                                    echo "Error accessing room list try again later";
+                                                } else {
+                                                    $demandRate = floatval(getDemandRate());
+                                                    $holidayRate = 0;
+                                                    if (checkForHolidays($_POST["checkIn"], $_POST["checkOut"])) {
+                                                        $holidayRate = floatval(getHolidayRate());
+                                                    }
+
+                                                    while ($room = mysqli_fetch_assoc($roomList)) {
+                                                        $roomCost = ($room['roomCost'] * $demandRate) + $room['roomCost'];
+                                                        $roomCost = ($roomCost * $holidayRate) + $roomCost;
+                                                        if (isset($_POST['roomGroup']) == false) {
+                                                            echo "<div class='col-lg-4 offset-lg-1 col-md-6 col-sm-12 col-12'>";
+                                                            echo "  <div class='nyc-location'>";
+                                                            echo "      <div class='hotel-location-text custom-form-check'>" . $room['roomType'] . " $" . number_format($roomCost, 2);
+                                                            echo "          <input type='radio' name='roomGroup'class='form-check-input' value='" . $room['roomType'] . "'>";
+                                                            echo "      </div>";
+                                                            echo "      <img class='img-fluid' src=" . $room['pictureAddress'] . " />";
+                                                            echo "  </div>";
+                                                            echo "</div>";
+                                                        } else {
+                                                            if ($room['roomType'] = $_POST['roomGroup']) {
+                                                                echo "<div class='col-lg-4 offset-lg-1 col-md-6 col-sm-12 col-12'>";
+                                                                echo "  <div class='nyc-location'>";
+                                                                echo "      <div class='hotel-location-text custom-form-check'>" . $room['roomType'] . " $" . number_format($roomCost, 2);
+                                                                echo "          <input type='radio' name='roomGroup'class='form-check-input' value='" . $room['roomType'] . "' checked>";
+                                                                echo "      </div>";
+                                                                echo "      <img class='img-fluid' src=" . $room['pictureAddress'] . " />";
+                                                                echo "  </div>";
+                                                                echo "</div>";
+                                                            } else {
+                                                                echo "<div class='col-lg-4 offset-lg-1 col-md-6 col-sm-12 col-12'>";
+                                                                echo "  <div class='nyc-location'>";
+                                                                echo "      <div class='hotel-location-text custom-form-check'>" . $room['roomType'] . " $" . number_format($roomCost, 2);
+                                                                echo "          <input type='radio' name='roomGroup'class='form-check-input' value='" . $room['roomType'] . "'>";
+                                                                echo "      </div>";
+                                                                echo "      <img class='img-fluid' src=" . $room['pictureAddress'] . " />";
+                                                                echo "  </div>";
+                                                                echo "</div>";
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
-
                                             ?>
                                         </div>
                                     </fieldset>
@@ -314,19 +460,52 @@ CSD 460 - Red Team
                                         <div class="row">
                                             <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                                                 <div class="hotel-location-text text-start custom-form-check">
-                                                    <input type="checkbox" class="form-check-input" name="wifi"
-                                                        id="exampleCheck1">
+                                                    <?php
+                                                    if (isset($_POST['wifi'])) {
+                                                        ?>
+                                                        <input type="checkbox" class="form-check-input" name="wifi"
+                                                            id="exampleCheck1" checked>
+                                                        <?php
+                                                    } else {
+                                                        ?>
+                                                        <input type="checkbox" class="form-check-input" name="wifi"
+                                                            id="exampleCheck1">
+                                                        <?php
+                                                    }
+                                                    ?>
                                                     WiFi
                                                     +$12.99 flat fee
                                                 </div>
                                                 <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                    <input type="checkbox" class="form-check-input" name="parking"
-                                                        id="exampleCheck1">
+                                                    <?php
+                                                    if (isset($_POST['parking'])) {
+                                                        ?>
+                                                        <input type="checkbox" class="form-check-input" name="parking"
+                                                            id="exampleCheck1" checked>
+                                                        <?php
+                                                    } else {
+                                                        ?>
+                                                        <input type="checkbox" class="form-check-input" name="parking"
+                                                            id="exampleCheck1">
+                                                        <?php
+                                                    }
+                                                    ?>
                                                     Parking + $19.99 per night
                                                 </div>
                                                 <div class="hotel-location-text text-start custom-form-check mt-50">
-                                                    <input type="checkbox" class="form-check-input" name="breakfest"
-                                                        id="exampleCheck1">
+                                                    <?php
+                                                    if (isset($_POST['breakfest'])) {
+                                                        ?>
+                                                        <input type="checkbox" class="form-check-input" name="breakfest"
+                                                            id="exampleCheck1" checked>
+                                                        <?php
+                                                    } else {
+                                                        ?>
+                                                        <input type="checkbox" class="form-check-input" name="breakfest"
+                                                            id="exampleCheck1">
+                                                        <?php
+                                                    }
+                                                    ?>
                                                     Breakfast + $8.99 per night
                                                 </div>
                                             </div>
