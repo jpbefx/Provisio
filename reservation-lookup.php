@@ -2,7 +2,26 @@
 Nicholas Werner, James Bailey, Larissa Passamani Lima
 CSD 460 - Red Team
  -->
-<?php session_start(); ?>
+<?php session_start();
+//ini_set("display_errors", 1);
+?>
+<?php
+//Global user check
+require("php/databaseMgmt.php");
+require("php/dateMgmt.php");
+
+if (isset($_SESSION['username'])) {
+  if (validateUser($_SESSION['username']) == false) {
+    signOutUser();
+  }
+} else {
+  header("Location: index.php");
+}
+
+//Need to add a check to make sure user doesnt navigate to this page on there own.
+//IE Check if reservation session fields exist
+//If these do not exist, kick user back to landing page.
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +34,10 @@ CSD 460 - Red Team
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
+    integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 
 <body>
@@ -101,13 +124,17 @@ CSD 460 - Red Team
     <div class="booking-text">
       <h2>My Bookings</h2>
       <div class="search-bar">
-        <ul>
-          <li>Search by Reservation Number:</li>
-          <li>
-            <input class="form-control" type="text" placeholder="" aria-label="default input" />
-          </li>
-          <li><button type="button" class="">Search</button></li>
-        </ul>
+
+        <form method="post" action="">
+          <ul>
+            <li>Search by Reservation Number:</li>
+            <li>
+              <input class="form-control" type="number" name="search_reserveno" required placeholder=""
+                aria-label="default input" value=<?= $_REQUEST["search_reserveno"] ?> />
+            </li>
+            <li><button name="searchbtn" type="submit" class="">Search</button></li>
+          </ul>
+        </form>
       </div>
       <div class="check-propoints">Check my Loyalty ProPoints Here</div>
     </div>
@@ -120,284 +147,238 @@ CSD 460 - Red Team
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <div class="reservation-list mt-50 mb-61">
-            <div class="reservation-list-wrapper">
-              <div class="mb-61">
-                <div class="row">
-                  <div class="col-lg-9 col-md-9 col-sm-12 col-12">
-                    <div class="hotel-heading">
-                      <h2>Provisio Hotel - New York City</h2>
-                      <p>123 Imaginary Street, New York, NY 10001</p>
+          <?php if (isset($_REQUEST["searchbtn"])) { ?>
+            <?php
+            getUserInfo($_SESSION['username'])['userID'];
+            $results = getReservation($_REQUEST["search_reserveno"], getUserInfo($_SESSION['username'])['userID']);
+            if ($results) {
+              while ($row = mysqli_fetch_array($results)) {
+                //print_r($row->reservationID);
+          
+                $hotel = getHotelInfowithID($row['hotelID']);
+
+                $room = getRoomInfowithID($row['roomID']);
+
+                ?>
+                <div class="reservation-list mt-50 mb-61">
+                  <div class="reservation-list-wrapper">
+                    <div class="mb-61">
+                      <div class="row">
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-12">
+                          <div class="hotel-heading">
+                            <h2>
+                              <?php echo $hotel["hotelName"]; ?> -
+                              <?php echo $hotel["hotelCity"]; ?>
+                            </h2>
+                            <p>
+                              <?php echo $hotel["hotelAddress"]; ?>
+                              <?php echo $hotel["hotelCity"]; ?>,
+                              <?php echo $hotel["hotelState"]; ?>
+                              <?php echo $hotel["hotelZip"]; ?>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                          <div class="reservation-id">Reservation #:
+                            <?php echo $row["reservationID"]; ?>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reservation-content">
+                      <ul>
+                        <li><span>Booking Dates:</span></li>
+                        <li>Check in Date :
+                          <?php echo $row["checkIn"]; ?>
+                        </li>
+                        <li>Check out Date :
+                          <?php echo $row["checkOut"]; ?>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="reservation-content">
+                          <ul>
+                            <li><span>Number of guests:</span></li>
+                            <li>
+                              <?php echo $row["numGuests"]; ?>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-lg-8 col-md-6 col-sm-12 col-12">
+                        <div class="reservation-content">
+                          <ul>
+                            <li><span>Room Type:</span></li>
+                            <li>
+                              <?php echo $room["roomType"]; ?>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="reservation-content">
+                          <ul>
+                            <li><span>Number of Nights:</span></li>
+                            <li>
+                              <?php
+                              $numNights = round((strtotime($row["checkOut"]) - strtotime($row['checkIn'])) / 86400);
+                              echo $numNights;
+                              ?>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-lg-9 col-md-6 col-sm-12 col-12">
+                        <div class="reservation-content">
+                          <ul>
+                            <li><span>Chosen Amenities:</span></li>
+                            <?php if ($row['hasPaidWifi']) { ?>
+                              <li>WiFi</li>
+                            <?php }
+                            if ($row['hasPaidParking']) { ?>
+                              <li>Breakfast</li>
+                            <?php }
+                            if ($row['hasPaidBreakfast']) { ?>
+                              <li>Parking</li>
+                            <?php } ?>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="reservation-content">
+                          <ul>
+                            <li><span>Total Price:</span></li>
+                            <li>$
+                              <?php echo $row["reservTotal"]; ?>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-12">
-                    <div class="reservation-id">Reservation #: 3675</div>
-                  </div>
                 </div>
-              </div>
-              <div class="reservation-content">
-                <ul>
-                  <li><span>Booking Dates:</span></li>
-                  <li>Check in Date : 09/01/2023</li>
-                  <li>Check out Date : 09/06/2023</li>
-                </ul>
-              </div>
-              <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Number of guests:</span></li>
-                      <li>2</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-lg-8 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Room Type:</span></li>
-                      <li>Double Queen Beds</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Number of Nights:</span></li>
-                      <li>5</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-lg-9 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Chosen Amenities:</span></li>
-                      <li>WiFi</li>
-                      <li>Breakfast</li>
-                      <li>Parking</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Total Price:</span></li>
-                      <li>$784.85</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+              <?php }
+            } else
+              echo "<br/><h4 class='text-center' style='color:red'>No Results matching Reservation ID</h4>"; ?>
+          <?php } ?>
           <div class="current-reservation-heading">
             Current / Past Reservations
           </div>
-          <div class="reservation-list mb-61">
-            <div class="reservation-list-wrapper">
-              <div class="mb-61">
-                <div class="row">
-                  <div class="col-lg-9 col-md-9 col-sm-12 col-12">
-                    <div class="hotel-heading">
-                      <h2>Provisio Hotel - Las Vegas</h2>
-                      <p>1234 Mirage Lane. Las Vegas, NV 89101</p>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-12">
-                    <div class="reservation-id">Reservation #: 1597</div>
-                  </div>
-                </div>
-              </div>
-              <div class="reservation-content">
-                <ul>
-                  <li><span>Booking Dates:</span></li>
-                  <li>Check in Date : 09/01/2023</li>
-                  <li>Check out Date : 09/06/2023</li>
-                </ul>
-              </div>
-              <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Number of guests:</span></li>
-                      <li>2</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-lg-8 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Room Type:</span></li>
-                      <li>Double Queen Beds</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Number of Nights:</span></li>
-                      <li>5</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-lg-9 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Chosen Amenities:</span></li>
-                      <li>WiFi</li>
-                      <li>Breakfast</li>
-                      <li>Parking</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Total Price:</span></li>
-                      <li>$784.85</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php
+          getUserInfo($_SESSION['username'])['userID'];
+          $results = getReservation('', getUserInfo($_SESSION['username'])['userID']);
 
-          <div class="reservation-list mb-61">
-            <div class="reservation-list-wrapper">
-              <div class="mb-61">
-                <div class="row">
-                  <div class="col-lg-9 col-md-9 col-sm-12 col-12">
-                    <div class="hotel-heading">
-                      <h2>Provisio Hotel - Hawaii</h2>
-                      <p>1234 Aloha Lane, Honolulu, HI 96815</p>
-                    </div>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-12">
-                    <div class="reservation-id">Reservation #: 2354</div>
-                  </div>
-                </div>
-              </div>
-              <div class="reservation-content">
-                <ul>
-                  <li><span>Booking Dates:</span></li>
-                  <li>Check in Date : 09/01/2023</li>
-                  <li>Check out Date : 09/06/2023</li>
-                </ul>
-              </div>
-              <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Number of guests:</span></li>
-                      <li>2</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-lg-8 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Room Type:</span></li>
-                      <li>Double Queen Beds</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Number of Nights:</span></li>
-                      <li>5</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-lg-9 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Chosen Amenities:</span></li>
-                      <li>WiFi</li>
-                      <li>Breakfast</li>
-                      <li>Parking</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Total Price:</span></li>
-                      <li>$784.85</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          while ($row = mysqli_fetch_array($results)) {
+            //print_r($row->reservationID);
+          
+            $hotel = getHotelInfowithID($row['hotelID']);
 
-          <div class="reservation-list">
-            <div class="reservation-list-wrapper">
-              <div class="mb-61">
-                <div class="row">
-                  <div class="col-lg-9 col-md-9 col-sm-12 col-12">
-                    <div class="hotel-heading">
-                      <h2>Provisio Hotel - Hawaii</h2>
-                      <p>1234 Aloha Lane, Honolulu, HI 96815</p>
+            $room = getRoomInfowithID($row['roomID']);
+
+            ?>
+            <div class="reservation-list mb-61">
+              <div class="reservation-list-wrapper">
+                <div class="mb-61">
+                  <div class="row">
+                    <div class="col-lg-9 col-md-9 col-sm-12 col-12">
+                      <div class="hotel-heading">
+                        <h2>
+                          <?php echo $hotel["hotelName"]; ?> -
+                          <?php echo $hotel["hotelCity"]; ?>
+                        </h2>
+                        <p>
+                          <?php echo $hotel["hotelAddress"]; ?>
+                          <?php echo $hotel["hotelCity"]; ?>,
+                          <?php echo $hotel["hotelState"]; ?>
+                          <?php echo $hotel["hotelZip"]; ?>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                      <div class="reservation-id">Reservation #:
+                        <?php echo $row["reservationID"]; ?>
+                      </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-md-3 col-sm-12 col-12">
-                    <div class="reservation-id">Reservation #: 2355</div>
-                  </div>
                 </div>
-              </div>
-              <div class="reservation-content">
-                <ul>
-                  <li><span>Booking Dates:</span></li>
-                  <li>Check in Date : 09/01/2023</li>
-                  <li>Check out Date : 09/06/2023</li>
-                </ul>
-              </div>
-              <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Number of guests:</span></li>
-                      <li>2</li>
-                    </ul>
-                  </div>
+                <div class="reservation-content">
+                  <ul>
+                    <li><span>Booking Dates:</span></li>
+                    <li>Check in Date :
+                      <?php echo $row["checkIn"]; ?>
+                    </li>
+                    <li>Check out Date :
+                      <?php echo $row["checkOut"]; ?>
+                    </li>
+                  </ul>
                 </div>
-                <div class="col-lg-8 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Room Type:</span></li>
-                      <li>Double Queen Beds</li>
-                    </ul>
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="reservation-content">
+                      <ul>
+                        <li><span>Number of guests:</span></li>
+                        <li>
+                          <?php echo $row["numGuests"]; ?>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Number of Nights:</span></li>
-                      <li>5</li>
-                    </ul>
+                  <div class="col-lg-8 col-md-6 col-sm-12 col-12">
+                    <div class="reservation-content">
+                      <ul>
+                        <li><span>Room Type:</span></li>
+                        <li>
+                          <?php echo $room["roomType"]; ?>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
-                <div class="col-lg-9 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Chosen Amenities:</span></li>
-                      <li>WiFi</li>
-                      <li>Breakfast</li>
-                      <li>Parking</li>
-                    </ul>
+                  <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                    <div class="reservation-content">
+                      <ul>
+                        <li><span>Number of Nights:</span></li>
+                        <li>
+                          <?php
+                          $numNights = round((strtotime($row["checkOut"]) - strtotime($row['checkIn'])) / 86400);
+                          echo $numNights;
+                          ?>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Total Price:</span></li>
-                      <li>$784.85</li>
-                    </ul>
+                  <div class="col-lg-9 col-md-6 col-sm-12 col-12">
+                    <div class="reservation-content">
+                      <ul>
+                        <li><span>Chosen Amenities:</span></li>
+                        <?php if ($row['hasPaidWifi']) { ?>
+                          <li>WiFi</li>
+                        <?php }
+                        if ($row['hasPaidParking']) { ?>
+                          <li>Breakfast</li>
+                        <?php }
+                        if ($row['hasPaidBreakfast']) { ?>
+                          <li>Parking</li>
+                        <?php } ?>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+                    <div class="reservation-content">
+                      <ul>
+                        <li><span>Total Price:</span></li>
+                        <li>$
+                          <?php echo $row["reservTotal"]; ?>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          <?php } ?>
+
         </div>
       </div>
     </div>
@@ -415,8 +396,8 @@ CSD 460 - Red Team
 
   <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
   <script src="js/bootstrap.min.js" type="text/javascript"></script>
-  <script src="js/rome.js" type="text/javascript"></script>
-  <script src="js/main.js" type="text/javascript"></script>
+  <!-- <script src="js/rome.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>-->
 </body>
 
 </html>

@@ -105,6 +105,24 @@ function getHotelInfo(string $name): bool|array
     return false;
 }
 
+function getHotelInfowithID(int $id)
+{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from hotel where hotelID = " . $id . " limit 1;";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_assoc($result);
+        }
+    }
+    return false;
+}
+
 /*
 Returns all rooms in the room table
 @return false if an error occurs
@@ -146,6 +164,23 @@ function getRoomInfo($name): bool|array
     return false;
 }
 
+function getRoomInfowithID($id)
+{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from room where roomID =" . $id . " limit 1;";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_assoc($result);
+        }
+    }
+    return false;
+}
 /*
 Calls the session destroy function to clear all session related data. Can be used if
 another method is required to be ran after signing out the user. Can be removed if 
@@ -321,4 +356,38 @@ function connectDB(): bool
     }
     return true;
 }
+
+
+/*
+returns array of reservation information 
+@param $searchtext - search with reservationnumber
+@param $userid - userid
+@return array - properties of reservation
+false - unable to retrieve
+*/
+function getReservation($searchtext, $userid)
+{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    if ($searchtext != '')
+        $query = "select * from reservations where userID = " . $userid . " and  reservationID=" . $searchtext . " limit 1";
+    else
+        $query = "select * from reservations where userID = " . $userid . "";
+
+    $result = mysqli_query($dbConnection, $query);
+
+    if ($result) {
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            // print_r(mysqli_fetch_array($result));
+            return $result;
+        }
+    }
+    return false;
+}
+
 ?>
