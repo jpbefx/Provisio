@@ -87,6 +87,12 @@ function getAllHotels(): bool|mysqli_result
     return false;
 }
 
+/*
+returns the array conatining the array keys of a hotel based on the hotels name
+@param $name the name of a hotel to search
+@return the array of the passed hotel
+false - info not found
+*/
 function getHotelInfo(string $name): bool|array
 {
     global $dbConnection;
@@ -105,6 +111,12 @@ function getHotelInfo(string $name): bool|array
     return false;
 }
 
+/*
+returns the array conatining the array keys of a hotel based on the hotels id
+@param $id the id of a hotel to search
+@return the array of the passed hotel
+false - info not found
+*/
 function getHotelInfowithID(int $id)
 {
     global $dbConnection;
@@ -146,6 +158,12 @@ function getAllRooms(): bool|mysqli_result
     return false;
 }
 
+/*
+returns the array conatining the array keys of a room based on the room type
+@param $name the type of room to search
+@return the array of the passed room
+false - info not found
+*/
 function getRoomInfo($name): bool|array
 {
     global $dbConnection;
@@ -164,6 +182,12 @@ function getRoomInfo($name): bool|array
     return false;
 }
 
+/*
+returns the array conatining the array keys of a room based on the rooms id
+@param $id the id of a room to search
+@return the array of the passed room
+false - info not found
+*/
 function getRoomInfowithID($id)
 {
     global $dbConnection;
@@ -188,6 +212,7 @@ nothing else is added to this.
 */
 function signOutUser()
 {
+    closeSessionVars();
     session_destroy();
 }
 
@@ -205,6 +230,7 @@ function closeSessionVars()
     unset($_SESSION['hasBreakfest']);
     unset($_SESSION['hasWifi']);
     unset($_SESSION['reservTotal']);
+    unset($_SESSION['isLocked']);
 }
 
 /*
@@ -267,7 +293,6 @@ Create a reservation inside the reservations table
 @return reservationID - reservation was created successfully
 false - reservation creation failed
 */
-
 function addReservation($userID, $hotelID, $roomID, $checkIn, $checkOut, $numGuests, $hasPaidWifi, $hasPaidParking, $hasPaidBreakfast, $reservTotal): string|bool
 {
     global $dbConnection;

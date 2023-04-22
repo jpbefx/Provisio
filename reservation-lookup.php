@@ -129,8 +129,13 @@ if (isset($_SESSION['username'])) {
           <ul>
             <li>Search by Reservation Number:</li>
             <li>
+              <?php
+              if (!isset($_REQUEST["search_reserveno"])) {
+                $_REQUEST["search_reserveno"] = "";
+              }
+              ?>
               <input class="form-control" type="number" name="search_reserveno" required placeholder=""
-                aria-label="default input" value=<?= $_REQUEST["search_reserveno"] ?> />
+                aria-label="default input" value=<?= $_REQUEST["search_reserveno"]; ?> />
             </li>
             <li><button name="searchbtn" type="submit" class="">Search</button></li>
           </ul>

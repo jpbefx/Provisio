@@ -267,7 +267,7 @@ CSD 460 - Red Team
                                                             $roomCost = (getRoomInfo($_SESSION['room'])['roomCost'] * $demandRate) + getRoomInfo($_SESSION['room'])['roomCost'];
                                                             $roomCost = ($roomCost * $holidayRate) + $roomCost;
 
-                                                            $reservTotal =  $roomCost * $numNights;
+                                                            $reservTotal = $roomCost * $numNights;
 
                                                             if ($_SESSION['hasWifi'] == "Yes") {
                                                                 $reservTotal += 12.99;
