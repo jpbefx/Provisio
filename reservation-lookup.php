@@ -3,9 +3,7 @@ Nicholas Werner, James Bailey, Larissa Passamani Lima
 CSD 460 - Red Team
  -->
 <?php session_start();
-//ini_set("display_errors", 1);
-//What if we added a log instead, and forwarded it to one or all of us?
-//ini_set("log_errors", 1); I would need to look up the function for sending the log out.
+
 ?>
 <?php
 //Global user check
