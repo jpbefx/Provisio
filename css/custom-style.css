@@ -21,7 +21,7 @@ body {
 }
 
 .mt-70 {
-	margin-top: 70px;
+	margin-top: 140px;
 }
 
 .mt-80 {
@@ -546,20 +546,20 @@ section .booknow-btn button:hover {
 
 /* End of Hotel Reservation CSS */
 /* Start Customer Loyalty Points CSS */
-section .loyalty-heading {
-	background: #143A2F;
-	border-radius: 13px;
-	font-weight: 400;
-	font-size: 36px;
-	line-height: 140px;
-	text-align: center;
-	color: #FFFFFF;
-	width: 750px;
-	height: 140px;
-	margin: 0 auto;
-	padding: 0;
-}
 
+section .loyalty-heading {
+    background: #143A2F;
+    border-radius: 19px;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 140px;
+    text-align: center;
+    color: #FFFFFF;
+    width: 801px;
+    height: 144px;
+    margin: 0 auto;
+    padding: 0;
+}
 section .loyalty-heading span {
 	width: 96px;
 	height: 96px;

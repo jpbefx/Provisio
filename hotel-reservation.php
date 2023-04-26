@@ -85,7 +85,8 @@ CSD 460 - Red Team
                                                 <li>
                                                     <hr class="dropdown-divider">
                                                 </li>
-                                                <li><a class="dropdown-item" href="propoints.php">ProPoints</a></li>
+                                                <li><a class="dropdown-item"
+                                                        href="customer-loyalty-propoints.php">ProPoints</a></li>
                                             </ul>
                                         </li>
                                         <?php
