@@ -1,5 +1,5 @@
 <!-- 
-Nicholas Werner, James Bailey, Larissa Passamani Lima , Shia GOldberger
+Nicholas Werner, James Bailey, Larissa Passamani Lima
 CSD 460 - Red Team
  -->
 <?php session_start(); ?>
@@ -39,7 +39,7 @@ CSD 460 - Red Team
                 <div class="col-12">
                     <nav class="navbar navbar-expand-lg">
                         <div class="container-fluid">
-                            <a class="navbar-brand nav-bar" href="index.html"><img class="img-fluid"
+                            <a class="navbar-brand nav-bar" href="index.php"><img class="img-fluid"
                                     src="images/provisiologo.svg" /></a>
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"

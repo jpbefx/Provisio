@@ -33,8 +33,13 @@ CSD 460 - Red Team
         if (validateUser($_SESSION['username']) == false) {
             signOutUser();
         }
-    } else {
-        header("Location: index.php");
+    }
+
+    if(isset($_POST["checkIn"]) == false){
+        $_SESSION['isLocked'] = false;
+    }
+    if(isset($_POST["checkOut"]) == false){
+        $_SESSION['isLocked'] = false;
     }
     ?>
 </head>

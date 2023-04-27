@@ -165,7 +165,7 @@ CSD 460 - Red Team
         </div>
         <div class="col-12 col-sm-12 col-md-12 col-lg-5">
           <div class="manage-reservation-img">
-            <a href="#">Manage your Reservation
+            <a href="reservation-lookup.php">Manage your Reservation
               <img class="img-fluid" src="images/manage-reservation-img-new.png" />
             </a>
           </div>

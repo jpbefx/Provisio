@@ -57,13 +57,8 @@ CSD 460 - Red Team
         if ($invalidateSession == true) {
             header("Location: index.php");
         }
-    } else {
-        header("Location: index.php");
     }
 
-    //Need to add a check to make sure user doesnt navigate to this page on there own.
-    //IE Check if reservation session fields exist
-    //If these do not exist, kick user back to landing page.
     ?>
 </head>
 
@@ -294,11 +289,19 @@ CSD 460 - Red Team
 
                                         <div class="submit-btns text-center">
                                             <form method="post">
-                                                <button type="button" onclick="history.back()">Cancel</button>
+                                                <button type="button" onclick="location.href='hotel-reservation.php'">Cancel</button>
 
-
-                                                <button type="submit" name="submit">Submit</button>
-
+                                                <?php
+                                                if (isset($_SESSION['username'])) {
+                                                    ?>
+                                                    <button type="submit" name="submit">Submit</button>
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                    <button type="button" onclick="location.href='login.php'">Sign in to Book</button>
+                                                    <?php
+                                                }
+                                                ?>
                                         </div>
                                         <?php ini_set("display_errors", 1);
                                         if (array_key_exists('submit', $_POST)) {
