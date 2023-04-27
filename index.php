@@ -129,7 +129,7 @@ CSD 460 - Red Team
       <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-5">
           <div class="book-stay-img">
-            <a href="#">Book your stay
+            <a href="hotel-reservation.php">Book your stay
               <img class="img-fluid" src="images/book-stay-img-new.png" />
             </a>
           </div>
@@ -180,7 +180,7 @@ CSD 460 - Red Team
       <div class="row">
         <div class="col-12 col-sm-12 col-md-11 col-lg-5">
           <div class="book-stay-img">
-            <a href="#">ProPoints
+            <a href="customer-loyalty-propoints.php">ProPoints
               <img class="img-fluid" src="images/propoints-img-new.png" />
             </a>
           </div>
