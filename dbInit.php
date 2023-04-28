@@ -2,6 +2,11 @@
 Nicholas Werner, James Bailey, Larissa Passamani Lima
 CSD 460 - Red Team
  -->
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -105,7 +110,7 @@ CSD 460 - Red Team
             `pictureAddress1` VARCHAR(100),
             `pictureAddress2` VARCHAR(100),
             `pictureAddress3` VARCHAR(100),
-            `description` VARCHAR(300),
+            `description` VARCHAR(500),
             PRIMARY KEY (`hotelID`)
     );";
 
@@ -159,7 +164,7 @@ CSD 460 - Red Team
     }
 
     echo "<br>";
-    
+
     //Create Attractions Table
     $sql = "CREATE TABLE `provisio`.`attractions` (
             `attractionID` int NOT NULL AUTO_INCREMENT,
@@ -177,7 +182,7 @@ CSD 460 - Red Team
     }
 
     //Create all Attractions
-
+    
     //New York
     $sql = "INSERT INTO `provisio`.`attractions`
         (hotelID,attractionName,pictureAddress)
@@ -260,7 +265,7 @@ CSD 460 - Red Team
     } else {
         echo "Error adding record: " . mysqli_error($conn);
     }
-    
+
     $sql = "INSERT INTO `provisio`.`attractions`
         (hotelID,attractionName,pictureAddress)
         VALUES (3,'Iolani Palace','images/iolani-palace-img.png')";

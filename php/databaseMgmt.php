@@ -3,6 +3,11 @@ Nicholas Werner, James Bailey, Larissa Passamani Lima
 CSD 460 - Red Team
  -->
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
+<?php
 
 $dbConnection = null;
 
@@ -420,9 +425,10 @@ Updates a users propoints balance
 @param $username - username of user record to update
 @param $points - Points to update (use negative to subtract points)
 @return true if points are updated
-        false if operation failed
+false if operation failed
 */
-function updateProPoints($username,$points): bool{
+function updateProPoints($username, $points): bool
+{
     global $dbConnection;
     if ($dbConnection == null) {
         if (connectDB() == false) {
@@ -444,7 +450,8 @@ returns all attractions based on the hotelID passed to the function
 @return array - Attractions returned in database key format
 false - no records found or an error occured looking them up
 */
-function getAttractionsByHotelID($hotelID): bool|mysqli_result{
+function getAttractionsByHotelID($hotelID): bool|mysqli_result
+{
     global $dbConnection;
     if ($dbConnection == null) {
         if (connectDB() == false) {
