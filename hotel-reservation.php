@@ -357,7 +357,7 @@ CSD 460 - Red Team
                                                         echo "      <div class='hotel-location-text custom-form-check'>" . $hotel['hotelName'];
                                                         echo "          <input type='radio' name='hotelGroup' class='form-check-input' value='" . $hotel['hotelName'] . "'>";
                                                         echo "      </div>";
-                                                        echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
+                                                        echo "      <img class='img-fluid' src=" . $hotel['pictureAddress1'] . " />";
                                                         echo "  </div>";
                                                         echo "</div>";
                                                     } else {
@@ -367,7 +367,7 @@ CSD 460 - Red Team
                                                             echo "      <div class='hotel-location-text custom-form-check'>" . $hotel['hotelName'];
                                                             echo "          <input type='radio' name='hotelGroup' class='form-check-input' value='" . $hotel['hotelName'] . "' checked>";
                                                             echo "      </div>";
-                                                            echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
+                                                            echo "      <img class='img-fluid' src=" . $hotel['pictureAddress1'] . " />";
                                                             echo "  </div>";
                                                             echo "</div>";
                                                         } else {
@@ -376,7 +376,7 @@ CSD 460 - Red Team
                                                             echo "      <div class='hotel-location-text custom-form-check'>" . $hotel['hotelName'];
                                                             echo "          <input type='radio' name='hotelGroup' class='form-check-input' value='" . $hotel['hotelName'] . "'>";
                                                             echo "      </div>";
-                                                            echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
+                                                            echo "      <img class='img-fluid' src=" . $hotel['pictureAddress1'] . " />";
                                                             echo "  </div>";
                                                             echo "</div>";
                                                         }

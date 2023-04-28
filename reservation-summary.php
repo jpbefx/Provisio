@@ -333,14 +333,14 @@ CSD 460 - Red Team
                                                 $hasWifi,
                                                 $hasParking,
                                                 $hasBreakfest, $_SESSION['reservTotal']
-                                            );
-                                            echo $result;
-                                            //  die();
+                                            );                                           
                                         
                                             if ($result == false) {
                                                 // Redirect to the landing page with an error message
                                                 echo "<script>alert('An error occurred while submitting your reservation. Please try again.');</script>";
                                             } else {
+                                                //Add propoints to user account for reservation
+                                                updateProPoints($_SESSION['username'],150);
                                                 // Redirect to the sessionUpdate page with a success message
                                                 echo "<script>alert('Your reservation was submitted successfully! Your Reservation # is: $result'); location.replace('php/sessionUpdate.php');</script>";
                                             }

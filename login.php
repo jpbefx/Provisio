@@ -21,6 +21,7 @@ ob_start();
   <?php
   //Global user check
   require("php/databaseMgmt.php");
+  
   if (isset($_SESSION['username'])) {
     if (validateUser($_SESSION['username']) == false) {
       signOutUser();

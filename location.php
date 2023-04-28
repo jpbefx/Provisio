@@ -23,7 +23,6 @@ CSD 460 - Red Team
     //Global user check
     require("php/databaseMgmt.php");
 
-
     if (isset($_SESSION['username'])) {
         if (validateUser($_SESSION['username']) == false) {
             signOutUser();
@@ -119,134 +118,50 @@ CSD 460 - Red Team
                     <div class="mtop-20rem">
                         <div class="location-btn"> Our Locations </div>
                         <div class="location-wrapper">
-                            <div class="row">
-                                <div class="col-lg-5 col-md-12 col-sm-12 col-12">
-                                    <div class="">
-                                        <img class="img-fluid" src="images/ny-img.png" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-7 col-md-12 col-sm-12 col-12">
-                                    <div class="ny-text">
-                                        <h1>New York City, NY</h1>
-                                        <p>The Provisio New York hotel is located in the Midtown East district of
-                                            Manhattan. The area is full of shops, restaurants, bars, and business
-                                            offices, making it an ideal spot for business trips, family vacations,
-                                            or a
-                                            romantic getaway. </p>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="hotels-directly mt-50">
-                                        <h3>Top Attractions near our NYC location</h3>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                    <div class="nyc-location">
-                                        <img class="img-fluid" src="images/time-square-img.png" />
-                                        <div class="nyc-location-text">Times Square</div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                    <div class="nyc-location">
-                                        <img class="img-fluid" src="images/central-park-img.png" />
-                                        <div class="nyc-location-text">Central Park</div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                    <div class="nyc-location">
-                                        <img class="img-fluid" src="images/empire-state-img.png" />
-                                        <div class="nyc-location-text">Empire State</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-5">
-                                <div class="row">
-                                    <div class="col-lg-5 col-md-12 col-sm-12 col-12">
-                                        <div class="">
-                                            <img class="img-fluid" src="images/nv-img.png" />
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 col-md-12 col-sm-12 col-12">
-                                        <div class="ny-text">
-                                            <h1>Las Vegas, NV</h1>
-                                            <p>The Provisio Las Vegas hotel is located in a prime location just
-                                                minutes
-                                                away from the glitz and glamour of the world-renowned Las Vegas
-                                                Strip.
-                                                Whether looking for a night out, a relaxed stroll, or a quiet moment
-                                                of
-                                                peace, this hotel is the perfect destination for all types of
-                                                travelers.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="hotels-directly mt-50">
-                                            <h3>Top Attractions near our Last Vegas location</h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div class="nyc-location">
-                                            <img class="img-fluid" src="images/las-strip-img.png" />
-                                            <div class="nyc-location-text">Las Vegas Strip</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div class="nyc-location">
-                                            <img class="img-fluid" src="images/dam-img.png" />
-                                            <div class="nyc-location-text">Hover Dam</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div class="nyc-location">
-                                            <img class="img-fluid" src="images/casinos-img.png" />
-                                            <div class="nyc-location-text">Casinos</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-5">
-                                <div class="row">
-                                    <div class="col-lg-5 col-md-12 col-sm-12 col-12">
-                                        <div class="">
-                                            <img class="img-fluid" src="images/honolulu-img.png" />
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-7 col-md-12 col-sm-12 col-12">
-                                        <div class="ny-text">
-                                            <h1>Honolulu, HI</h1>
-                                            <p>Provisio Hawaii is located in the heart of Waikiki, Honolulu, Hawaii.
-                                                This is the perfect place to stay during a vacation to the island,
-                                                with
-                                                its beachfront views, luxurious amenities and convenient location.
-                                                Guests can enjoy breathtaking views of the Pacific Ocean.</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="hotels-directly mt-50">
-                                            <h3>Top Attractions near our Honolulu location</h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div class="nyc-location">
-                                            <img class="img-fluid" src="images/waikiki-beach-img.png" />
-                                            <div class="nyc-location-text">Waikiki Beach</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div class="nyc-location">
-                                            <img class="img-fluid" src="images/hanauma-bay-img.png" />
-                                            <div class="nyc-location-text">Hanauma Bay</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                                        <div class="nyc-location">
-                                            <img class="img-fluid" src="images/iolani-palace-img.png" />
-                                            <div class="nyc-location-text">Iolani Palace</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php
+                            $hotelList = getAllHotels();
+                            $hotelList = getAllHotels();
+                            if ($hotelList == false) {
+                                echo "Error accessing hotel list try again later";
+                            } else {
+                                while ($hotel = mysqli_fetch_assoc($hotelList)) {
+                                    echo "<div class='row'>";
+                                    echo "  <div class='col-lg-5 col-md-12 col-sm-12 col-12'>";
+                                    echo "      <div class=''>";
+                                    echo "          <img class='img-fluid' src=" . $hotel['pictureAddress3'] . " />";
+                                    echo "      </div>";
+                                    echo "  </div>";
+                                    echo "  <div class='col-lg-7 col-md-12 col-sm-12 col-12'>";
+                                    echo "      <div class='ny-text'>";
+                                    echo "          <h1>" . $hotel['hotelCity'] . ", " . $hotel['hotelState'] . "</h1>";
+                                    echo "          <p>" . $hotel['description'] . "</p>";
+                                    echo "      </div>";
+                                    echo "  </div>";
+
+                                    $attractionsList = getAttractionsByHotelID($hotel['hotelID']);
+                                    if ($attractionsList == false) {
+                                        echo "<br>";
+                                    } else {
+                                        echo "<div class='col-12'>";
+                                        echo "  <div class='hotels-directly mt-50'>";
+                                        echo "      <h3>Top Attractions near our " . $hotel['hotelName'] . " location</h3>";
+                                        echo "  </div>";
+                                        echo "</div>";
+                                        while ($attraction = mysqli_fetch_assoc($attractionsList)) {
+                                            echo "<div class='col-lg-4 col-md-6 col-sm-12 col-12'>";
+                                            echo "  <div class='nyc-location'>";
+                                            echo "      <img class='img-fluid' src=" . $attraction['pictureAddress'] . " />";
+                                            echo "      <div class='nyc-location-text'>" . $attraction['attractionName'] . "</div>";
+                                            echo "  </div>";
+                                            echo "</div>";
+                                        }
+
+                                    }
+                                    echo "</div>";
+                                    echo "<br><br>";
+                                }
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

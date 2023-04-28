@@ -188,7 +188,7 @@ returns the array conatining the array keys of a room based on the rooms id
 @return the array of the passed room
 false - info not found
 */
-function getRoomInfowithID($id)
+function getRoomInfowithID($roomId)
 {
     global $dbConnection;
     if ($dbConnection == null) {
@@ -196,7 +196,7 @@ function getRoomInfowithID($id)
             return false;
         }
     }
-    $query = "select * from room where roomID =" . $id . " limit 1;";
+    $query = "select * from room where roomID =" . $roomId . " limit 1;";
     $result = mysqli_query($dbConnection, $query);
     if ($result) {
         if ($result && mysqli_num_rows($result) > 0) {
@@ -409,6 +409,52 @@ function getReservation($searchtext, $userid)
 
         if ($result && mysqli_num_rows($result) > 0) {
             // print_r(mysqli_fetch_array($result));
+            return $result;
+        }
+    }
+    return false;
+}
+
+/*
+Updates a users propoints balance
+@param $username - username of user record to update
+@param $points - Points to update (use negative to subtract points)
+@return true if points are updated
+        false if operation failed
+*/
+function updateProPoints($username,$points): bool{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $currentPoints = getUserInfo($username)["proPoints"];
+    $newPoints = $currentPoints + $points;
+    $query = "update users set proPoints = $newPoints where username = '$username'";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        return true;
+    }
+    return false;
+}
+/*
+returns all attractions based on the hotelID passed to the function
+@param hotelID - Hotel ID for attraction look up
+@return array - Attractions returned in database key format
+false - no records found or an error occured looking them up
+*/
+function getAttractionsByHotelID($hotelID): bool|mysqli_result{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from attractions where hotelID =" . $hotelID . " ;";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
             return $result;
         }
     }

@@ -25,7 +25,7 @@ CSD 460 - Red Team
 
     $conn = new mysqli($host, $username, $password) or die("Unable to connect");
     if ($conn)
-        echo "<br><br>YAY It has connected successfully<br>";
+        echo "<br>YAY It has connected successfully<br>";
 
     $conn = mysqli_connect($host, $username, $password);
 
@@ -102,7 +102,10 @@ CSD 460 - Red Team
             `hotelZip` VARCHAR(5),
             `hotelEmail` VARCHAR(50),
             `hotelPhone` VARCHAR(20),
-            `pictureAddress` VARCHAR(100),
+            `pictureAddress1` VARCHAR(100),
+            `pictureAddress2` VARCHAR(100),
+            `pictureAddress3` VARCHAR(100),
+            `description` VARCHAR(300),
             PRIMARY KEY (`hotelID`)
     );";
 
@@ -114,8 +117,12 @@ CSD 460 - Red Team
 
     //Create all hotel locations
     $sql = "INSERT INTO `provisio`.`hotel`
-        (hotelName,hotelAddress,hotelCity,hotelState,hotelZip,hotelEmail,hotelPhone,pictureAddress)
-        VALUES ('New York City','123 Imaginary Street','New York','NY', '10001','info@provisiohotel-nyc.com','(555) 123-4567','images/location-newyork-img.png')";
+        (hotelName,hotelAddress,hotelCity,hotelState,hotelZip,hotelEmail,hotelPhone,pictureAddress1,pictureAddress2,pictureAddress3,description)
+        VALUES ('New York City','123 Imaginary Street','New York','NY', '10001',
+        'info@provisiohotel-nyc.com','(555) 123-4567','images/location-newyork-img.png','images/directly-1-img.png','images/ny-img.png',
+        'The Provisio New York hotel is located in the Midtown East district of Manhattan. The area is full of shops,
+        restaurants, bars, and business offices, making it an ideal spot for business trips, family vacations, or a
+        romantic getaway.')";
 
     if (mysqli_query($conn, $sql)) {
         echo "Hotel New York added successfully<br>";
@@ -124,8 +131,12 @@ CSD 460 - Red Team
     }
 
     $sql = "INSERT INTO `provisio`.`hotel`
-        (hotelName,hotelAddress,hotelCity,hotelState,hotelZip,hotelEmail,hotelPhone,pictureAddress)
-        VALUES ('Las Vegas','1234 Mirage Lane','Las Vegas','NV', '89101','info@provisiohotelvegas.com','(555) 123-4568','images/location-lasvegas-img.png')";
+        (hotelName,hotelAddress,hotelCity,hotelState,hotelZip,hotelEmail,hotelPhone,pictureAddress1,pictureAddress2,pictureAddress3,description)
+        VALUES ('Las Vegas','1234 Mirage Lane','Las Vegas','NV', '89101',
+        'info@provisiohotelvegas.com','(555) 123-4568','images/location-lasvegas-img.png','images/directly-2-img.png','images/nv-img.png',
+        'The Provisio Las Vegas hotel is located in a prime location just minutes away from the glitz and glamour
+        of the world-renowned Las Vegas Strip. Whether looking for a night out, a relaxed stroll, or a quiet moment
+        of peace, this hotel is the perfect destination for all types of travelers.')";
 
     if (mysqli_query($conn, $sql)) {
         echo "Hotel Las Vegas added successfully<br>";
@@ -134,11 +145,128 @@ CSD 460 - Red Team
     }
 
     $sql = "INSERT INTO `provisio`.`hotel`
-        (hotelName,hotelAddress,hotelCity,hotelState,hotelZip,hotelEmail,hotelPhone,pictureAddress)
-        VALUES ('Honolulu','1234 Aloha Lane','Honolulu','HI', '96815','info@provisiohawaii.com','(555) 123-4569','images/location-honolulu-img.png')";
+        (hotelName,hotelAddress,hotelCity,hotelState,hotelZip,hotelEmail,hotelPhone,pictureAddress1,pictureAddress2,pictureAddress3,description)
+        VALUES ('Honolulu','1234 Aloha Lane','Honolulu','HI', '96815',
+        'info@provisiohawaii.com','(555) 123-4569','images/location-honolulu-img.png','images/directly-3-img.png','images/honolulu-img.png',
+        'Provisio Hawaii is located in the heart of Waikiki, Honolulu, Hawaii. This is the perfect place to stay
+        during a vacation to the island, with its beachfront views, luxurious amenities and convenient location.
+        Guests can enjoy breathtaking views of the Pacific Ocean.')";
 
     if (mysqli_query($conn, $sql)) {
         echo "Hotel Honolulu added successfully<br>";
+    } else {
+        echo "Error adding record: " . mysqli_error($conn);
+    }
+
+    echo "<br>";
+    
+    //Create Attractions Table
+    $sql = "CREATE TABLE `provisio`.`attractions` (
+            `attractionID` int NOT NULL AUTO_INCREMENT,
+            `hotelID` int NOT NULL,
+            `attractionName` VARCHAR(20),
+            `pictureAddress` VARCHAR(100),
+            PRIMARY KEY (attractionID),
+            FOREIGN KEY (hotelID) REFERENCES provisio.hotel(hotelID)
+    );";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Attractions table created successfully<br>";
+    } else {
+        echo "Error creating table: " . mysqli_error($conn);
+    }
+
+    //Create all Attractions
+
+    //New York
+    $sql = "INSERT INTO `provisio`.`attractions`
+        (hotelID,attractionName,pictureAddress)
+        VALUES (1,'Times Square','images/time-square-img.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Times Square added successfully<br>";
+    } else {
+        echo "Error adding record: " . mysqli_error($conn);
+    }
+
+    $sql = "INSERT INTO `provisio`.`attractions`
+        (hotelID,attractionName,pictureAddress)
+        VALUES (1,'Central Park','images/central-park-img.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Central Park added successfully<br>";
+    } else {
+        echo "Error adding record: " . mysqli_error($conn);
+    }
+
+    $sql = "INSERT INTO `provisio`.`attractions`
+        (hotelID,attractionName,pictureAddress)
+        VALUES (1,'Central Park','images/central-park-img.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Central Park added successfully<br>";
+    } else {
+        echo "Error adding record: " . mysqli_error($conn);
+    }
+
+    //Las Vagas
+    $sql = "INSERT INTO `provisio`.`attractions`
+        (hotelID,attractionName,pictureAddress)
+        VALUES (2,'Las Vegas Strip','images/las-strip-img.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Las Vegas Strip added successfully<br>";
+    } else {
+        echo "Error adding record: " . mysqli_error($conn);
+    }
+
+    $sql = "INSERT INTO `provisio`.`attractions`
+        (hotelID,attractionName,pictureAddress)
+        VALUES (2,'Hover Dam','images/dam-img.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Hover Dam added successfully<br>";
+    } else {
+        echo "Error adding record: " . mysqli_error($conn);
+    }
+
+    $sql = "INSERT INTO `provisio`.`attractions`
+        (hotelID,attractionName,pictureAddress)
+        VALUES (2,'Casinos','images/casinos-img.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Casinos added successfully<br>";
+    } else {
+        echo "Error adding record: " . mysqli_error($conn);
+    }
+
+    //Honolulu
+    $sql = "INSERT INTO `provisio`.`attractions`
+        (hotelID,attractionName,pictureAddress)
+        VALUES (3,'Waikiki Beach','images/waikiki-beach-img.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Waikiki Beach added successfully<br>";
+    } else {
+        echo "Error adding record: " . mysqli_error($conn);
+    }
+
+    $sql = "INSERT INTO `provisio`.`attractions`
+        (hotelID,attractionName,pictureAddress)
+        VALUES (3,'Hanauma Bay','images/hanauma-bay-img.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Hanauma Bay added successfully<br>";
+    } else {
+        echo "Error adding record: " . mysqli_error($conn);
+    }
+    
+    $sql = "INSERT INTO `provisio`.`attractions`
+        (hotelID,attractionName,pictureAddress)
+        VALUES (3,'Iolani Palace','images/iolani-palace-img.png')";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Iolani Palace added successfully<br>";
     } else {
         echo "Error adding record: " . mysqli_error($conn);
     }

@@ -23,7 +23,6 @@ CSD 460 - Red Team
     //Global user check
     require("php/databaseMgmt.php");
 
-
     if (isset($_SESSION['username'])) {
         if (validateUser($_SESSION['username']) == false) {
             signOutUser();
@@ -169,7 +168,7 @@ CSD 460 - Red Team
                         echo "      </p>";
                         echo "  </div>";
                         echo "  <div class='directly-img'>";
-                        echo "      <img class='img-fluid' src=" . $hotel['pictureAddress'] . " />";
+                        echo "      <img class='img-fluid' src=" . $hotel['pictureAddress2'] . " />";
                         echo "  </div>";
                         echo "</div>";
                     }
