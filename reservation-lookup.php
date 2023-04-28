@@ -21,6 +21,7 @@ if (isset($_SESSION['username'])) {
 <html lang="en">
 
 <head>
+
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Provisio | Reservation Lookup page</title>
@@ -32,18 +33,52 @@ if (isset($_SESSION['username'])) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"
     integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      background-color: #D1E1D6;
+    }
 
+    .wrapper {
+      min-height: calc(1200px);
+      position: relative;
+    }
+
+    .mt70 footer {
+      height: 70px;
+      width: 100%;
+      bottom: 0;
+
+    }
+
+    header .check-propoints {
+      background: #143A2F;
+      border-radius: 6px;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 32px;
+      color: #FFFFFF;
+      text-align: center;
+      padding: 10px 37px;
+      width: 71%;
+      margin: 114px;
+      margin-top: 34px;
+
+
+    }
+  </style>
 </head>
 
 <body>
+
   <header class="customer-loyalty-bg">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
           <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-              <a class="navbar-brand nav-bar" href="index.php"><img class="img-fluid"
-                  src="images/white-logo.svg" /></a>
+              <a class="navbar-brand nav-bar" href="index.php"><img class="img-fluid" src="images/white-logo.svg" /></a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -136,7 +171,8 @@ if (isset($_SESSION['username'])) {
           </ul>
         </form>
       </div>
-      <button class="check-propoints" type="button" onclick="location.href='customer-loyalty-propoints.php'">Check my Loyalty ProPoints Here</button>
+      <button class="check-propoints" type="button" onclick="location.href='customer-loyalty-propoints.php'">Check my
+        Loyalty ProPoints Here</button>
     </div>
     </div>
     </div>
@@ -395,13 +431,15 @@ if (isset($_SESSION['username'])) {
     </div>
   </section>
 
-  <footer>
+  <footer class="mt-70 footer">
     <div class="container">
       <div class="row">
         <div class="col-12">
           <div class="copyright-text">2023 Provisio . Inc</div>
         </div>
       </div>
+    </div>
+    </div>
     </div>
   </footer>
 

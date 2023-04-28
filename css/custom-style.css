@@ -21,7 +21,7 @@ body {
 }
 
 .mt-70 {
-	margin-top: 140px;
+	margin-top: 0px;
 }
 
 .mt-80 {
@@ -674,16 +674,17 @@ header .search-bar li button {
 }
 
 header .check-propoints {
-	background: #143A2F;
-	border-radius: 6px;
-	font-weight: 400;
-	font-size: 24px;
-	line-height: 32px;
-	color: #FFFFFF;
-	text-align: center;
-	padding: 10px 37px;
-	width: 71%;
-	margin: 36px auto;
+    background: #143A2F;
+    border-radius: 6px;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 10px 37px;
+    width: 71%;
+    margin: 99px;
+    margin-top: 34px;
 }
 
 section .reservation-list {
@@ -855,6 +856,7 @@ footer .copyright-text {
 		width: 100%;
 		font-size: 20px !important;
 		padding: 10px 10px;
+		margin-left: 108px;
 	}
 
 	section .reservation-content li span {
