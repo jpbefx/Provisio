@@ -34,7 +34,7 @@ CSD 460 - Red Team
             height: 70px;
             width: 100%;
             bottom: 0;
-            position: absolute;
+
         }
     </style>
     <?php
