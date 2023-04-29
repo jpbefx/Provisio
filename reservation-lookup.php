@@ -178,7 +178,6 @@ if (isset($_SESSION['username'])) {
     </div>
     </div>
   </header>
-
   <section class="location-bg">
     <div class="container">
       <div class="row">
@@ -187,14 +186,10 @@ if (isset($_SESSION['username'])) {
             if (isset($_SESSION['username']) == true) {
               getUserInfo($_SESSION['username'])['userID'];
               $results = getReservation($_REQUEST["search_reserveno"], getUserInfo($_SESSION['username'])['userID']);
-              if ($results) {
+              if ($results && mysqli_num_rows($results) > 0) {
                 while ($row = mysqli_fetch_array($results)) {
-                  //print_r($row->reservationID);
-          
                   $hotel = getHotelInfowithID($row['hotelID']);
-
                   $room = getRoomInfowithID($row['roomID']);
-
                   ?>
                   <div class="reservation-list mt-50 mb-61">
                     <div class="reservation-list-wrapper">
@@ -308,127 +303,125 @@ if (isset($_SESSION['username'])) {
           </div>
           <?php
           if (isset($_SESSION['username']) == true) {
-
             getUserInfo($_SESSION['username'])['userID'];
             $results = getReservation('', getUserInfo($_SESSION['username'])['userID']);
-
-            while ($row = mysqli_fetch_array($results)) {
-              //print_r($row->reservationID);
-          
-              $hotel = getHotelInfowithID($row['hotelID']);
-
-              $room = getRoomInfowithID($row['roomID']);
-
-              ?>
-              <div class="reservation-list mb-61">
-                <div class="reservation-list-wrapper">
-                  <div class="mb-61">
+            if ($results && mysqli_num_rows($results) > 0) {
+              while ($row = mysqli_fetch_array($results)) {
+                $hotel = getHotelInfowithID($row['hotelID']);
+                $room = getRoomInfowithID($row['roomID']);
+                ?>
+                <div class="reservation-list mb-61">
+                  <div class="reservation-list-wrapper">
+                    <div class="mb-61">
+                      <div class="row">
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-12">
+                          <div class="hotel-heading">
+                            <h2>
+                              <?php echo $hotel["hotelName"]; ?> -
+                              <?php echo $hotel["hotelCity"]; ?>
+                            </h2>
+                            <p>
+                              <?php echo $hotel["hotelAddress"]; ?>
+                              <?php echo $hotel["hotelCity"]; ?>,
+                              <?php echo $hotel["hotelState"]; ?>
+                              <?php echo $hotel["hotelZip"]; ?>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-12">
+                          <div class="reservation-id">Reservation #:
+                            <?php echo $row["reservationID"]; ?>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="reservation-content">
+                      <ul>
+                        <li><span>Booking Dates:</span></li>
+                        <li>Check in Date :
+                          <?php echo $row["checkIn"]; ?>
+                        </li>
+                        <li>Check out Date :
+                          <?php echo $row["checkOut"]; ?>
+                        </li>
+                      </ul>
+                    </div>
                     <div class="row">
-                      <div class="col-lg-9 col-md-9 col-sm-12 col-12">
-                        <div class="hotel-heading">
-                          <h2>
-                            <?php echo $hotel["hotelName"]; ?> -
-                            <?php echo $hotel["hotelCity"]; ?>
-                          </h2>
-                          <p>
-                            <?php echo $hotel["hotelAddress"]; ?>
-                            <?php echo $hotel["hotelCity"]; ?>,
-                            <?php echo $hotel["hotelState"]; ?>
-                            <?php echo $hotel["hotelZip"]; ?>
-                          </p>
+                      <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="reservation-content">
+                          <ul>
+                            <li><span>Number of guests:</span></li>
+                            <li>
+                              <?php echo $row["numGuests"]; ?>
+                            </li>
+                          </ul>
                         </div>
                       </div>
-                      <div class="col-lg-3 col-md-3 col-sm-12 col-12">
-                        <div class="reservation-id">Reservation #:
-                          <?php echo $row["reservationID"]; ?>
+                      <div class="col-lg-8 col-md-6
+        col-sm-12 col-12">
+                        <div class="reservation-content">
+                          <ul>
+                            <li><span>Room Type:</span></li>
+                            <li>
+                              <?php echo $room["roomType"]; ?>
+                            </li>
+                          </ul>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="reservation-content">
-                    <ul>
-                      <li><span>Booking Dates:</span></li>
-                      <li>Check in Date :
-                        <?php echo $row["checkIn"]; ?>
-                      </li>
-                      <li>Check out Date :
-                        <?php echo $row["checkOut"]; ?>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                      <div class="reservation-content">
-                        <ul>
-                          <li><span>Number of guests:</span></li>
-                          <li>
-                            <?php echo $row["numGuests"]; ?>
-                          </li>
-                        </ul>
+                      <div class="col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="reservation-content">
+                          <ul>
+                            <li><span>Number of Nights:</span></li>
+                            <li>
+                              <?php
+                              $numNights = round((strtotime($row["checkOut"]) - strtotime($row['checkIn'])) / 86400);
+                              echo $numNights;
+                              ?>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-lg-8 col-md-6 col-sm-12 col-12">
-                      <div class="reservation-content">
-                        <ul>
-                          <li><span>Room Type:</span></li>
-                          <li>
-                            <?php echo $room["roomType"]; ?>
-                          </li>
-                        </ul>
+                      <div class="col-lg-9 col-md-6 col-sm-12 col-12">
+                        <div class="reservation-content">
+                          <ul>
+                            <li><span>Chosen Amenities:</span></li>
+                            <?php if ($row['hasPaidWifi']) { ?>
+                              <li>WiFi</li>
+                            <?php }
+                            if ($row['hasPaidParking']) { ?>
+                              <li>Breakfast</li>
+                            <?php }
+                            if ($row['hasPaidBreakfast']) { ?>
+                              <li>Parking</li>
+                            <?php } ?>
+                          </ul>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                      <div class="reservation-content">
-                        <ul>
-                          <li><span>Number of Nights:</span></li>
-                          <li>
-                            <?php
-                            $numNights = round((strtotime($row["checkOut"]) - strtotime($row['checkIn'])) / 86400);
-                            echo $numNights;
-                            ?>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="col-lg-9 col-md-6 col-sm-12 col-12">
-                      <div class="reservation-content">
-                        <ul>
-                          <li><span>Chosen Amenities:</span></li>
-                          <?php if ($row['hasPaidWifi']) { ?>
-                            <li>WiFi</li>
-                          <?php }
-                          if ($row['hasPaidParking']) { ?>
-                            <li>Breakfast</li>
-                          <?php }
-                          if ($row['hasPaidBreakfast']) { ?>
-                            <li>Parking</li>
-                          <?php } ?>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-                      <div class="reservation-content">
-                        <ul>
-                          <li><span>Total Price:</span></li>
-                          <li>$
-                            <?php echo $row["reservTotal"]; ?>
-                          </li>
-                        </ul>
+                      <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="reservation-content">
+                          <ul>
+                            <li><span>Total Price:</span></li>
+                            <li>$
+                              <?php echo $row["reservTotal"]; ?>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <?php
-            }
+              <?php }
+            } else
+              echo "<br/><h4 class='text-center' style='color:red'>No Reservations Found</h4>";
           } else {
             echo "<br/><h4 class='text-center' style='color:red'>Sign In to Manage Reservations</h4>";
           }
           ?>
-
         </div>
       </div>
-    </div>
+  </section>
+  </div>
+  </div>
   </section>
 
   <footer class="mt-70 footer">
@@ -439,13 +432,9 @@ if (isset($_SESSION['username'])) {
         </div>
       </div>
     </div>
-    </div>
-    </div>
   </footer>
 
-
   <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-  <!-- <script src="js/popper.min.js" type="text/javascript"></script> -->
   <script src="js/bootstrap.min.js" type="text/javascript"></script>
   <script src="js/rome.js" type="text/javascript"></script>
   <script src="js/main.js" type="text/javascript"></script>
