@@ -34,9 +34,9 @@ body {
 
 .response-text {
 	font-weight: 400;
-	font-size: 20px;
-	line-height: 27px;
-	color: #AC1414;
+	font-size: 40px;
+	line-height: 150%;
+	color: #ff8800;
 	margin-top: 6px !important;
 }
 
@@ -1304,7 +1304,7 @@ footer .copyright-text {
 	}
 
 	header .custom-nav li a {
-		color: #fff;
+		color: #5b5b5b;
 	}
 
 	header .custom-nav li a:hover {
@@ -1334,3 +1334,4 @@ footer .copyright-text {
 		margin-right: 30px;
 	}
 }
+
