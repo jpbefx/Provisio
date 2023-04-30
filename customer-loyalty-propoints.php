@@ -197,7 +197,7 @@ CSD 460 - Red Team
     </div>
     </section>
     </div>
-    <footer class="mt-70 footer">
+    <footer>
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -206,6 +206,7 @@ CSD 460 - Red Team
             </div>
         </div>
     </footer>
+    
 
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
 </body>
