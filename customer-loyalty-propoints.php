@@ -132,7 +132,15 @@ CSD 460 - Red Team
                 <div class="row">
                     <div class="col-12">
                         <div class="mtop-20rem">
-                            <div class="loyalty-heading"> You have <span>0</span> ProPoints </div>
+                            <?php
+                            if (isset($_SESSION['username'])) {
+                                echo "<div class='loyalty-heading'> You have <span>" . getUserInfo($_SESSION['username'])['proPoints'] . "</span> ProPoints </div>";
+                            } else {
+                                ?>
+                                <div class='loyalty-heading'> Sign In to view your <span> ProPoints </span></div>
+                                <?php
+                            }
+                            ?>
                             <div class="loyalty-wrapper">
                                 <div class="loyalty-content-bg">
                                     <table class="table caption-top">
@@ -147,15 +155,37 @@ CSD 460 - Red Team
                                             </tr>
                                         </thead>
                                         <tbody class="custom-table-body">
-                                            <tr>
-                                                <td>2678</td>
-                                                <td>New York City</td>
-                                                <td>Text</td>
-                                                <td>Text</td>
-                                                <td>Text</td>
-                                                <td>Text</td>
-                                            </tr>
-                                            <!-- Additional rows of data can be added here -->
+                                            <?php
+                                            if (isset($_SESSION['username'])) {
+                                                $reservList = getReservation("", getUserInfo($_SESSION['username'])['userID']);
+                                                if ($reservList && mysqli_num_rows($reservList) > 0) {
+                                                    $totalPoints = 0;
+                                                    while ($entry = mysqli_fetch_array($reservList)) {
+                                                        $totalPoints += 150;
+                                                        echo "<tr>";
+                                                        echo "    <td>" . $entry['reservationID'] . "</td>";
+                                                        echo "    <td>" . getHotelInfoWithID($entry['hotelID'])['hotelName'] . "</td>";
+                                                        echo "    <td>" . $entry['checkIn'] . "</td>";
+                                                        echo "    <td>" . $entry['checkOut'] . "</td>";
+                                                        echo "    <td>150</td>";
+                                                        echo "    <td>$totalPoints</td>";
+                                                        echo "</tr>";
+                                                    }
+                                                } else {
+                                                    ?>
+                                                    <tr>
+                                                        <td colspan=6 style="text-align:center">No Reservations Found</td>
+                                                    </tr>
+                                                    <?php
+                                                }
+                                            } else {
+                                                ?>
+                                                <tr>
+                                                    <td colspan=6 style="text-align:center">Sign in to view your reservations</td>
+                                                </tr>
+                                                <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>

@@ -17,6 +17,46 @@ $dbpass = "Redt3am";
 $dbname = "provisio";
 
 /*
+Create a reservation inside the reservations table
+@param $userID
+@param $hotelID
+@param $roomID
+@param $checkIn - in format YYYY-MM-dd
+@param $checkOut - in format YYYY-MM-dd
+@param $numGuests - int
+@param $hasPaidWifi - 0 or 1
+@param $hasPaidParking - 0 or 1
+@param $hasPaidBreakfast - 0 or 1
+@param $reservTotal - double
+@return reservationID - reservation was created successfully
+false - reservation creation failed
+*/
+function addReservation($userID, $hotelID, $roomID, $checkIn, $checkOut, $numGuests, $hasPaidWifi, $hasPaidParking, $hasPaidBreakfast, $reservTotal): string|bool
+{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+
+    $insertStmt = "INSERT INTO `provisio`.`reservations` 
+            (userID, hotelID , roomID, checkIn, checkOut, numGuests,
+            hasPaidWifi, hasPaidParking, hasPaidBreakfast, reservTotal)
+            VALUES ('$userID', '$hotelID', '$roomID', '$checkIn',
+            '$checkOut', '$numGuests', '$hasPaidWifi', '$hasPaidParking',
+            '$hasPaidBreakfast', '$reservTotal'
+            );";
+
+    $result = mysqli_query($dbConnection, $insertStmt);
+    if ($result == false) {
+        return false;
+    }
+
+    return $dbConnection->insert_id;
+}
+
+/*
 Authenticate the user by validating the entry within the users table
 @param $user - username of user
 @param $pass - plain text password
@@ -46,182 +86,6 @@ function authUser($user, $pass): bool
 }
 
 /*
-Validate the username of an account exists in the database    
-@param $username of the user to validate account
-@return true if account exists in database
-false if account does not exist
-*/
-function validateUser($user): bool
-{
-    global $dbConnection;
-    if ($dbConnection == null) {
-        if (connectDB() == false) {
-            return false;
-        }
-    }
-    $query = "select * from users where username = '$user' limit 1";
-    $result = mysqli_query($dbConnection, $query);
-    if ($result) {
-        if ($result && mysqli_num_rows($result) > 0) {
-            return true;
-        }
-    }
-    return false;
-}
-
-/*
-Returns all hotels in the hotel table
-@return false if an error occurs
-mysqli_result containing all records
-*/
-function getAllHotels(): bool|mysqli_result
-{
-    global $dbConnection;
-    if ($dbConnection == null) {
-        if (connectDB() == false) {
-            return false;
-        }
-    }
-    $query = "select * from hotel";
-    $result = mysqli_query($dbConnection, $query);
-    if ($result) {
-        if ($result && mysqli_num_rows($result) > 0) {
-            return $result;
-        }
-    }
-    return false;
-}
-
-/*
-returns the array conatining the array keys of a hotel based on the hotels name
-@param $name the name of a hotel to search
-@return the array of the passed hotel
-false - info not found
-*/
-function getHotelInfo(string $name): bool|array
-{
-    global $dbConnection;
-    if ($dbConnection == null) {
-        if (connectDB() == false) {
-            return false;
-        }
-    }
-    $query = "select * from hotel where hotelName = '$name' limit 1;";
-    $result = mysqli_query($dbConnection, $query);
-    if ($result) {
-        if ($result && mysqli_num_rows($result) > 0) {
-            return mysqli_fetch_assoc($result);
-        }
-    }
-    return false;
-}
-
-/*
-returns the array conatining the array keys of a hotel based on the hotels id
-@param $id the id of a hotel to search
-@return the array of the passed hotel
-false - info not found
-*/
-function getHotelInfowithID(int $id)
-{
-    global $dbConnection;
-    if ($dbConnection == null) {
-        if (connectDB() == false) {
-            return false;
-        }
-    }
-    $query = "select * from hotel where hotelID = " . $id . " limit 1;";
-    $result = mysqli_query($dbConnection, $query);
-    if ($result) {
-        if ($result && mysqli_num_rows($result) > 0) {
-            return mysqli_fetch_assoc($result);
-        }
-    }
-    return false;
-}
-
-/*
-Returns all rooms in the room table
-@return false if an error occurs
-mysqli_result containing all records
-*/
-function getAllRooms(): bool|mysqli_result
-{
-    global $dbConnection;
-    if ($dbConnection == null) {
-        if (connectDB() == false) {
-            return false;
-        }
-    }
-    $query = "select * from room";
-    $result = mysqli_query($dbConnection, $query);
-    if ($result) {
-        if ($result && mysqli_num_rows($result) > 0) {
-            return $result;
-        }
-    }
-    return false;
-}
-
-/*
-returns the array conatining the array keys of a room based on the room type
-@param $name the type of room to search
-@return the array of the passed room
-false - info not found
-*/
-function getRoomInfo($name): bool|array
-{
-    global $dbConnection;
-    if ($dbConnection == null) {
-        if (connectDB() == false) {
-            return false;
-        }
-    }
-    $query = "select * from room where roomType = '$name' limit 1;";
-    $result = mysqli_query($dbConnection, $query);
-    if ($result) {
-        if ($result && mysqli_num_rows($result) > 0) {
-            return mysqli_fetch_assoc($result);
-        }
-    }
-    return false;
-}
-
-/*
-returns the array conatining the array keys of a room based on the rooms id
-@param $id the id of a room to search
-@return the array of the passed room
-false - info not found
-*/
-function getRoomInfowithID($roomId)
-{
-    global $dbConnection;
-    if ($dbConnection == null) {
-        if (connectDB() == false) {
-            return false;
-        }
-    }
-    $query = "select * from room where roomID =" . $roomId . " limit 1;";
-    $result = mysqli_query($dbConnection, $query);
-    if ($result) {
-        if ($result && mysqli_num_rows($result) > 0) {
-            return mysqli_fetch_assoc($result);
-        }
-    }
-    return false;
-}
-/*
-Calls the session destroy function to clear all session related data. Can be used if
-another method is required to be ran after signing out the user. Can be removed if 
-nothing else is added to this.
-*/
-function signOutUser()
-{
-    closeSessionVars();
-    session_destroy();
-}
-
-/*
 Unsets all hotel reservation variables if they exist or not
 */
 function closeSessionVars()
@@ -236,6 +100,26 @@ function closeSessionVars()
     unset($_SESSION['hasWifi']);
     unset($_SESSION['reservTotal']);
     unset($_SESSION['isLocked']);
+}
+
+/*
+global function to connect to the provisio database using global variables
+@return true - connection is successful
+false - unable to connect
+*/
+function connectDB(): bool
+{
+    global $dbhost, $dbuser, $dbpass, $dbname, $dbConnection;
+    $dbConnection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+    try {
+    } catch (Exception $e) {
+        return false;
+    }
+    if (mysqli_ping($dbConnection) == false) {
+        $dbConnection = null;
+        return false;
+    }
+    return true;
 }
 
 /*
@@ -270,12 +154,11 @@ function createUser($user, $pass, $fname, $lname, $email): string
 }
 
 /*
-returns array of user information using username
-@param $username - username of user to return
-@return array - properties of user
-false - unable to retrieve
+Returns all hotels in the hotel table
+@return false if an error occurs
+mysqli_result containing all records
 */
-function getUserInfo($username): bool|array
+function getAllHotels(): bool|mysqli_result
 {
     global $dbConnection;
     if ($dbConnection == null) {
@@ -283,22 +166,22 @@ function getUserInfo($username): bool|array
             return false;
         }
     }
-    $query = "select * from users where username = '$username' limit 1;";
+    $query = "select * from hotel";
     $result = mysqli_query($dbConnection, $query);
     if ($result) {
         if ($result && mysqli_num_rows($result) > 0) {
-            return mysqli_fetch_assoc($result);
+            return $result;
         }
     }
     return false;
 }
 
 /*
-Create a reservation inside the reservations table
-@return reservationID - reservation was created successfully
-false - reservation creation failed
+Returns all rooms in the room table
+@return false if an error occurs
+mysqli_result containing all records
 */
-function addReservation($userID, $hotelID, $roomID, $checkIn, $checkOut, $numGuests, $hasPaidWifi, $hasPaidParking, $hasPaidBreakfast, $reservTotal): string|bool
+function getAllRooms(): bool|mysqli_result
 {
     global $dbConnection;
     if ($dbConnection == null) {
@@ -306,21 +189,38 @@ function addReservation($userID, $hotelID, $roomID, $checkIn, $checkOut, $numGue
             return false;
         }
     }
-
-    $insertStmt = "INSERT INTO `provisio`.`reservations` 
-            (userID, hotelID , roomID, checkIn, checkOut, numGuests,
-            hasPaidWifi, hasPaidParking, hasPaidBreakfast, reservTotal)
-            VALUES ('$userID', '$hotelID', '$roomID', '$checkIn',
-            '$checkOut', '$numGuests', '$hasPaidWifi', '$hasPaidParking',
-            '$hasPaidBreakfast', '$reservTotal'
-            );";
-
-    $result = mysqli_query($dbConnection, $insertStmt);
-    if ($result == false) {
-        return false;
+    $query = "select * from room";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return $result;
+        }
     }
+    return false;
+}
 
-    return $dbConnection->insert_id;
+/*
+returns all attractions based on the hotelID passed to the function
+@param hotelID - Hotel ID for attraction look up
+@return array - Attractions returned in database key format
+false - no records found or an error occured looking them up
+*/
+function getAttractionsByHotelID($hotelID): bool|mysqli_result
+{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from attractions where hotelID =" . $hotelID . " ;";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return $result;
+        }
+    }
+    return false;
 }
 
 /*
@@ -368,25 +268,52 @@ function getHolidayRate(): string|bool
 }
 
 /*
-global function to connect to the provisio database using global variables
-@return true - connection is successful
-false - unable to connect
+returns the array conatining the array keys of a hotel based on the hotels name
+@param $name the name of a hotel to search
+@return the array of the passed hotel
+false - info not found
 */
-function connectDB(): bool
+function getHotelInfo(string $name): bool|array
 {
-    global $dbhost, $dbuser, $dbpass, $dbname, $dbConnection;
-    $dbConnection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-    try {
-    } catch (Exception $e) {
-        return false;
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
     }
-    if (mysqli_ping($dbConnection) == false) {
-        $dbConnection = null;
-        return false;
+    $query = "select * from hotel where hotelName = '$name' limit 1;";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_assoc($result);
+        }
     }
-    return true;
+    return false;
 }
 
+/*
+returns the array conatining the array keys of a hotel based on the hotels id
+@param $id the id of a hotel to search
+@return the array of the passed hotel
+false - info not found
+*/
+function getHotelInfowithID(int $id): bool|array
+{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from hotel where hotelID = " . $id . " limit 1;";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_assoc($result);
+        }
+    }
+    return false;
+}
 
 /*
 returns array of reservation information 
@@ -395,7 +322,7 @@ returns array of reservation information
 @return array - properties of reservation
 false - unable to retrieve
 */
-function getReservation($searchtext, $userid)
+function getReservation($searchtext, $userid): bool|mysqli_result
 {
     global $dbConnection;
     if ($dbConnection == null) {
@@ -411,13 +338,94 @@ function getReservation($searchtext, $userid)
     $result = mysqli_query($dbConnection, $query);
 
     if ($result) {
-
         if ($result && mysqli_num_rows($result) > 0) {
-            // print_r(mysqli_fetch_array($result));
             return $result;
         }
     }
     return false;
+}
+
+/*
+returns the array conatining the array keys of a room based on the room type
+@param $name the type of room to search
+@return the array of the passed room
+false - info not found
+*/
+function getRoomInfo($name): bool|array
+{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from room where roomType = '$name' limit 1;";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_assoc($result);
+        }
+    }
+    return false;
+}
+
+/*
+returns the array conatining the array keys of a room based on the rooms id
+@param $id the id of a room to search
+@return the array of the passed room
+false - info not found
+*/
+function getRoomInfowithID($roomId): bool|array
+{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from room where roomID =" . $roomId . " limit 1;";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_assoc($result);
+        }
+    }
+    return false;
+}
+
+/*
+returns array of user information using username
+@param $username - username of user to return
+@return array - properties of user
+false - unable to retrieve
+*/
+function getUserInfo($username): bool|array
+{
+    global $dbConnection;
+    if ($dbConnection == null) {
+        if (connectDB() == false) {
+            return false;
+        }
+    }
+    $query = "select * from users where username = '$username' limit 1;";
+    $result = mysqli_query($dbConnection, $query);
+    if ($result) {
+        if ($result && mysqli_num_rows($result) > 0) {
+            return mysqli_fetch_assoc($result);
+        }
+    }
+    return false;
+}
+
+/*
+Calls the session destroy function to clear all session related data. Can be used if
+another method is required to be ran after signing out the user. Can be removed if 
+nothing else is added to this.
+*/
+function signOutUser()
+{
+    closeSessionVars();
+    session_destroy();
 }
 
 /*
@@ -444,13 +452,14 @@ function updateProPoints($username, $points): bool
     }
     return false;
 }
+
 /*
-returns all attractions based on the hotelID passed to the function
-@param hotelID - Hotel ID for attraction look up
-@return array - Attractions returned in database key format
-false - no records found or an error occured looking them up
+Validate the username of an account exists in the database    
+@param $username of the user to validate account
+@return true if account exists in database
+false if account does not exist
 */
-function getAttractionsByHotelID($hotelID): bool|mysqli_result
+function validateUser($user): bool
 {
     global $dbConnection;
     if ($dbConnection == null) {
@@ -458,11 +467,11 @@ function getAttractionsByHotelID($hotelID): bool|mysqli_result
             return false;
         }
     }
-    $query = "select * from attractions where hotelID =" . $hotelID . " ;";
+    $query = "select * from users where username = '$user' limit 1";
     $result = mysqli_query($dbConnection, $query);
     if ($result) {
         if ($result && mysqli_num_rows($result) > 0) {
-            return $result;
+            return true;
         }
     }
     return false;

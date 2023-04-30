@@ -415,6 +415,7 @@ if (isset($_SESSION['username'])) {
               echo "<br/><h4 class='text-center' style='color:red'>No Reservations Found</h4>";
           } else {
             echo "<br/><h4 class='text-center' style='color:red'>Sign In to Manage Reservations</h4>";
+            echo "<br><div class='submit-btns text-center'><button type='button' onclick='location.href='login.php''>Sign in</button></div>";
           }
           ?>
         </div>
