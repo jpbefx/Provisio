@@ -177,8 +177,7 @@ CSD 460 - Red Team
             </div>
         </div>
     </section>
-
-    <footer>
+    <footer style="margin-top: 50px;">
         <div class="container">
             <div class="row">
                 <div class="col-12">

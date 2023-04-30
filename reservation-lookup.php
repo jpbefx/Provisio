@@ -34,24 +34,6 @@ if (isset($_SESSION['username'])) {
     integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
-    html,
-    body {
-      height: 100%;
-      background-color: #D1E1D6;
-    }
-
-    .wrapper {
-      min-height: calc(1200px);
-      position: relative;
-    }
-
-    .mt70 footer {
-      height: 70px;
-      width: 100%;
-      bottom: 0;
-
-    }
-
     header .check-propoints {
       background: #143A2F;
       border-radius: 6px;
@@ -64,7 +46,6 @@ if (isset($_SESSION['username'])) {
       width: 71%;
       margin: 114px;
       margin-top: 34px;
-
 
     }
   </style>
@@ -425,7 +406,8 @@ if (isset($_SESSION['username'])) {
   </div>
   </section>
 
-  <footer class="mt-70 footer">
+
+  <footer>
     <div class="container">
       <div class="row">
         <div class="col-12">
