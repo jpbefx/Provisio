@@ -34,11 +34,11 @@ CSD 460 - Red Team
 </head>
 
 <body>
-  <header>
+  <header class="location-header-bg">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <nav class="navbar navbar-expand-lg bg-white">
+          <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
               <a class="navbar-brand nav-bar" href="index.php"><img class="img-fluid"
                   src="images/provisiologo.svg" /></a>
@@ -58,6 +58,7 @@ CSD 460 - Red Team
                   <li class="nav-item">
                     <a class="nav-link" href="location.php">Location</a>
                   </li>
+
                   <?php
                   //Show the dropdown if a user is signed in
                   if (isset($_SESSION['username'])) {
@@ -109,19 +110,32 @@ CSD 460 - Red Team
         </div>
       </div>
     </div>
-  </header>
 
-  <section class="mt-4">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="">
-            <img class="img-fluid" src="images/banner-img.png" />
+    <style>
+      .signin-link {
+        color: darkgreen;
+        text-decoration: none;
+      }
+
+      .signin-link:hover {
+        color: lightgreen;
+      }
+    </style>
+
+    <section id="mt-4-img" class="mt-4"
+      style="position: absolute; z-index: 10; top: 60%; left: 50%; transform: translate(-50%, -50%); width: 1100px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="">
+              <img class="img-fluid" src="images/banner-img.png"
+                style="width: 150% !important; height: auto !important;" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </header>
 
   <section class="">
     <div class="first-section"></div>
@@ -136,8 +150,9 @@ CSD 460 - Red Team
         </div>
         <div class="col-12 col-sm-12 col-md-12 col-lg-7">
           <div class="book-stay-text">
-            <p>
-              Use our search filters to find your perfect travel destination
+            <p><a class="signin-link" href="login.php"> Sign In</a> to use our search filters to find your perfect
+              travel
+              destination
               based on your preferred travel dates, location, and other
               preferences. Once you find what you're looking for, you can
               confidently proceed with the booking process and secure your
