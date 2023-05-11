@@ -206,10 +206,10 @@ error_reporting(E_ALL);
 
     $sql = "INSERT INTO `provisio`.`attractions`
         (hotelID,attractionName,pictureAddress)
-        VALUES (1,'Central Park','images/central-park-img.png')";
+        VALUES (1,'Empire State','images/empire-state-img.png')";
 
     if (mysqli_query($conn, $sql)) {
-        echo "Central Park added successfully<br>";
+        echo "Empire State added successfully<br>";
     } else {
         echo "Error adding record: " . mysqli_error($conn);
     }
