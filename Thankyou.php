@@ -92,27 +92,27 @@ CSD 460 - Red Team
                                     //Show the dropdown if a user is signed in
                                     if (isset($_SESSION['username'])) {
                                         ?>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" role="button"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            <?php
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                <?php
                                                 echo $_SESSION['username'];
                                                 ?>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="hotel-reservation.php">Start a
-                                                    Reservation</a>
-                                            </li>
-                                            <li><a class="dropdown-item" href="reservation-lookup.php">Manage
-                                                    Reservations</a></li>
-                                            <li>
-                                                <hr class="dropdown-divider">
-                                            </li>
-                                            <li><a class="dropdown-item"
-                                                    href="customer-loyalty-propoints.php">ProPoints</a></li>
-                                        </ul>
-                                    </li>
-                                    <?php
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="hotel-reservation.php">Start a
+                                                        Reservation</a>
+                                                </li>
+                                                <li><a class="dropdown-item" href="reservation-lookup.php">Manage
+                                                        Reservations</a></li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item"
+                                                        href="customer-loyalty-propoints.php">ProPoints</a></li>
+                                            </ul>
+                                        </li>
+                                        <?php
                                     }
                                     ?>
                                     <div class="login-btn">
@@ -120,12 +120,12 @@ CSD 460 - Red Team
                                         //Green Button Space; Either logout or login
                                         if (isset($_SESSION['username'])) {
                                             ?>
-                                        <a href="php\logout.php">
-                                            <?php
+                                            <a href="php\logout.php">
+                                                <?php
                                         } else {
                                             ?>
-                                            <a href="login.php">
-                                                <?php
+                                                <a href="login.php">
+                                                    <?php
                                         }
 
                                         if (isset($_SESSION['username'])) {
@@ -151,7 +151,7 @@ CSD 460 - Red Team
                     <div class="mtop-20rem">
                         <div class="reservation-list">
                             <div class="hotel-heading text-center">
-                                <h2>Here is your Booking Summary </h2>
+                                <h2>Reservation Submitted</h2>
                             </div>
                             <div class="reservation-list-wrapper">
                                 <div class="mb-61">
@@ -286,81 +286,32 @@ CSD 460 - Red Team
                                                 </div>
                                             </div>
                                         </div>
+                                        <style>
+                                            .submit-btns {
+                                                font-weight: 400;
+                                                font-size: 28px;
+                                                line-height: 37px;
+                                                color: #143A2F
+                                            }
+                                        </style>
 
                                         <div class="submit-btns text-center">
-                                            <form method="post">
-                                                <button type="button"
-                                                    onclick="location.href='hotel-reservation.php'">Cancel</button>
-
-                                                <?php
-                                                if (isset($_SESSION['username'])) {
-                                                    ?>
-                                                <button type="submit" name="submit">Submit</button>
-                                                <?php
-                                                } else {
-                                                    ?>
-                                                <button type="button" onclick="location.href='login.php'">Sign in to
-                                                    Book</button>
-                                                <?php
-                                                }
-                                                ?>
+                                            <?php if ($_REQUEST["res"] != '') { ?>
+                                                Your reservation was submitted successfully! Your Reservation Number is #
+                                                <?= $_REQUEST["res"] ?>
+                                            <?php } ?>
                                         </div>
-                                        <?php ini_set("display_errors", 1);
-                                        if (array_key_exists('submit', $_POST)) {
-                                            submitReservation();
-                                        }
-
-                                        function submitReservation()
-                                        {
-                                            $hasParking = 0;
-                                            if ($_SESSION['hasParking'] == "Yes") {
-                                                $hasParking = 1;
-                                            }
-
-                                            $hasBreakfest = 0;
-                                            if ($_SESSION['hasBreakfest'] == "Yes") {
-                                                $hasBreakfest = 1;
-                                            }
-
-                                            $hasWifi = 0;
-                                            if ($_SESSION['hasWifi'] == "Yes") {
-                                                $hasWifi = 1;
-                                            }
-
-                                            // Insert the reservation into the database
-                                            $result = addReservation(
-                                                getUserInfo($_SESSION['username'])['userID'], getHotelInfo($_SESSION['hotel'])['hotelID'],
-                                                getRoomInfo($_SESSION['room'])['roomID'], $_SESSION['checkIn'],
-                                                $_SESSION['checkOut'], $_SESSION['numGuests'],
-                                                $hasWifi,
-                                                $hasParking,
-                                                $hasBreakfest, $_SESSION['reservTotal']
-                                            );                                           
-                                        
-                                            if ($result == false) {
-                                                // Redirect to the landing page with an error message
-                                                echo "<script>alert('An error occurred while submitting your reservation. Please try again.');</script>";
-                                            } else {
-                                                //Add propoints to user account for reservation
-                                                updateProPoints($_SESSION['username'],150);
-                                                // Redirect to the sessionUpdate page with a success message
-                                                echo "<meta http-equiv='refresh' content='0;url=Thankyou.php?res=".$result."'>";
-                                               // echo "<script>alert('Your reservation was submitted successfully! Your Reservation # is: $result'); location.replace('php/sessionUpdate.php');</script>";
-                                            }
-                                        }
-                                        ?>
+                                        </form>
                                     </div>
-                                    </form>
-                                </div>
-                                <div class="earn-points-text">
-                                    <p>Earn 150 Provisio points per night </p>
+                                    <div class="earn-points-text">
+                                        <p>Earn 150 Provisio points per night </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <footer>
@@ -378,6 +329,11 @@ CSD 460 - Red Team
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/rome.js" type="text/javascript"></script>
     <script src="js/main.js" type="text/javascript"></script>
+    <?php
+
+
+    closeSessionVars();
+    ?>
 </body>
 
 </html>
