@@ -133,6 +133,20 @@ CSD 460 - Red Team
                 <div class="custom-form">
                   <label for="InputPassword1" class="form-label">Password</label>
                   <input type="password" name="password" class="form-control" id="InputPassword1">
+
+                <div><input type="checkbox" onclick="passControl()"> Show Password
+                </input>
+                <script>
+                  function passControl() {
+                    var x = document.getElementById("InputPassword1");
+                    if (x.type === "password") {
+                      x.type = "text";
+                    } else {
+                      x.type = "password";
+                    }
+                  }
+                </script>
+                </div>
                 </div>
                 <div class="response-text">
                   <ul>
@@ -171,7 +185,7 @@ CSD 460 - Red Team
                       if ($hasError == false) {
                         $ret = createUser(password_hash($_POST["password"], PASSWORD_DEFAULT), $_POST["firstName"], $_POST["lastName"], $_POST["email"]);
                         if ($ret == "") {
-                          echo "<li>Account Created Successfully... Sign In <a href='login.php'> Here </a></li>";
+                          echo "<li style='color:green;font-size:22px'>Account Created Successfully... Sign In <a href='login.php'> Here </a></li>";
                         } else {
                           echo $ret;
                         }
