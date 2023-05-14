@@ -342,7 +342,7 @@ CSD 460 - Red Team
                                                 echo "<script>alert('An error occurred while submitting your reservation. Please try again.');</script>";
                                             } else {
                                                 //Add propoints to user account for reservation
-                                                updateProPoints($_SESSION['username'],150);
+                                                updateProPoints($_SESSION['username'],150 * (round((strtotime($_SESSION["checkOut"]) - strtotime($_SESSION['checkIn'])) / 86400)));
                                                 // Redirect to the sessionUpdate page with a success message
                                                 echo "<meta http-equiv='refresh' content='0;url=Thankyou.php?res=".$result."'>";
                                                // echo "<script>alert('Your reservation was submitted successfully! Your Reservation # is: $result'); location.replace('php/sessionUpdate.php');</script>";

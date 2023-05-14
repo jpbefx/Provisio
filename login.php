@@ -125,7 +125,7 @@ ob_start();
             </div>
             <form method="post">
               <div class="custom-form">
-                <label for="username" class="form-label">Username</label>
+                <label for="username" class="form-label">Email</label>
                 <input type="text" class="form-control" name="username" id="username" aria-describedby="username">
               </div>
               <div class="custom-form">

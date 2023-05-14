@@ -161,13 +161,14 @@ CSD 460 - Red Team
                                                 if ($reservList && mysqli_num_rows($reservList) > 0) {
                                                     $totalPoints = 0;
                                                     while ($entry = mysqli_fetch_array($reservList)) {
-                                                        $totalPoints += 150;
+                                                        $entryPoints = (round((strtotime($entry['checkOut']) - strtotime($entry['checkIn'])) / 86400)) * 150;
+                                                        $totalPoints += $entryPoints;
                                                         echo "<tr>";
                                                         echo "    <td>" . $entry['reservationID'] . "</td>";
                                                         echo "    <td>" . getHotelInfoWithID($entry['hotelID'])['hotelName'] . "</td>";
                                                         echo "    <td>" . $entry['checkIn'] . "</td>";
                                                         echo "    <td>" . $entry['checkOut'] . "</td>";
-                                                        echo "    <td>150</td>";
+                                                        echo "    <td>$entryPoints</td>";
                                                         echo "    <td>$totalPoints</td>";
                                                         echo "</tr>";
                                                     }

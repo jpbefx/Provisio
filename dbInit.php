@@ -57,7 +57,6 @@ error_reporting(E_ALL);
     // Create users table
     $sql = "CREATE TABLE `provisio`.`users` (
             `userID` int NOT NULL AUTO_INCREMENT,
-            `username` varchar(30) NOT NULL,
             `password` varchar(200) NOT NULL,
             `email` varchar(50) NOT NULL,
             `firstName` varchar(30) NOT NULL,
@@ -75,8 +74,8 @@ error_reporting(E_ALL);
     //Insert 2 default users
     $hashPass = password_hash('redTeamRocks', PASSWORD_DEFAULT);
     $sql = "INSERT INTO `provisio`.`users`
-        (username,password,email,firstName,lastName,proPoints)
-        VALUES ('admin','$hashPass','admin@provisio.com','Admin','Admin',999999)";
+        (password,email,firstName,lastName,proPoints)
+        VALUES ('$hashPass','admin@provisio.com','Admin','Admin',999999)";
 
     if (mysqli_query($conn, $sql)) {
         echo "Admin account created successfully in users table<br>";
@@ -86,8 +85,8 @@ error_reporting(E_ALL);
 
     $hashPass = password_hash('default', PASSWORD_DEFAULT);
     $sql = "INSERT INTO `provisio`.`users`
-        (username,password,email,firstName,lastName,proPoints)
-        VALUES ('default','$hashPass','Default@email.com','Default','Default',0)";
+        (password,email,firstName,lastName,proPoints)
+        VALUES ('$hashPass','Default@email.com','Default','Default',0)";
 
     if (mysqli_query($conn, $sql)) {
         echo "Default account created successfully in users table<br>";

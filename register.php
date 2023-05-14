@@ -127,10 +127,6 @@ CSD 460 - Red Team
                   <input type="text" name="lastName" class="form-control" placeholder="" aria-label="Last name">
                 </div>
                 <div class="custom-form">
-                  <label for="username" class="form-label">Username</label>
-                  <input type="text" name="username" class="form-control" id="username" aria-describedby="username">
-                </div>
-                <div class="custom-form">
                   <label for="InputEmail1" class="form-label">Email address</label>
                   <input type="email" name="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
                 </div>
@@ -148,10 +144,6 @@ CSD 460 - Red Team
                     function createAccount()
                     {
                       $hasError = false;
-                      if ($_POST["username"] == "") {
-                        $hasError = true;
-                        echo "<li>Username is blank</li>";
-                      }
                       if ($_POST["password"] == "") {
                         $hasError = true;
                         echo "<li>Password is blank</li>";
@@ -177,7 +169,7 @@ CSD 460 - Red Team
                         echo "<li>Email is blank</li>";
                       }
                       if ($hasError == false) {
-                        $ret = createUser($_POST["username"], password_hash($_POST["password"], PASSWORD_DEFAULT), $_POST["firstName"], $_POST["lastName"], $_POST["email"]);
+                        $ret = createUser(password_hash($_POST["password"], PASSWORD_DEFAULT), $_POST["firstName"], $_POST["lastName"], $_POST["email"]);
                         if ($ret == "") {
                           echo "<li>Account Created Successfully... Sign In <a href='login.php'> Here </a></li>";
                         } else {

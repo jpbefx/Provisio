@@ -71,7 +71,7 @@ function authUser($user, $pass): bool
             return false;
         }
     }
-    $query = "select * from users where username = '$user' limit 1";
+    $query = "select * from users where email = '$user' limit 1";
     $result = mysqli_query($dbConnection, $query);
     if ($result) {
         if ($result && mysqli_num_rows($result) > 0) {
@@ -124,7 +124,6 @@ function connectDB(): bool
 
 /*
 Create a user inside of the users table
-@param $user - username of user
 @param $pass - pre-hashed password
 @param $fname - user's first name
 @param $lname - user's last name
@@ -132,7 +131,7 @@ Create a user inside of the users table
 return true - user was created correctly
 errorString - reason user creation failed to show end user
 */
-function createUser($user, $pass, $fname, $lname, $email): string
+function createUser($pass, $fname, $lname, $email): string
 {
     global $dbConnection;
     if ($dbConnection == null) {
@@ -140,11 +139,11 @@ function createUser($user, $pass, $fname, $lname, $email): string
             return "Unable to create account, try again later";
         }
     }
-    $dupUserCheck = mysqli_fetch_assoc(mysqli_query($dbConnection, "select COUNT(*) from users where username = '$user';"))['COUNT(*)'];
+    $dupUserCheck = mysqli_fetch_assoc(mysqli_query($dbConnection, "select COUNT(*) from users where email = '$email';"))['COUNT(*)'];
     if ($dupUserCheck > 0) {
-        return "Username is taken, try another one!";
+        return "Email is taken, try another one!";
     } else {
-        $insertStmt = "INSERT INTO users (username,password,email,firstName,lastName,proPoints) VALUES ('$user','$pass','$email','$fname','$lname',0)";
+        $insertStmt = "INSERT INTO users (password,email,firstName,lastName,proPoints) VALUES ('$pass','$email','$fname','$lname',0)";
         $result = mysqli_query($dbConnection, $insertStmt);
         if ($result == false) {
             return "Unable to create account, try again later";
@@ -407,7 +406,7 @@ function getUserInfo($username): bool|array
             return false;
         }
     }
-    $query = "select * from users where username = '$username' limit 1;";
+    $query = "select * from users where email = '$username' limit 1;";
     $result = mysqli_query($dbConnection, $query);
     if ($result) {
         if ($result && mysqli_num_rows($result) > 0) {
@@ -445,7 +444,7 @@ function updateProPoints($username, $points): bool
     }
     $currentPoints = getUserInfo($username)["proPoints"];
     $newPoints = $currentPoints + $points;
-    $query = "update users set proPoints = $newPoints where username = '$username'";
+    $query = "update users set proPoints = $newPoints where email = '$username'";
     $result = mysqli_query($dbConnection, $query);
     if ($result) {
         return true;
@@ -467,7 +466,7 @@ function validateUser($user): bool
             return false;
         }
     }
-    $query = "select * from users where username = '$user' limit 1";
+    $query = "select * from users where email = '$user' limit 1";
     $result = mysqli_query($dbConnection, $query);
     if ($result) {
         if ($result && mysqli_num_rows($result) > 0) {
